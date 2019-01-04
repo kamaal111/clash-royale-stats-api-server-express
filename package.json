@@ -3,12 +3,33 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "app.js"
   },
   "author": "Kamaal",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "async": "^2.6.1",
+    "body-parser": "^1.18.3",
+    "colors": "^1.3.3",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "http-errors": "^1.7.1",
+    "mongoose": "^5.4.1",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3"
+  },
   "devDependencies": {},
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamaal111/clashroyaleapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kamaal111/clashroyaleapi/issues"
+  },
+  "homepage": "https://github.com/kamaal111/clashroyaleapi#readme",
   "description": ""
 }

@@ -1,3 +1,4 @@
 
-data/bearerToken.json
-data/playerTag.json
+data/
+node_modules/
+client/
