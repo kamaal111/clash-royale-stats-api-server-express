@@ -14,9 +14,11 @@ let app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use(cookieParser());
 app.use(express.static(`${__dirname}/public`));
 
@@ -28,7 +30,8 @@ app.set("views", `${__dirname}/views`);
 
 // mongoose connection
 mongoose.connect(
-  "mongodb://localhost/cr_api", {
+  "mongodb://localhost/cr_api",
+  {
     useCreateIndex: true,
     useNewUrlParser: true
   }
@@ -54,6 +57,12 @@ db.once("open", () => {
 //     })
 //   })
 // );
+
+const homePage = require("./routes");
+app.use("/", homePage);
+
+const playerRoute = require("./routes/playersRoute");
+app.use("/players", playerRoute);
 
 const chestsRoute = require("./routes/chestRoute");
 app.use("/chests", chestsRoute);

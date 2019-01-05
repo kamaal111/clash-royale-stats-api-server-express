@@ -4,14 +4,12 @@
 const express = require("express"),
   router = express.Router();
 
-// show chest data
+// show player data
 
 // requests
 const chestReq = require("../requests/getChest");
 
 router.get("/", function(req, res, next) {
-  chestReq();
-
   next();
 });
 

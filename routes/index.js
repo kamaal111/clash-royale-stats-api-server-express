@@ -4,14 +4,9 @@
 const express = require("express"),
   router = express.Router();
 
-// show chest data
-
-// requests
-const chestReq = require("../requests/getChest");
+// ask for playertag and then redirect to players page
 
 router.get("/", function(req, res, next) {
-  chestReq();
-
   next();
 });
 

@@ -30,7 +30,7 @@ const ChestSchema = Schema({
 
   idName: {
     type: String,
-    unique: false,
+    unique: true,
     require: true
   }
 });
