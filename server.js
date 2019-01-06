@@ -2,10 +2,9 @@
 
 // modules
 const express = require("express"),
-  mongoose = require("mongoose"),
-  session = require("express-session"),
-  MongoStore = require("connect-mongo")(session),
-  cookieParser = require("cookie-parser"),
+  // session = require("express-session"),
+  // MongoStore = require("connect-mongo")(session),
+  // cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
   createError = require("http-errors"),
   logger = require("morgan");
@@ -19,7 +18,7 @@ app.use(
     extended: false
   })
 );
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.static(`${__dirname}/public`));
 
 // app.use(express.static("client/build"));
@@ -29,23 +28,7 @@ app.set("view engine", "pug");
 app.set("views", `${__dirname}/views`);
 
 // mongoose connection
-mongoose.connect(
-  "mongodb://localhost/cr_api",
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true
-  }
-);
-
-const db = mongoose.connection;
-
-db.on("error", err => {
-  console.error("connection error:", err);
-});
-
-db.once("open", () => {
-  console.log("db connection succesful");
-});
+const db = require("./src/database");
 
 // app.use(
 //   session({
@@ -58,13 +41,13 @@ db.once("open", () => {
 //   })
 // );
 
-const homePage = require("./routes");
+const homePage = require("./src/routes");
 app.use("/", homePage);
 
-const playerRoute = require("./routes/playersRoute");
+const playerRoute = require("./src/routes/playersRoute");
 app.use("/players", playerRoute);
 
-const chestsRoute = require("./routes/chestRoute");
+const chestsRoute = require("./src/routes/chestRoute");
 app.use("/chests", chestsRoute);
 
 // catch 404 and forward to error handler

@@ -4,7 +4,7 @@
 const https = require("https");
 
 // models
-const Chest = require("../models/chest_schema");
+const Chest = require("../schemas/chest_schema");
 
 // testing data
 const playerTag = require("../data/playerTag.json"),
@@ -17,7 +17,7 @@ const options = {
   hostname: "api.clashroyale.com",
   path: urls[0],
   headers: {
-    Authorization: bearerToken.key2
+    Authorization: bearerToken.key1
   }
 };
 
@@ -30,7 +30,7 @@ const getChest = () => {
     });
 
     res.on("end", function() {
-      const chest = require("../models/chest_schema");
+      const Chest = require("../schemas/chest_schema");
 
       const parsed = JSON.parse(body);
       console.log(parsed);
@@ -42,7 +42,7 @@ const getChest = () => {
 
         do {
           let item = parsed.items[count];
-          chest({
+          Chest({
             name: item.name,
             idName: item.index
           }).save(function(err) {

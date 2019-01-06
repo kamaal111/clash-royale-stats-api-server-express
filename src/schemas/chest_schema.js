@@ -44,6 +44,6 @@ ChestSchema.index(
   }
 );
 
-const Chest = mongoose.model("Chest", ChestSchema);
+const Chest = mongoose.model("Chests", ChestSchema);
 
 module.exports = Chest;
