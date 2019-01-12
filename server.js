@@ -2,9 +2,10 @@
 
 // modules
 const express = require("express"),
+  // mongoose = require("mongoose"),
   // session = require("express-session"),
   // MongoStore = require("connect-mongo")(session),
-  // cookieParser = require("cookie-parser"),
+  cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
   createError = require("http-errors"),
   logger = require("morgan");
@@ -18,34 +19,20 @@ app.use(
     extended: false
   })
 );
-// app.use(cookieParser());
-app.use(express.static(`${__dirname}/public`));
+app.use(cookieParser());
+app.use(express.static(`${__dirname}/src/public`));
 
 // app.use(express.static("client/build"));
 
 // view engine setup
 app.set("view engine", "pug");
-app.set("views", `${__dirname}/views`);
+app.set("views", `${__dirname}/src/views`);
 
 // mongoose connection
 const db = require("./src/database");
 
-// app.use(
-//   session({
-//     secret: "Kamaal loves you",
-//     resave: true,
-//     saveUninitialized: false,
-//     store: new MongoStore({
-//       mongooseConnection: db
-//     })
-//   })
-// );
-
 const homePage = require("./src/routes");
 app.use("/", homePage);
-
-const playerRoute = require("./src/routes/playersRoute");
-app.use("/players", playerRoute);
 
 const chestsRoute = require("./src/routes/chestRoute");
 app.use("/chests", chestsRoute);

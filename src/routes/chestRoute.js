@@ -8,7 +8,8 @@ const Chest = require("../schemas/chest_schema");
 // show chest data
 
 // requests
-const chestReq = require("../requests/getChest");
+const getChest = require("../requests/playerData").getChest;
+const getPlayer = require("../requests/playerData").getPlayer;
 
 const findChest = chestName => {
   Chest.find({ name: chestName })
@@ -22,19 +23,14 @@ const findChest = chestName => {
 };
 
 const combine = () => {
-  chestReq();
-  findChest("Epic Chest");
+  //getChest();
+  getPlayer();
 };
 
-combine();
+// combine();
 
 router.get("/", function(req, res, next) {
-  // async function asyncCall () {
-  //   console.log('Requesting from API')
-  //   chestReq()
-  // }
-  // asyncCall().then(findChest("Silver Chest"))
-  // next();
+  combine();
 });
 
 module.exports = router;

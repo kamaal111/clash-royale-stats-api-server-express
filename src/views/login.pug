@@ -1,0 +1,7 @@
+extends app
+
+block content
+  form(action='/login', method='post')
+    label Please enter your playertag:
+      input(type='text', name='playerTag')
+    button(type='submit') Submit

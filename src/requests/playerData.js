@@ -6,23 +6,11 @@ const https = require("https");
 // models
 const Chest = require("../schemas/chest_schema");
 
-// testing data
-const playerTag = require("../data/playerTag.json"),
-  bearerToken = require("../data/bearerToken.json");
-
-const urls = [`/v1/players/%23${playerTag.player0}/upcomingchests`];
-
-const options = {
-  method: "GET",
-  hostname: "api.clashroyale.com",
-  path: urls[0],
-  headers: {
-    Authorization: bearerToken.key1
-  }
-};
+// options
+const options = require("../lib");
 
 const getChest = () => {
-  const req = https.request(options, res => {
+  const req = https.request(options(1), res => {
     let body = "";
 
     res.on("data", function(data) {
@@ -58,4 +46,23 @@ const getChest = () => {
   req.end();
 };
 
-module.exports = getChest;
+const getPlayer = () => {
+  const req = https.request(options(0), res => {
+    let body = "";
+
+    res.on("data", function(data) {
+      body += data;
+    });
+
+    res.on("end", function() {
+      // const Player = require("../schemas/player_schema");
+
+      const parsed = JSON.parse(body);
+      console.log(parsed);
+    });
+  });
+  req.end();
+};
+
+module.exports.getChest = getChest;
+module.exports.getPlayer = getPlayer;
