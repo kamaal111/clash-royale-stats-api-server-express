@@ -5,11 +5,11 @@ const express = require("express"),
   router = express.Router();
 
 const Chest = require("../schemas/chest_schema");
-// show chest data
 
 // requests
 const getChest = require("../requests/playerData").getChest;
-const getPlayer = require("../requests/playerData").getPlayer;
+const getPlayerData = require("../requests/playerData").getPlayerData;
+const getBattlelog = require("../requests/playerData").getBattlelog;
 
 const findChest = chestName => {
   Chest.find({ name: chestName })
@@ -23,11 +23,8 @@ const findChest = chestName => {
 };
 
 const combine = () => {
-  //getChest();
-  getPlayer();
+  getBattlelog();
 };
-
-// combine();
 
 router.get("/", function(req, res, next) {
   combine();

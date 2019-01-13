@@ -35,15 +35,6 @@ const ChestSchema = Schema({
   }
 });
 
-ChestSchema.index(
-  {
-    name: 1
-  },
-  {
-    unique: true
-  }
-);
-
 const Chest = mongoose.model("Chests", ChestSchema);
 
 module.exports = Chest;
