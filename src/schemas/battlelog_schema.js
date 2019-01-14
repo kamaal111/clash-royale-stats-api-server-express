@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const BattlelogSchema = Schema({
   type: String,
-  battleTime: Date,
+  battleTime: String,
   arena: { id: Number, name: String },
   gameMode: { id: Number, name: String },
   deckSelection: String,
@@ -15,12 +15,42 @@ const BattlelogSchema = Schema({
     {
       tag: String,
       name: String,
+      startingTrophies: { type: Number, default: "" },
+      trophyChange: { type: Number, default: "" },
       crowns: Number,
 
       clan: {
-        tag: String,
-        name: String,
-        badgeId: Number
+        tag: { type: String, default: "" },
+        name: { type: String, default: "" },
+        badgeId: { type: Number, default: "" }
+      },
+
+      cards: [
+        {
+          name: String,
+          id: Number,
+          level: Number,
+          maxLevel: Number,
+          iconUrls: {
+            medium: String
+          }
+        }
+      ]
+    }
+  ],
+
+  opponent: [
+    {
+      tag: String,
+      name: String,
+      startingTrophies: { type: Number, default: "" },
+      trophyChange: { type: Number, default: "" },
+      crowns: Number,
+
+      clan: {
+        tag: { type: String, default: "" },
+        name: { type: String, default: "" },
+        badgeId: { type: Number, default: "" }
       },
 
       cards: [

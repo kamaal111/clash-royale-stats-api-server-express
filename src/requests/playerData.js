@@ -7,7 +7,7 @@ const https = require("https");
 const options = require("../lib");
 
 const getPlayerData = () => {
-  const req = https.request(options(0), res => {
+  const req = https.request(options(0, "#998LLUR0R"), res => {
     let body = "";
 
     res.on("data", function(data) {
@@ -84,7 +84,7 @@ const getPlayerData = () => {
 };
 
 const getChest = () => {
-  const req = https.request(options(1), res => {
+  const req = https.request(options(1, "#998LLUR0R"), res => {
     let body = "";
 
     res.on("data", function(data) {
@@ -120,7 +120,7 @@ const getChest = () => {
 };
 
 const getBattlelog = () => {
-  const req = https.request(options(2), res => {
+  const req = https.request(options(2, "#998LLUR0R"), res => {
     let body = "";
 
     res.on("data", function(data) {
@@ -131,29 +131,214 @@ const getBattlelog = () => {
       const Battlelog = require("../schemas/battlelog_schema");
 
       const parsed = JSON.parse(body);
-      console.log(parsed[0]);
 
-      let i = 0;
-      let log = parsed[i];
+      let count = 0;
+
       Battlelog.deleteMany({}, err => {
         if (err) console.error("1 - Save Failed(battlelog)", err);
         console.log("1 - Refreshing Database(battlelog)");
 
         do {
-          Battlelog({
-            type: log.type,
-            battleTime: log.battleTime,
+          let log = parsed[count];
 
-            arena: { id: log.arena.id, name: log.arena.name },
+          for (let i = 0; i < log.team.length; i++) {
+            for (let index = 0; index < log.opponent.length; index++) {
+              Battlelog({
+                type: log.type,
+                battleTime: log.battleTime,
 
-            gameMode: { id: log.gameMode.id, name: log.gameMode.name },
+                arena: { id: log.arena.id, name: log.arena.name },
 
-            deckSelection: log.deckSelection,
+                gameMode: { id: log.gameMode.id, name: log.gameMode.name },
 
-            team: { tag: log.team.tag }
-          }).save(function(err) {
-            if (err) console.error("2 - Save Failed(battlelog)", err);
-          });
+                deckSelection: log.deckSelection,
+
+                team: [
+                  {
+                    tag: log.team[i].tag,
+                    name: log.team[i].name,
+                    startingTrophies: log.team[i].startingTrophies,
+                    trophyChange: log.team[i].trophyChange,
+                    crowns: log.team[i].crowns,
+
+                    clan: {
+                      tag: log.team[i].clan.tag,
+                      name: log.team[i].clan.name,
+                      badgeId: log.team[i].clan.badgeId
+                    },
+
+                    cards: [
+                      {
+                        name: log.team[i].cards[0].name,
+                        id: log.team[i].cards[0].id,
+                        level: log.team[i].cards[0].level,
+                        maxLevel: log.team[i].cards[0].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[0].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.team[i].cards[1].name,
+                        id: log.team[i].cards[1].id,
+                        level: log.team[i].cards[1].level,
+                        maxLevel: log.team[i].cards[1].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[1].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.team[i].cards[2].name,
+                        id: log.team[i].cards[2].id,
+                        level: log.team[i].cards[2].level,
+                        maxLevel: log.team[i].cards[2].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[2].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.team[i].cards[3].name,
+                        id: log.team[i].cards[3].id,
+                        level: log.team[i].cards[3].level,
+                        maxLevel: log.team[i].cards[3].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[3].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.team[i].cards[4].name,
+                        id: log.team[i].cards[4].id,
+                        level: log.team[i].cards[4].level,
+                        maxLevel: log.team[i].cards[4].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[4].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.team[i].cards[5].name,
+                        id: log.team[i].cards[5].id,
+                        level: log.team[i].cards[5].level,
+                        maxLevel: log.team[i].cards[5].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[5].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.team[i].cards[6].name,
+                        id: log.team[i].cards[6].id,
+                        level: log.team[i].cards[6].level,
+                        maxLevel: log.team[i].cards[6].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[6].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.team[i].cards[7].name,
+                        id: log.team[i].cards[7].id,
+                        level: log.team[i].cards[7].level,
+                        maxLevel: log.team[i].cards[7].maxLevel,
+                        iconUrls: {
+                          medium: log.team[i].cards[7].iconUrls.medium
+                        }
+                      }
+                    ]
+                  }
+                ],
+
+                opponent: [
+                  {
+                    tag: log.opponent[index].tag,
+                    name: log.opponent[index].name,
+                    startingTrophies: log.opponent[index].startingTrophies,
+                    trophyChange: log.opponent[index].trophyChange,
+                    crowns: log.opponent[index].crowns,
+
+                    clan: {
+                      tag: log.opponent[index].clan.tag,
+                      name: log.opponent[index].clan.name,
+                      badgeId: log.opponent[index].clan.badgeId
+                    },
+
+                    cards: [
+                      {
+                        name: log.opponent[index].cards[0].name,
+                        id: log.opponent[index].cards[0].id,
+                        level: log.opponent[index].cards[0].level,
+                        maxLevel: log.opponent[index].cards[0].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[0].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.opponent[index].cards[1].name,
+                        id: log.opponent[index].cards[1].id,
+                        level: log.opponent[index].cards[1].level,
+                        maxLevel: log.opponent[index].cards[1].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[1].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.opponent[index].cards[2].name,
+                        id: log.opponent[index].cards[2].id,
+                        level: log.opponent[index].cards[2].level,
+                        maxLevel: log.opponent[index].cards[2].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[2].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.opponent[index].cards[3].name,
+                        id: log.opponent[index].cards[3].id,
+                        level: log.opponent[index].cards[3].level,
+                        maxLevel: log.opponent[index].cards[3].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[3].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.opponent[index].cards[4].name,
+                        id: log.opponent[index].cards[4].id,
+                        level: log.opponent[index].cards[4].level,
+                        maxLevel: log.opponent[index].cards[4].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[4].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.opponent[index].cards[5].name,
+                        id: log.opponent[index].cards[5].id,
+                        level: log.opponent[index].cards[5].level,
+                        maxLevel: log.opponent[index].cards[5].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[5].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.opponent[index].cards[6].name,
+                        id: log.opponent[index].cards[6].id,
+                        level: log.opponent[index].cards[6].level,
+                        maxLevel: log.opponent[index].cards[6].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[6].iconUrls.medium
+                        }
+                      },
+                      {
+                        name: log.opponent[index].cards[7].name,
+                        id: log.opponent[index].cards[7].id,
+                        level: log.opponent[index].cards[7].level,
+                        maxLevel: log.opponent[index].cards[7].maxLevel,
+                        iconUrls: {
+                          medium: log.opponent[index].cards[7].iconUrls.medium
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }).save(function(err) {
+                if (err) console.error("2 - Save Failed(battlelog)", err);
+              });
+            }
+          }
           count++;
         } while (count < parsed.length);
 

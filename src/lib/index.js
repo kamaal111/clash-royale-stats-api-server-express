@@ -1,20 +1,19 @@
 "use strict";
 
 // testing data
-const playerTag = require("../data/playerTag.json"),
-  bearerToken = require("../data/bearerToken.json");
+const bearerToken = require("../data/bearerToken.json");
 
-const playerUrls = [
-  `/v1/players/${playerTag.player0}`,
-  `/v1/players/${playerTag.player0}/upcomingchests`,
-  `/v1/players/${playerTag.player0}/battlelog`
+const playerUrls = player => [
+  `/v1/players/${player}`,
+  `/v1/players/${player}/upcomingchests`,
+  `/v1/players/${player}/battlelog`
 ];
 
-const options = num => {
+const options = (num, player) => {
   let cheese = {
     method: "GET",
     hostname: "api.clashroyale.com",
-    path: playerUrls[num],
+    path: playerUrls(player)[num],
     headers: {
       Authorization: bearerToken.key1
     }
