@@ -2,9 +2,6 @@
 
 // modules
 const express = require("express"),
-  // mongoose = require("mongoose"),
-  // session = require("express-session"),
-  // MongoStore = require("connect-mongo")(session),
   cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
   createError = require("http-errors"),
@@ -31,6 +28,7 @@ app.set("views", `${__dirname}/src/views`);
 // mongoose connection
 const db = require("./src/database");
 
+// home routes
 const homePage = require("./src/routes");
 app.use("/", homePage);
 

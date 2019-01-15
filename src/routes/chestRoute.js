@@ -11,24 +11,24 @@ const getChest = require("../requests/playerData").getChest;
 const getPlayerData = require("../requests/playerData").getPlayerData;
 const getBattlelog = require("../requests/playerData").getBattlelog;
 
-// const findChest = chestName => {
-//   Chest.find({ name: chestName })
-//     .then(docs => {
-//       console.log(docs);
-//       console.log("Found Chests");
-//     })
-//     .catch(err => {
-//       console.error(err);
-//     });
-// };
+const findChest = chestName => {
+  Chest.find({ name: chestName })
+    .then(docs => {
+      console.log(docs);
+      console.log("Found Chests");
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
 
 const combine = () => {
-  // getChest();
-  // getPlayerData();
+  getChest();
+  getPlayerData();
   getBattlelog();
 };
 
-combine();
+// combine();
 router.get("/", function(req, res, next) {});
 
 module.exports = router;
