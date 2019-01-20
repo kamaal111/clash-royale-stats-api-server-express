@@ -4,7 +4,9 @@
 const express = require("express"),
   router = express.Router();
 
-const Chest = require("../schemas/chest_schema");
+const Chest = require("../schemas/chest_schema"),
+  Battlelogs = require("../schemas/battlelog_schema"),
+  Player = require("../schemas/player_schema");
 
 // requests
 const getChest = require("../requests/playerData").getChest;
@@ -28,7 +30,24 @@ const combine = () => {
   getBattlelog();
 };
 
-// combine();
-router.get("/", function(req, res, next) {});
+// this is our get method
+// this method fetches all available data in our database
+router.get("/", function(req, res, next) {
+  Chest.find((err, doc) => {
+    if (err) return res.json({ succes: false, error: err });
+    return res.json({ succes: true, doc: doc });
+  });
+  console.log(doc);
+});
+
+// this is our update method
+// this method overwrites existing data in our database
+// router.post("/updateChests", (req, res, next) => {
+//   const { id, update } = req.body;
+//   Chest.findOneAndUpdate(id, update, err => {
+//     if (err) return res.json({ success: false, error: err });
+//     return res.json({ success: true });
+//   });
+// });
 
 module.exports = router;

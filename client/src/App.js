@@ -1,38 +1,55 @@
 import React, { Component } from "react";
-import "./index.css";
+//import SearchChests from "./components/SearchChests";
+import ChestList from "./components/ChestList";
 
-// imports from the
+const urls = ["http://localhost:3001/api/chests"];
 
-class App extends Component {
-  state = { playertag: [] };
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      chests: [],
+      loading: true
+    };
+  }
 
-  // componentDidMount() {
-  //   fetch("/chests")
-  //     .then(res => res.json())
-  //     .then(chest => this.setState({ chest }));
-  // }
+  componentDidMount() {
+    this.callApi();
+  }
+
+  callApi = () => {
+    fetch(urls[0])
+      .then(res => res.json())
+      .then(data => this.setState({ chests: data.doc, loading: false }))
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  componentWillUnmount() {
+    if (this.state.intervalIsSet) {
+      clearInterval(this.state.intervalIsSet);
+      this.setState({ intervalIsSet: null });
+    }
+  }
 
   render() {
     return (
-      <div className="App">
-        <h1>Welcome</h1>
-        <form action="/chests" method="post">
-          <label>
-            Please enter your playertag:
-            <input type="text" name="playertag" />
-          </label>
-          <input type="submit" value="submit" />
-        </form>
-        {/*
-        {this.state.chests.map(chest => (
-          <div key={chest.id}>
-            <p>{chest.username}</p>
+      <div>
+        <div>
+          <div>
+            <h1>Chests</h1>
+            {/*<SearchChests />*/}
           </div>
-        ))}
-        */}
+        </div>
+        <div>
+          {this.state.loading ? (
+            <p>Loading.....</p>
+          ) : (
+            <ChestList data={this.state.chests} func={this.callApi} />
+          )}
+        </div>
       </div>
     );
   }
 }
-
-export default App;
