@@ -2,15 +2,20 @@ import React, { Component } from "react";
 
 import ChestList from "./components/ChestList";
 
-const urls = ["http://localhost:3001/api/chests"];
+const urls = [
+  "http://localhost:3001/api/chests",
+  "http://localhost:3001/api/player",
+  "http://localhost:3001/api/battlelog"
+];
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       chests: [],
-      loading: true,
-      isMounted: false
+      player: [],
+      battlelog: [],
+      loading: true
     };
   }
 
@@ -21,12 +26,13 @@ export default class App extends Component {
 
   callApi = () => {
     console.log("fetching!!!!");
+
     fetch(urls[0])
       .then(results => {
         return results.json();
       })
       .then(data => {
-        this.setState({ chests: data.doc, loading: false, isMounted: true });
+        this.setState({ chests: data.doc, loading: false });
       })
       .catch(e => {
         console.error("Error fetching and parsing data", e);

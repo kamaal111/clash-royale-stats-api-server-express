@@ -43,12 +43,21 @@ app.use(function(req, res, next) {
   next();
 });
 
-// home routes
-// const homePage = require("./src/routes");
-// app.use("/api", homePage);
+// home route
+const homePage = require("./src/routes");
+app.use("/api", homePage);
 
+// chest route
 const chestsRoute = require("./src/routes/chestRoute");
 app.use("/api/chests", chestsRoute);
+
+// player route
+const playerRoute = require("./src/routes/playerDataRoute");
+app.use("/api/player", playerRoute);
+
+// battlelog route
+const battlelogRoute = require("./src/routes/battlelogRoute");
+app.use("/api/battlelog", battlelogRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
