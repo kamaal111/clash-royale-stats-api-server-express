@@ -21,7 +21,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.static(`${__dirname}/src/public`));
 
-// app.use(express.static("client/build"));
+// app.use(express.static("client"));
 
 // view engine setup
 app.set("view engine", "pug");
@@ -44,8 +44,8 @@ app.use(function(req, res, next) {
 });
 
 // home routes
-const homePage = require("./src/routes");
-app.use("/api", homePage);
+// const homePage = require("./src/routes");
+// app.use("/api", homePage);
 
 const chestsRoute = require("./src/routes/chestRoute");
 app.use("/api/chests", chestsRoute);

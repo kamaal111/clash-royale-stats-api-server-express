@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import SearchChests from "./components/SearchChests";
+
 import ChestList from "./components/ChestList";
 
 const urls = ["http://localhost:3001/api/chests"];
@@ -9,44 +9,41 @@ export default class App extends Component {
     super();
     this.state = {
       chests: [],
-      loading: true
+      loading: true,
+      isMounted: false
     };
   }
 
   componentDidMount() {
+    console.log("mount!");
     this.callApi();
   }
 
   callApi = () => {
+    console.log("fetching!!!!");
     fetch(urls[0])
-      .then(res => res.json())
-      .then(data => this.setState({ chests: data.doc, loading: false }))
+      .then(results => {
+        return results.json();
+      })
+      .then(data => {
+        this.setState({ chests: data.doc, loading: false, isMounted: true });
+      })
       .catch(e => {
-        console.log(e);
+        console.error("Error fetching and parsing data", e);
       });
   };
-
-  componentWillUnmount() {
-    if (this.state.intervalIsSet) {
-      clearInterval(this.state.intervalIsSet);
-      this.setState({ intervalIsSet: null });
-    }
-  }
 
   render() {
     return (
       <div>
         <div>
-          <div>
-            <h1>Chests</h1>
-            {/*<SearchChests />*/}
-          </div>
+          <h1>Chests</h1>
         </div>
         <div>
           {this.state.loading ? (
             <p>Loading.....</p>
           ) : (
-            <ChestList data={this.state.chests} func={this.callApi} />
+            <ChestList data={this.state.chests} />
           )}
         </div>
       </div>
