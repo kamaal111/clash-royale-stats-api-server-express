@@ -9,7 +9,7 @@ const BattlelogSchema = Schema({
   battleTime: String,
   arena: { id: Number, name: String },
   gameMode: { id: Number, name: String },
-  deckSelection: String,
+  // deckSelection: String,
 
   team: [
     {
@@ -19,11 +19,11 @@ const BattlelogSchema = Schema({
       trophyChange: { type: Number, default: "" },
       crowns: Number,
 
-      clan: {
-        tag: { type: String, default: "" },
-        name: { type: String, default: "" },
-        badgeId: { type: Number, default: "" }
-      },
+      // clan: {
+      //   tag: { type: String, default: "" },
+      //   name: { type: String, default: "" },
+      //   badgeId: { type: Number, default: "" }
+      // },
 
       cards: [
         {
@@ -47,11 +47,11 @@ const BattlelogSchema = Schema({
       trophyChange: { type: Number, default: "" },
       crowns: Number,
 
-      clan: {
-        tag: { type: String, default: "" },
-        name: { type: String, default: "" },
-        badgeId: { type: Number, default: "" }
-      },
+      // clan: {
+      //   tag: { type: String, default: "" },
+      //   name: { type: String, default: "" },
+      //   badgeId: { type: Number, default: "" }
+      // },
 
       cards: [
         {
