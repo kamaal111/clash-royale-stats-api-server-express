@@ -6,8 +6,7 @@ const express = require("express"),
   cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
   createError = require("http-errors"),
-  logger = require("morgan"),
-  cors = require("cors");
+  logger = require("morgan");
 
 let app = express();
 

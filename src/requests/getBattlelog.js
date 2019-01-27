@@ -6,8 +6,10 @@ const https = require("https");
 // options
 const options = require("../lib");
 
-const getBattlelog = () => {
-  const req = https.request(options(2, "#998LLUR0R"), res => {
+// "#998LLUR0R"
+
+const getBattlelog = playerTag => {
+  const req = https.request(options(2, playerTag), res => {
     let body = "";
 
     res.on("data", function(data) {
