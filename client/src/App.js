@@ -1,49 +1,81 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 
 import ChestList from "./components/ChestList";
-
-const urls = [
-  "http://localhost:3001/api/chests",
-  "http://localhost:3001/api/player",
-  "http://localhost:3001/api/battlelog"
-];
+import Playertag from "./components/Playertag";
 
 export default class App extends Component {
   constructor() {
     super();
+
     this.state = {
       chests: [],
       player: [],
       battlelog: [],
-      loading: true
+      loading: true,
+      searchText: ""
     };
   }
 
   componentDidMount() {
-    console.log("mount!");
+    // TODO: callApi then show results(on reload)
+    console.log("Mount!");
     this.callApi();
   }
 
   callApi = () => {
-    console.log("fetching!!!!");
+    console.log("Fetch all!");
+    Promise.all([
+      fetch("http://localhost:3001/api/chests")
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ chests: data.doc, loading: false });
+        }),
+      fetch("http://localhost:3001/api/battlelog")
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ battlelog: data.doc });
+        }),
+      fetch("http://localhost:3001/api/player")
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ player: data.doc });
+        })
+    ]);
+  };
 
-    fetch(urls[0])
-      .then(results => {
-        return results.json();
-      })
-      .then(data => {
-        this.setState({ chests: data.doc, loading: false });
-      })
-      .catch(e => {
-        console.error("Error fetching and parsing data", e);
-      });
+  onSearchChange = e => {
+    this.setState({ searchText: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    Cookies.set(this.state.searchText, "playertag");
+    e.currentTarget.reset();
+    this.updateApi();
+    this.setState({ loading: true });
+    window.location.reload();
+  };
+
+  updateApi = () => {
+    console.log("Update data!");
+    fetch(`http://localhost:3001/api/hello`);
   };
 
   render() {
     return (
       <div>
         <div>
-          <h1>Chests</h1>
+          <Playertag
+            onSearchChange={this.onSearchChange}
+            handleSubmit={this.handleSubmit}
+          />
         </div>
         <div>
           {this.state.loading ? (

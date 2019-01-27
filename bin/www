@@ -7,7 +7,7 @@
 const app = require("../server"),
   debug = require("debug")("react-backend:server"),
   http = require("http"),
-  colors = require("colors");
+  colors = require("colors").rainbow;
 
 /**
  * Get port from environment and store in Express.
@@ -27,9 +27,7 @@ var server = http.createServer(app);
  */
 
 server.listen(port, () => {
-  console.log(
-    `${"Kamaal has infected your PC 😎 ".red}Dare to check out port ${port}`
-  );
+  console.log(`The backend${" MAGIC".rainbow} happens on port ${port}`);
 });
 server.on("error", onError);
 server.on("listening", onListening);
