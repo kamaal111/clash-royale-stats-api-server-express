@@ -8,8 +8,8 @@ const options = require("../lib");
 
 // "#998LLUR0R"
 
-const getPlayerData = playerTag => {
-  const req = https.request(options(0, playerTag), res => {
+const getPlayerData = playertag => {
+  const req = https.request(options(0, playertag), res => {
     let body = "";
 
     res.on("data", function(data) {
@@ -20,13 +20,16 @@ const getPlayerData = playerTag => {
       const Player = require("../schemas/player_schema");
 
       const parsed = JSON.parse(body);
+      // console.log(parsed);
 
-      Player.deleteMany({}, err => {
-        if (err) console.error("1 - Save Failed(player)", err);
-        console.log("1 - Refreshing Database(player)");
+      let player = playertag;
+
+      Player.deleteMany({ id: player }, function(err) {
+        if (err) console.error(`1 - Save Failed(player) ${player}`, err);
+        console.log(`1 - Refreshing Database(player) ${player}`);
 
         Player({
-          tag: parsed.tag,
+          id: player,
           name: parsed.name,
           expLevel: parsed.expLevel,
           trophies: parsed.trophies,
@@ -46,28 +49,29 @@ const getPlayerData = playerTag => {
           warDayWins: parsed.warDayWins,
           clanCardsCollected: parsed.clanCardsCollected,
 
-          clan: {
-            tag: parsed.clan.tag,
-            name: parsed.clan.name,
-            badgeId: parsed.clan.badgeId
-          },
+          // clan: {
+          //   tag: parsed.clan.tag,
+          //   name: parsed.clan.name,
+          //   badgeId: parsed.clan.badgeId
+          // },
+
           arena: { id: parsed.arena.id, name: parsed.arena.name },
 
-          leagueStatistics: {
-            currentSeason: {
-              trophies: parsed.leagueStatistics.currentSeason.trophies,
-              bestTrophies: parsed.leagueStatistics.currentSeason.bestTrophies
-            },
-            previousSeason: {
-              id: parsed.leagueStatistics.previousSeason.id,
-              trophies: parsed.leagueStatistics.previousSeason.trophies,
-              bestTrophies: parsed.leagueStatistics.previousSeason.bestTrophies
-            },
-            bestSeason: {
-              id: parsed.leagueStatistics.bestSeason.id,
-              trophies: parsed.leagueStatistics.bestSeason.trophies
-            }
-          },
+          // leagueStatistics: {
+          //   currentSeason: {
+          //     trophies: parsed.leagueStatistics.currentSeason.trophies,
+          //     bestTrophies: parsed.leagueStatistics.currentSeason.bestTrophies
+          //   },
+          //   previousSeason: {
+          //     id: parsed.leagueStatistics.previousSeason.id,
+          //     trophies: parsed.leagueStatistics.previousSeason.trophies,
+          //     bestTrophies: parsed.leagueStatistics.previousSeason.bestTrophies
+          //   },
+          //   bestSeason: {
+          //     id: parsed.leagueStatistics.bestSeason.id,
+          //     trophies: parsed.leagueStatistics.bestSeason.trophies
+          //   }
+          // },
 
           currentFavouriteCard: {
             name: parsed.currentFavouriteCard.name,
@@ -75,10 +79,10 @@ const getPlayerData = playerTag => {
             iconUrls: { medium: parsed.currentFavouriteCard.iconUrls.medium }
           }
         }).save(function(err) {
-          if (err) console.error("2 - Save Failed(player)", err);
+          if (err) console.error(`2 - Save Failed(player) ${player}`, err);
         });
 
-        console.log("2 - Saved playerdata");
+        console.log(`2 - Saved playerdata ${player}`);
       });
     });
   });

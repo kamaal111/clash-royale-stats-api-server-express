@@ -6,7 +6,7 @@ const Playertag = props => {
   return (
     <form
       id="playertag"
-      // action="http://localhost:3001/api/welcome"
+      // action="http://localhost:3001/api/"
       method="post"
       onSubmit={handleSubmit}
     >

@@ -4,9 +4,9 @@
 const bearerToken = require("../data/bearerToken.json");
 
 const playerUrls = player => [
-  `/v1/players/${player}`,
-  `/v1/players/${player}/upcomingchests`,
-  `/v1/players/${player}/battlelog`
+  `/v1/players/%23${player}`,
+  `/v1/players/%23${player}/upcomingchests`,
+  `/v1/players/%23${player}/battlelog`
 ];
 
 const options = (num, player) => {
@@ -15,7 +15,7 @@ const options = (num, player) => {
     hostname: "api.clashroyale.com",
     path: playerUrls(player)[num],
     headers: {
-      Authorization: bearerToken.key0
+      Authorization: bearerToken.key1
     }
   };
   return cheese;
