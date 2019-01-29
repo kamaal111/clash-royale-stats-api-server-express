@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BattlelogSchema = Schema({
+  id: String,
   type: String,
   battleTime: String,
   arena: { id: Number, name: String },

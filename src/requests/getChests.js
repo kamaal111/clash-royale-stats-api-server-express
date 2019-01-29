@@ -8,8 +8,8 @@ const options = require("../lib");
 
 // "#998LLUR0R"
 
-const getChest = playerTag => {
-  const req = https.request(options(1, playerTag), res => {
+const getChest = playertag => {
+  const req = https.request(options(1, playertag), res => {
     let body = "";
 
     res.on("data", function(data) {
@@ -21,22 +21,25 @@ const getChest = playerTag => {
 
       const parsed = JSON.parse(body);
 
+      let player = playertag;
       let count = 0;
-      Chest.deleteMany({}, err => {
-        if (err) console.error("1 - Save Failed(chest)", err);
-        console.log("1 - Refreshing Database(chest)");
+
+      Chest.deleteMany({ id: player }, err => {
+        if (err) console.error(`1 - Save Failed(chest) ${player}`, err);
+        console.log(`1 - Refreshing Database(chest) ${player}`);
 
         do {
           let item = parsed.items[count];
           Chest({
+            id: player,
             name: item.name,
-            idName: item.index
+            order: item.index
           }).save(function(err) {
-            if (err) console.error("2 - Save Failed(chest)", err);
+            if (err) console.error(`2 - Save Failed(chest) ${player}`, err);
           });
           count++;
         } while (count < parsed.items.length);
-        console.log("2 - Saved Chests");
+        console.log(`2 - Saved Chests ${player}`);
       });
     });
   });

@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const PlayerSchema = Schema({
   updatedAt: { type: Date, default: Date.now },
 
-  tag: String,
+  id: String,
   name: String,
   expLevel: Number,
   trophies: Number,
@@ -15,31 +15,41 @@ const PlayerSchema = Schema({
   losses: Number,
   battleCount: Number,
   threeCrownWins: Number,
-  challengeCardsWon: Number,
-  challengeMaxWins: Number,
-  tournamentCardsWon: Number,
-  tournamentBattleCount: Number,
-  role: String,
+  challengeCardsWon: { type: Number, default: "" },
+  challengeMaxWins: { type: Number, default: "" },
+  tournamentCardsWon: { type: Number, default: "" },
+  tournamentBattleCount: { type: Number, default: "" },
+  role: { type: String, default: "" },
   donations: Number,
   donationsReceived: Number,
   totalDonations: Number,
-  warDayWins: Number,
-  warDayWins: Number,
-  clanCardsCollected: Number,
+  warDayWins: { type: Number, default: "" },
+  warDayWins: { type: Number, default: "" },
+  clanCardsCollected: { type: Number, default: "" },
 
-  clan: {
-    tag: { type: String, default: "" },
-    name: { type: String, default: "" },
-    badgeId: { type: Number, default: "" }
-  },
+  // clan: {
+  //   tag: { type: String, default: "" },
+  //   name: { type: String, default: "" },
+  //   badgeId: { type: Number, default: "" }
+  // },
 
   arena: { id: Number, name: String },
 
-  leagueStatistics: {
-    currentSeason: { trophies: Number, bestTrophies: Number },
-    previousSeason: { id: String, trophies: Number, bestTrophies: Number },
-    bestSeason: { id: String, trophies: Number }
-  },
+  // leagueStatistics: {
+  //   currentSeason: {
+  //     trophies: { type: Number, default: 0 },
+  //     bestTrophies: { type: Number, default: 0 }
+  //   },
+  //   previousSeason: {
+  //     id: { type: String, default: "" },
+  //     trophies: { type: Number, default: "" },
+  //     bestTrophies: { type: Number, default: "" }
+  //   },
+  //   bestSeason: {
+  //     id: { type: String, default: "" },
+  //     trophies: { type: Number, default: "" }
+  //   }
+  // },
 
   currentFavouriteCard: {
     name: String,
