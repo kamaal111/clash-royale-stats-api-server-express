@@ -3,11 +3,11 @@ import Chest from "./Chest";
 // import NoChests from "./NoChests";
 
 const ChestList = props => {
-  const { data } = props;
+  const { datac } = props;
   let chests;
 
-  if (data.length > 0) {
-    chests = data.map(c => (
+  if (datac.length > 0) {
+    chests = datac.map(c => (
       <Chest name={c.name} id={c.order} playertag={c.id} key={c._id} />
     ));
   }

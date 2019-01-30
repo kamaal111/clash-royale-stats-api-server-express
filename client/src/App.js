@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
-import ChestList from "./components/ChestList";
 import Playertag from "./components/Playertag";
+import Playerdata from "./components/Playerdata/index";
+import ChestList from "./components/ChestList/index";
+// import Battlelog from "./components/Battlelog";
 
 export default class App extends Component {
   constructor() {
@@ -11,7 +13,7 @@ export default class App extends Component {
       chests: [],
       player: [],
       battlelog: [],
-      cookie: "",
+      cookie: this.getCookie("playertag"),
 
       loading: true,
       searchText: ""
@@ -19,9 +21,32 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // TODO: callApi then show results(on reload)
     console.log("Mount!");
-    // this.callApi();
+    let playertag = this.getCookie("playertag");
+    if (playertag !== false) {
+      console.log("calling");
+      this.callApi(playertag);
+    }
+  }
+
+  checkCookie() {
+    let playertag = this.getCookie("playertag");
+    if (playertag !== false) {
+      return <button onClick={this.updateData}>Upadate</button>;
+    } else {
+      return <p>Please enter your playertag</p>;
+    }
+  }
+
+  dataLoading() {
+    if (this.state.loading) return <p>Loading.....</p>;
+    else
+      return (
+        <div>
+          <Playerdata datap={this.state.player} />
+          <ChestList datac={this.state.chests} />
+        </div>
+      );
   }
 
   setCookie(cname, cvalue, exdays) {
@@ -43,8 +68,6 @@ export default class App extends Component {
   }
 
   callApi = player => {
-    let hi = this.state.cookie;
-    console.log(hi);
     console.log("Fetch all!");
     Promise.all([
       fetch(`http://localhost:3001/api/chests/${player}`)
@@ -82,31 +105,29 @@ export default class App extends Component {
     let cooks = this.getCookie("playertag");
     this.setState({ cookie: cooks });
 
-    e.currentTarget.reset();
     this.callApi(cooks);
   };
 
-  updateApi = () => {
+  handleUpdate = e => {
+    e.preventDefault();
+    this.updateData();
+  };
+
+  updateData = () => {
     console.log("Update data!");
-    fetch(`http://localhost:3001/api/hello`);
+    let player = this.getCookie("playertag");
+    fetch(`http://localhost:3001/api/${player}`);
   };
 
   render() {
     return (
       <div>
-        <div>
-          <Playertag
-            onSearchChange={this.onSearchChange}
-            handleSubmit={this.handleSubmit}
-          />
-        </div>
-        <div>
-          {this.state.loading ? (
-            <p>Loading.....</p>
-          ) : (
-            <ChestList data={this.state.chests} />
-          )}
-        </div>
+        <Playertag
+          onSearchChange={this.onSearchChange}
+          handleSubmit={this.handleSubmit}
+        />
+        {this.checkCookie()}
+        {this.dataLoading()}
       </div>
     );
   }
