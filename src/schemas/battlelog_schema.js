@@ -10,7 +10,7 @@ const BattlelogSchema = Schema({
   battleTime: String,
   arena: { id: Number, name: String },
   gameMode: { id: Number, name: String },
-  // deckSelection: String,
+  deckSelection: String,
 
   team: [
     {

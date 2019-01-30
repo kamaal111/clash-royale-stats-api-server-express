@@ -14,6 +14,7 @@ router.param("player", function(req, res, next, id) {
   getBattlelog(id);
   getChests(id);
   getPlayerData(id);
+  res.end();
 });
 
 router.get("/:player", function(req, res, next) {
