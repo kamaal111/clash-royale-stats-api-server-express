@@ -17,7 +17,7 @@ const Playerdata = props => {
         currentfavouriteCardMaxLevel={p.currentFavouriteCard.maxLevel}
         currentfavouriteCardName={p.currentFavouriteCard.name}
         donations={p.donations}
-        donationsRecieved={p.donationsRecieved}
+        donationsReceived={p.donationsReceived}
         totalDonations={p.totalDonations}
         expLevel={p.expLevel}
         losses={p.losses}

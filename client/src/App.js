@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Playertag from "./components/Playertag";
 import Playerdata from "./components/Playerdata/index";
 import ChestList from "./components/ChestList/index";
-// import Battlelog from "./components/Battlelog";
+// import BattlelogList from "./components/BattlelogList/index";
 
 export default class App extends Component {
   constructor() {
@@ -13,6 +13,7 @@ export default class App extends Component {
       chests: [],
       player: [],
       battlelog: [],
+
       cookie: this.getCookie("playertag"),
 
       loading: true,
@@ -39,12 +40,16 @@ export default class App extends Component {
   }
 
   dataLoading() {
-    if (this.state.loading) return <p>Loading.....</p>;
-    else
+    let playertag = this.getCookie("playertag");
+    if (this.state.loading && playertag !== false) return <p>Loading.....</p>;
+    else if (playertag === false) {
+      return <p>No Playertag</p>;
+    } else
       return (
         <div>
           <Playerdata datap={this.state.player} />
           <ChestList datac={this.state.chests} />
+          {/* <BattlelogList datab={this.state.battlelog} /> */}
         </div>
       );
   }
@@ -101,7 +106,7 @@ export default class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.setCookie("playertag", this.state.searchText);
+    this.setCookie("playertag", this.state.searchText, 365);
     let cooks = this.getCookie("playertag");
     this.setState({ cookie: cooks });
 
@@ -110,13 +115,21 @@ export default class App extends Component {
 
   handleUpdate = e => {
     e.preventDefault();
+    // let player = this.getCookie("playertag");
     this.updateData();
+    // this.callApi(player);
   };
 
   updateData = () => {
     console.log("Update data!");
     let player = this.getCookie("playertag");
-    fetch(`http://localhost:3001/api/${player}`);
+    fetch(`http://localhost:3001/api/${player}`)
+      // .then(this.setState({ loading: true }))
+      // .then(window.location.reload());
+      .then(this.callApi(player));
+    // .then(this.callApi(player));
+
+    // .then(window.location.reload());
   };
 
   render() {
@@ -125,6 +138,7 @@ export default class App extends Component {
         <Playertag
           onSearchChange={this.onSearchChange}
           handleSubmit={this.handleSubmit}
+          playerCookie={this.state.cookie}
         />
         {this.checkCookie()}
         {this.dataLoading()}

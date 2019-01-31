@@ -7,9 +7,7 @@ const ChestList = props => {
   let chests;
 
   if (datac.length > 0) {
-    chests = datac.map(c => (
-      <Chest name={c.name} id={c.order} playertag={c.id} key={c._id} />
-    ));
+    chests = datac.map(c => <Chest name={c.name} id={c.order} key={c._id} />);
   }
 
   return <ul>{chests}</ul>;
