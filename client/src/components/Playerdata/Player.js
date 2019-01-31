@@ -3,27 +3,29 @@ import React from "react";
 const Player = props => {
   return (
     <div>
-      <li>{props.arena}</li>
-      <li>{props.battleCount}</li>
-      <li>{props.challengeCardsWon}</li>
-      <li>{props.challengeMaxWins}</li>
-      <li>{props.clanCardsCollected}</li>
-      <li>{props.currentfavouriteCardIcon}</li>
-      <li>{props.currentfavouriteCardMaxLevel}</li>
-      <li>{props.currentfavouriteCardName}</li>
-      <li>{props.donations}</li>
-      <li>{props.donationsRecieved}</li>
-      <li>{props.totalDonations}</li>
-      <li>{props.expLevel}</li>
-      <li>{props.losses}</li>
-      <li>{props.wins}</li>
-      <li>{props.name}</li>
-      <li>{props.role}</li>
-      <li>{props.threeCrownWins}</li>
-      <li>{props.tournamentBattleCount}</li>
-      <li>{props.trophies}</li>
-      <li>{props.updatedAt}</li>
-      <li>{props.playertag}</li>
+      <li>Arena: {props.arena}</li>
+      <li>battle count: {props.battleCount}</li>
+      <li>Challenge cards won: {props.challengeCardsWon}</li>
+      <li>Challenge max wins: {props.challengeMaxWins}</li>
+      <li>Clan Cards Collected: {props.clanCardsCollected}</li>
+      <li>currentfavourite Card Icon: {props.currentfavouriteCardIcon}</li>
+      <li>
+        currentfavourite Card Max Level: {props.currentfavouriteCardMaxLevel}
+      </li>
+      <li>currentfavourite Card Name: {props.currentfavouriteCardName}</li>
+      <li>donations: {props.donations}</li>
+      <li>donations Received: {props.donationsReceived}</li>
+      <li>total Donations: {props.totalDonations}</li>
+      <li>exp Level: {props.expLevel}</li>
+      <li>losses: {props.losses}</li>
+      <li>wins: {props.wins}</li>
+      <li>name: {props.name}</li>
+      <li>role: {props.role}</li>
+      <li>three Crown Wins: {props.threeCrownWins}</li>
+      <li>tournament Battle Count: {props.tournamentBattleCount}</li>
+      <li>trophies: {props.trophies}</li>
+      <li>updated At: {props.updatedAt}</li>
+      <li>playertag: {props.playertag}</li>
     </div>
   );
 };

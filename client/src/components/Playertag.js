@@ -1,7 +1,11 @@
 import React from "react";
 
 const Playertag = props => {
-  const { onSearchChange, handleSubmit } = props;
+  const { onSearchChange, handleSubmit, playerCookie } = props;
+  const holder = () => {
+    if (playerCookie === false) return "";
+    // else return playerCookie;
+  };
 
   return (
     <div>
@@ -11,7 +15,7 @@ const Playertag = props => {
             type="text"
             name="playertag"
             onChange={onSearchChange}
-            placeholder="Playertag please"
+            placeholder={holder()}
           />
         </label>
         <button type="submit">Submit</button>
