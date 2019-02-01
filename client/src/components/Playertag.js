@@ -4,7 +4,7 @@ const Playertag = props => {
   const { onSearchChange, handleSubmit, playerCookie } = props;
   const holder = () => {
     if (playerCookie === false) return "";
-    // else return playerCookie;
+    else return playerCookie;
   };
 
   return (
