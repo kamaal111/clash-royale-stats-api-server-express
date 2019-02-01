@@ -1,49 +1,54 @@
 "use strict";
 
 // modules
-const https = require("https");
+const https = require("https"),
+  http = require("http");
 
 // options
 const options = require("../lib");
 
-// "#998LLUR0R"
+const getChest = (playertag, callback) => {
+  let player = playertag;
 
-const getChest = playertag => {
-  const req = https.request(options(1, playertag), res => {
-    let body = "";
+  const req = https.request(options(1, player), res => {
+    if (res.statusCode === 200) {
+      let body = "";
 
-    res.on("data", function(data) {
-      body += data;
-    });
-
-    res.on("end", function() {
-      const Chest = require("../schemas/chest_schema");
-
-      const parsed = JSON.parse(body);
-
-      let player = playertag;
-      let count = 0;
-
-      Chest.deleteMany({ id: player }, err => {
-        if (err) console.error(`1 - Save Failed(chest) ${player}`, err);
-        console.log(`1 - Refreshing Database(chest) ${player}`);
-
-        do {
-          let item = parsed.items[count];
-          Chest({
-            id: player,
-            name: item.name,
-            order: item.index
-          }).save(function(err) {
-            if (err) console.error(`2 - Save Failed(chest) ${player}`, err);
-          });
-          count++;
-        } while (count < parsed.items.length);
-        console.log(`2 - Saved Chests ${player}`);
+      res.on("data", function(data) {
+        body += data;
       });
-    });
-  });
+      res.on("end", function() {
+        const Chest = require("../schemas/chest_schema");
 
+        const parsed = JSON.parse(body);
+
+        let count = 0;
+
+        Chest.deleteMany({ id: player }, err => {
+          if (err) console.error(`1 - Save Failed(chest) ${player}`, err);
+          console.log(`1 - Refreshing Database(chest) ${player}`);
+
+          do {
+            let item = parsed.items[count];
+            Chest({
+              id: player,
+              name: item.name,
+              order: item.index
+            }).save(function(err) {
+              if (err) console.error(`2 - Save Failed(chest) ${player}`, err);
+            });
+            count++;
+          } while (count < parsed.items.length);
+          console.log(`2 - Saved Chests ${player}`);
+        });
+        return callback(true);
+      });
+    } else {
+      const errorCode = http.STATUS_CODES[res.statusCode];
+      const statusCodeError = new Error(errorCode);
+      return callback(statusCodeError.message);
+    }
+  });
   req.end();
 };
 

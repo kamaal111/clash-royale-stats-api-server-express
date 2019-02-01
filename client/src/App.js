@@ -115,18 +115,24 @@ export default class App extends Component {
 
   handleUpdate = e => {
     e.preventDefault();
-    // let player = this.getCookie("playertag");
-    this.updateData();
+    let player = this.getCookie("playertag");
+    console.log("Update data!");
+
+    // this.updateData()
     // this.callApi(player);
+    fetch(`http://localhost:3001/api/${player}`);
+
+    this.callApi(player);
   };
 
   updateData = () => {
     console.log("Update data!");
     let player = this.getCookie("playertag");
-    fetch(`http://localhost:3001/api/${player}`)
-      // .then(this.setState({ loading: true }))
-      // .then(window.location.reload());
-      .then(this.callApi(player));
+    fetch(`http://localhost:3001/api/${player}`);
+    // .then(this.setState({ loading: true }))
+    // .then(this.callApi(player))
+    // .then(window.location.reload());
+
     // .then(this.callApi(player));
 
     // .then(window.location.reload());
