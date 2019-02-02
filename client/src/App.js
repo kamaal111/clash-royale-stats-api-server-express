@@ -14,6 +14,9 @@ export default class App extends Component {
       player: [],
       battlelog: [],
 
+      playerStatus: [],
+      playerNotFound: false,
+
       cookie: this.getCookie("playertag"),
 
       loading: true,
@@ -33,7 +36,7 @@ export default class App extends Component {
   checkCookie() {
     let playertag = this.getCookie("playertag");
     if (playertag !== false) {
-      return <button onClick={this.updateData}>Upadate</button>;
+      return <button onClick={this.handleUpdate}>Upadate</button>;
     } else {
       return <p>Please enter your playertag</p>;
     }
@@ -115,27 +118,25 @@ export default class App extends Component {
 
   handleUpdate = e => {
     e.preventDefault();
-    let player = this.getCookie("playertag");
-    console.log("Update data!");
-
-    // this.updateData()
-    // this.callApi(player);
-    fetch(`http://localhost:3001/api/${player}`);
-
-    this.callApi(player);
+    this.updateData();
   };
 
   updateData = () => {
     console.log("Update data!");
     let player = this.getCookie("playertag");
-    fetch(`http://localhost:3001/api/${player}`);
-    // .then(this.setState({ loading: true }))
-    // .then(this.callApi(player))
-    // .then(window.location.reload());
-
-    // .then(this.callApi(player));
-
-    // .then(window.location.reload());
+    fetch(`http://localhost:3001/api/${player}`)
+      .then(results => {
+        return results.json();
+      })
+      .then(data => {
+        this.setState({ playerStatus: data });
+        console.log(data);
+      })
+      .then(() => {
+        if (this.state.playerStatus === "OK") {
+          this.callApi(player);
+        } else this.setState({ playerNotFound: true });
+      });
   };
 
   render() {
