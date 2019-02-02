@@ -7,7 +7,7 @@ const https = require("https"),
 // options
 const options = require("../lib");
 
-const getPlayerData = playertag => {
+const getPlayerData = (playertag, callback) => {
   let player = playertag;
 
   const req = https.request(options(0, player), res => {
@@ -82,11 +82,14 @@ const getPlayerData = playertag => {
           });
           console.log(`2 - Saved playerdata ${player}`);
         });
+        const statusCode = http.STATUS_CODES[res.statusCode];
+        const statusCodeError = new Error(statusCode);
+        return callback(statusCodeError.message);
       });
     } else {
-      const errorCode = http.STATUS_CODES[res.statusCode];
-      const statusCodeError = new Error(errorCode);
-      console.log(statusCodeError.message);
+      const statusCode = http.STATUS_CODES[res.statusCode];
+      const statusCodeError = new Error(statusCode);
+      return callback(statusCodeError.message);
     }
   });
   req.end();

@@ -8,22 +8,20 @@ const getChests = require("../requests/getChests").getChest,
   getBattlelog = require("../requests/getBattlelog").getBattlelog,
   getPlayerData = require("../requests/getPlayerData").getPlayerData;
 
-// const playertag = require("../data/playertag.json");
-
 router.param("player", function(req, res, next, id) {
-  getChests(id, response => {
-    if (response) {
-      getBattlelog(id);
-      getPlayerData(id);
-      res.end();
+  getPlayerData(id, response => {
+    if (response === "OK") {
+      console.log(response);
+      getBattlelog(id, response => {});
+      getChests(id, response => {});
+      res.json(response);
     } else {
+      console.log(response);
       res.json(response);
     }
   });
 });
 
-router.get("/:player", function(req, res, next) {
-  next();
-});
+router.get("/:player", function(req, res, next) {});
 
 module.exports = router;

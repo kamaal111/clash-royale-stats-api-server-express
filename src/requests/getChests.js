@@ -41,11 +41,13 @@ const getChest = (playertag, callback) => {
           } while (count < parsed.items.length);
           console.log(`2 - Saved Chests ${player}`);
         });
-        return callback(true);
+        const statusCode = http.STATUS_CODES[res.statusCode];
+        const statusCodeError = new Error(statusCode);
+        return callback(statusCodeError.message);
       });
     } else {
-      const errorCode = http.STATUS_CODES[res.statusCode];
-      const statusCodeError = new Error(errorCode);
+      const statusCode = http.STATUS_CODES[res.statusCode];
+      const statusCodeError = new Error(statusCode);
       return callback(statusCodeError.message);
     }
   });
