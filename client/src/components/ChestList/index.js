@@ -1,6 +1,7 @@
 import React from "react";
+import propTypes from "prop-types";
+
 import Chest from "./Chest";
-// import NoChests from "./NoChests";
 
 const ChestList = props => {
   const { datac } = props;
@@ -11,6 +12,10 @@ const ChestList = props => {
   }
 
   return <ul>{chests}</ul>;
+};
+
+ChestList.propTypes = {
+  datac: propTypes.array.isRequired
 };
 
 export default ChestList;

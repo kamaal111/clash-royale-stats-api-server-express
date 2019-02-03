@@ -1,6 +1,7 @@
 import React from "react";
+import propTypes from "prop-types";
+
 import Battlelog from "./Battlelog";
-// import NoChests from "./NoChests";
 
 const BattlelogList = props => {
   const { datab } = props;
@@ -26,6 +27,10 @@ const BattlelogList = props => {
   }
 
   return <ul>{battlelog}</ul>;
+};
+
+Battlelog.propTypes = {
+  datab: propTypes.array.isRequired
 };
 
 export default BattlelogList;

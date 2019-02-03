@@ -1,8 +1,10 @@
 import React from "react";
+import propTypes from "prop-types";
+
 import Player from "./Player";
 
 const Playerdata = props => {
-  const { datap } = props;
+  const { datap, playerStatus } = props;
   let playerdata;
 
   if (datap.length > 0) {
@@ -32,9 +34,13 @@ const Playerdata = props => {
         key={p._id}
       />
     ));
-  }
+  } else return (playerdata = playerStatus);
 
   return <ul>{playerdata}</ul>;
+};
+
+Playerdata.propTypes = {
+  datap: propTypes.array.isRequired
 };
 
 export default Playerdata;

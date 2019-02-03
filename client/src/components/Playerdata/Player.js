@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from "prop-types";
 
 const Player = props => {
   return (
@@ -28,5 +29,28 @@ const Player = props => {
       <li>playertag: {props.playertag}</li>
     </div>
   );
+};
+Player.propTypes = {
+  arena: propTypes.string.isRequired,
+  battleCount: propTypes.number.isRequired,
+  challengeCardsWon: propTypes.number.isRequired,
+  challengeMaxWins: propTypes.number.isRequired,
+  clanCardsCollected: propTypes.number.isRequired,
+  currentfavouriteCardIcon: propTypes.string.isRequired,
+  currentfavouriteCardMaxLevel: propTypes.number.isRequired,
+  currentfavouriteCardName: propTypes.string.isRequired,
+  donations: propTypes.number.isRequired,
+  donationsReceived: propTypes.number.isRequired,
+  totalDonations: propTypes.number.isRequired,
+  expLevel: propTypes.number.isRequired,
+  losses: propTypes.number.isRequired,
+  wins: propTypes.number.isRequired,
+  name: propTypes.string.isRequired,
+  role: propTypes.string.isRequired,
+  threeCrownWins: propTypes.number.isRequired,
+  tournamentBattleCount: propTypes.number.isRequired,
+  trophies: propTypes.number.isRequired,
+  updatedAt: propTypes.string.isRequired,
+  playertag: propTypes.string.isRequired
 };
 export default Player;
