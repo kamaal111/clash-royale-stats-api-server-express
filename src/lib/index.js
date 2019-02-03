@@ -15,7 +15,7 @@ const options = (num, player) => {
     hostname: "api.clashroyale.com",
     path: playerUrls(player)[num],
     headers: {
-      Authorization: bearerToken.key2
+      Authorization: bearerToken.key1
     }
   };
   return cheese;

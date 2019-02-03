@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Alert } from "reactstrap";
 
 import Playertag from "./components/Playertag";
 import Playerdata from "./components/Playerdata/index";
@@ -14,10 +15,11 @@ export default class App extends Component {
       player: [],
       battlelog: [],
 
-      playerStatus: [],
+      playerStatus: "player not found",
       playerNotFound: false,
 
       cookie: this.getCookie("playertag"),
+      formMessage: "",
 
       loading: true,
       searchText: ""
@@ -50,9 +52,12 @@ export default class App extends Component {
     } else
       return (
         <div>
-          <Playerdata datap={this.state.player} />
+          <Playerdata
+            datap={this.state.player}
+            playerStatus={this.state.playerStatus}
+          />
           <ChestList datac={this.state.chests} />
-          {/* <BattlelogList datab={this.state.battlelog} /> */}
+          {/* <BattlelogList datab={this.state.battlelog} */}
         </div>
       );
   }
@@ -106,14 +111,27 @@ export default class App extends Component {
     this.setState({ searchText: e.target.value });
   };
 
+  checkForm = str => {
+    if (str.length < 4) return "Playertag provided is too short";
+    else if (str.length > 12) return "Playertag provide is too long";
+    else if (str.search(/[^a-zA-Z0-9]/) !== -1)
+      return "Please provide your playertag without symbols";
+    else return true;
+  };
+
   handleSubmit = e => {
     e.preventDefault();
+    let checks = this.checkForm(this.state.searchText);
 
-    this.setCookie("playertag", this.state.searchText, 365);
-    let cooks = this.getCookie("playertag");
-    this.setState({ cookie: cooks });
+    if (checks !== true) this.setState({ formMessage: checks });
+    else {
+      this.setState({ formMessage: "" });
+      this.setCookie("playertag", this.state.searchText, 365);
+      let cooks = this.getCookie("playertag");
+      this.setState({ cookie: cooks });
 
-    this.callApi(cooks);
+      this.callApi(cooks);
+    }
   };
 
   handleUpdate = e => {
@@ -135,18 +153,33 @@ export default class App extends Component {
       .then(() => {
         if (this.state.playerStatus === "OK") {
           this.callApi(player);
+          this.setState({ playerNotFound: false });
         } else this.setState({ playerNotFound: true });
       });
+  };
+
+  alertClient = () => {
+    if (this.state.formMessage !== "")
+      return (
+        <Alert color="warning">
+          <p>{this.state.formMessage}</p>
+        </Alert>
+      );
   };
 
   render() {
     return (
       <div>
+        <Alert color="success">
+          <p>Welcome Clasher</p>
+        </Alert>
+        {this.alertClient()}
         <Playertag
           onSearchChange={this.onSearchChange}
           handleSubmit={this.handleSubmit}
           playerCookie={this.state.cookie}
         />
+
         {this.checkCookie()}
         {this.dataLoading()}
       </div>

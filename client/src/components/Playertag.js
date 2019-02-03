@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from "prop-types";
 
 const Playertag = props => {
   const { onSearchChange, handleSubmit, playerCookie } = props;
@@ -22,6 +23,12 @@ const Playertag = props => {
       </form>
     </div>
   );
+};
+
+Playertag.propTypes = {
+  onSearchChange: propTypes.func.isRequired,
+  handleSubmit: propTypes.func.isRequired,
+  playerCookie: propTypes.oneOfType([propTypes.string, propTypes.bool])
 };
 
 export default Playertag;

@@ -1,8 +1,10 @@
 import React from "react";
-import Cards from "./Cards";
+import propTypes from "prop-types";
+
+// import Cards from "./Cards";
 
 const Battlelog = props => {
-  let cards;
+  // let cards;
 
   //   if (props.opponentCards.length > 0) {
   //     cards = props.opponentCards.map(c => (
@@ -30,5 +32,17 @@ const Battlelog = props => {
       <li>{props.playertag}</li>
     </div>
   );
+};
+
+Battlelog.propTypes = {
+  arena: propTypes.string.isRequired,
+  battleTime: propTypes.string.isRequired,
+  deckSelection: propTypes.string.isRequired,
+  gameMode: propTypes.string.isRequired,
+  opponentName: propTypes.string.isRequired,
+  opponentTag: propTypes.string.isRequired,
+  opponentStartingTrophies: propTypes.number.isRequired,
+  opponentTrophyChange: propTypes.number.isRequired,
+  opponentCrown: propTypes.number.isRequired
 };
 export default Battlelog;
