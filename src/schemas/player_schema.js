@@ -15,41 +15,41 @@ const PlayerSchema = Schema({
   losses: Number,
   battleCount: Number,
   threeCrownWins: Number,
-  challengeCardsWon: { type: Number, default: "" },
-  challengeMaxWins: { type: Number, default: "" },
-  tournamentCardsWon: { type: Number, default: "" },
-  tournamentBattleCount: { type: Number, default: "" },
+  challengeCardsWon: { type: Number, default: 0 },
+  challengeMaxWins: { type: Number, default: 0 },
+  tournamentCardsWon: { type: Number, default: 0 },
+  tournamentBattleCount: { type: Number, default: 0 },
   role: { type: String, default: "" },
   donations: Number,
   donationsReceived: Number,
   totalDonations: Number,
-  warDayWins: { type: Number, default: "" },
-  warDayWins: { type: Number, default: "" },
-  clanCardsCollected: { type: Number, default: "" },
+  warDayWins: { type: Number, default: 0 },
+  warDayWins: { type: Number, default: 0 },
+  clanCardsCollected: { type: Number, default: 0 },
 
-  // clan: {
-  //   tag: { type: String, default: "" },
-  //   name: { type: String, default: "" },
-  //   badgeId: { type: Number, default: "" }
-  // },
+  clan: {
+    tag: String,
+    name: String,
+    badgeId: Number
+  },
 
   arena: { id: Number, name: String },
 
-  // leagueStatistics: {
-  //   currentSeason: {
-  //     trophies: { type: Number, default: 0 },
-  //     bestTrophies: { type: Number, default: 0 }
-  //   },
-  //   previousSeason: {
-  //     id: { type: String, default: "" },
-  //     trophies: { type: Number, default: "" },
-  //     bestTrophies: { type: Number, default: "" }
-  //   },
-  //   bestSeason: {
-  //     id: { type: String, default: "" },
-  //     trophies: { type: Number, default: "" }
-  //   }
-  // },
+  leagueStatistics: {
+    currentSeason: {
+      trophies: Number,
+      bestTrophies: Number
+    },
+    previousSeason: {
+      id: String,
+      trophies: Number,
+      bestTrophies: Number
+    },
+    bestSeason: {
+      id: String,
+      trophies: Number
+    }
+  },
 
   currentFavouriteCard: {
     name: String,

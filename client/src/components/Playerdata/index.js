@@ -36,7 +36,7 @@ const Playerdata = props => {
     ));
   } else return (playerdata = playerStatus);
 
-  return <ul>{playerdata}</ul>;
+  return <div>{playerdata}</div>;
 };
 
 Playerdata.propTypes = {
