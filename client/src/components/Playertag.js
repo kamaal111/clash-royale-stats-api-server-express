@@ -9,19 +9,19 @@ const Playertag = props => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="text"
-            name="playertag"
-            onChange={onSearchChange}
-            placeholder={holder()}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <form className="form-playertag" onSubmit={handleSubmit}>
+      <label>
+        <input
+          type="text"
+          name="playertag"
+          onChange={onSearchChange}
+          placeholder={holder()}
+        />
+      </label>
+      <button type="submit">
+        <i className="fas fa-search" />
+      </button>
+    </form>
   );
 };
 

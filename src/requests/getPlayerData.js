@@ -23,6 +23,18 @@ const getPlayerData = (playertag, callback) => {
 
         const parsed = JSON.parse(body);
 
+        const checkClan = name => {
+          if (parsed.clan) return parsed.clan[name];
+          else return "";
+        };
+
+        const checkLeague = (a, b) => {
+          if (parsed.leagueStatistics) {
+            let cheese = parsed.leagueStatistics[a];
+            return cheese[b];
+          } else return 0;
+        };
+
         Player.deleteMany({ id: player }, function(err) {
           if (err) console.error(`1 - Save Failed(player) ${player}`, err);
           console.log(`1 - Refreshing Database(player) ${player}`);
@@ -48,29 +60,29 @@ const getPlayerData = (playertag, callback) => {
             warDayWins: parsed.warDayWins,
             clanCardsCollected: parsed.clanCardsCollected,
 
-            // clan: {
-            //   tag: parsed.clan.tag,
-            //   name: parsed.clan.name,
-            //   badgeId: parsed.clan.badgeId
-            // },
+            clan: {
+              tag: checkClan("tag"),
+              name: checkClan("name"),
+              badgeId: checkClan("badgeId")
+            },
 
             arena: { id: parsed.arena.id, name: parsed.arena.name },
 
-            // leagueStatistics: {
-            //   currentSeason: {
-            //     trophies: parsed.leagueStatistics.currentSeason.trophies,
-            //     bestTrophies: parsed.leagueStatistics.currentSeason.bestTrophies
-            //   },
-            //   previousSeason: {
-            //     id: parsed.leagueStatistics.previousSeason.id,
-            //     trophies: parsed.leagueStatistics.previousSeason.trophies,
-            //     bestTrophies: parsed.leagueStatistics.previousSeason.bestTrophies
-            //   },
-            //   bestSeason: {
-            //     id: parsed.leagueStatistics.bestSeason.id,
-            //     trophies: parsed.leagueStatistics.bestSeason.trophies
-            //   }
-            // },
+            leagueStatistics: {
+              currentSeason: {
+                trophies: checkLeague("currentSeason", "trophies"),
+                bestTrophies: checkLeague("currentSeason", "bestTrophies")
+              },
+              previousSeason: {
+                id: checkLeague("previousSeason", "id"),
+                trophies: checkLeague("previousSeason", "trophies"),
+                bestTrophies: checkLeague("previousSeason", "bestTrophies")
+              },
+              bestSeason: {
+                id: checkLeague("bestSeason", "id"),
+                trophies: checkLeague("bestSeason", "trophies")
+              }
+            },
 
             currentFavouriteCard: {
               name: parsed.currentFavouriteCard.name,

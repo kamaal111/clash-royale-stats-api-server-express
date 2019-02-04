@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert } from "reactstrap";
+// import { Alert } from "reactstrap";
 
 import Playertag from "./components/Playertag";
 import Playerdata from "./components/Playerdata/index";
@@ -38,7 +38,11 @@ export default class App extends Component {
   checkCookie() {
     let playertag = this.getCookie("playertag");
     if (playertag !== false) {
-      return <button onClick={this.handleUpdate}>Upadate</button>;
+      return (
+        <button className="update-button" onClick={this.handleUpdate}>
+          <i className="fas fa-sync-alt" />
+        </button>
+      );
     } else {
       return <p>Please enter your playertag</p>;
     }
@@ -161,18 +165,18 @@ export default class App extends Component {
   alertClient = () => {
     if (this.state.formMessage !== "")
       return (
-        <Alert color="warning">
+        <div className="alert-warning">
           <p>{this.state.formMessage}</p>
-        </Alert>
+        </div>
       );
   };
 
   render() {
     return (
       <div>
-        <Alert color="success">
+        <div className="alert-success">
           <p>Welcome Clasher</p>
-        </Alert>
+        </div>
         {this.alertClient()}
         <Playertag
           onSearchChange={this.onSearchChange}
