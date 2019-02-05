@@ -9,17 +9,17 @@ const getChests = require("../requests/getChests").getChest,
   getPlayerData = require("../requests/getPlayerData").getPlayerData;
 
 router.param("player", function(req, res, next, id) {
-  getPlayerData(id, response => {
-    if (response === "OK") {
-      console.log(response);
-      getBattlelog(id, response => {});
-      getChests(id, response => {});
-      res.json(response);
-    } else {
-      console.log(response);
-      res.json(response);
-    }
-  });
+  // getPlayerData(id, response => {
+  //   if (response === "OK") {
+  //     console.log(response);
+  getBattlelog(id, response => {});
+  // getChests(id, response => {});
+  // res.json(response);
+  // } else {
+  //   console.log(response);
+  //   res.json(response);
+  // }
+  // });
 });
 
 router.get("/:player", function(req, res, next) {});
