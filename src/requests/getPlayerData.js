@@ -23,16 +23,15 @@ const getPlayerData = (playertag, callback) => {
 
         const parsed = JSON.parse(body);
 
-        const checkClan = name => {
-          if (parsed.clan) return parsed.clan[name];
+        const checkClan = tomato => {
+          if (parsed.clan) return parsed.clan[tomato];
           else return "";
         };
 
-        const checkLeague = (a, b) => {
+        const checkLeague = (tomato, cheese) => {
           if (parsed.leagueStatistics) {
-            let cheese = parsed.leagueStatistics[a];
-            return cheese[b];
-          } else return 0;
+            return parsed.leagueStatistics[tomato][cheese];
+          } else return "";
         };
 
         Player.deleteMany({ id: player }, function(err) {
