@@ -77,17 +77,30 @@ const BattlelogSchema = Schema({
         badgeIdTeam: Number
       },
 
-      cards: [
-        {
-          name: String,
-          id: Number,
-          level: Number,
-          maxLevel: Number,
-          iconUrls: {
-            medium: String
+      cards: {
+        cards: [
+          {
+            name: String,
+            id: Number,
+            level: Number,
+            maxLevel: Number,
+            iconUrls: {
+              medium: String
+            }
           }
-        }
-      ]
+        ],
+        cardsTeam: [
+          {
+            name: String,
+            id: Number,
+            level: Number,
+            maxLevel: Number,
+            iconUrls: {
+              medium: String
+            }
+          }
+        ]
+      }
     }
   ]
 });
