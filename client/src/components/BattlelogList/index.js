@@ -30,7 +30,7 @@ const BattlelogList = props => {
 };
 
 Battlelog.propTypes = {
-  datab: propTypes.array.isRequired
+  datab: propTypes.array
 };
 
 export default BattlelogList;

@@ -1,4 +1,6 @@
 
 src/data/
 node_modules/
-db
+db/
+client/
+.env

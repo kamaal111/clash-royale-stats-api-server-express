@@ -11,6 +11,7 @@ const PlayerSchema = Schema({
   name: String,
   expLevel: Number,
   trophies: Number,
+  bestTrophies: Number,
   wins: Number,
   losses: Number,
   battleCount: Number,

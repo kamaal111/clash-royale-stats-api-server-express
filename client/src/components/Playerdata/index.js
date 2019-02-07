@@ -21,6 +21,13 @@ const Playerdata = props => {
         donations={p.donations}
         donationsReceived={p.donationsReceived}
         totalDonations={p.totalDonations}
+        prevBestTrophies={p.leagueStatistics.previousSeason.bestTrophies}
+        prevId={p.leagueStatistics.previousSeason.id}
+        prevTrophies={p.leagueStatistics.previousSeason.trophies}
+        curBestTrophies={p.leagueStatistics.currentSeason.bestTrophies}
+        curTrophies={p.leagueStatistics.currentSeason.trophies}
+        bestSeasonId={p.leagueStatistics.bestSeason.id}
+        bestSeasonTrophies={p.leagueStatistics.bestSeason.trophies}
         expLevel={p.expLevel}
         losses={p.losses}
         wins={p.wins}
@@ -28,7 +35,9 @@ const Playerdata = props => {
         role={p.role}
         threeCrownWins={p.threeCrownWins}
         tournamentBattleCount={p.tournamentBattleCount}
+        tournamentCardsWon={p.tournamentCardsWon}
         trophies={p.trophies}
+        bestTrophies={p.bestTrophies}
         updatedAt={p.updatedAt}
         playertag={p.id}
         key={p._id}

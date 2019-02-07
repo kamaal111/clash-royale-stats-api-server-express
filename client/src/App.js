@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import Playertag from "./components/Playertag";
 import Playerdata from "./components/Playerdata/index";
 import ChestList from "./components/ChestList/index";
-// import BattlelogList from "./components/BattlelogList/index";
+import BattlelogList from "./components/BattlelogList/index";
 
 export default class App extends Component {
   constructor() {
@@ -37,23 +37,20 @@ export default class App extends Component {
 
   checkCookie() {
     let playertag = this.getCookie("playertag");
-    if (playertag !== false) {
+    if (playertag !== false)
       return (
         <button className="update-button" onClick={this.handleUpdate}>
           <i className="fas fa-sync-alt" />
         </button>
       );
-    } else {
-      return <p>Please enter your playertag</p>;
-    }
+    else return <p>Please enter your playertag</p>;
   }
 
   dataLoading() {
     let playertag = this.getCookie("playertag");
     if (this.state.loading && playertag !== false) return <p>Loading.....</p>;
-    else if (playertag === false) {
-      return <p>No Playertag</p>;
-    } else
+    else if (playertag === false) return <p>No Playertag</p>;
+    else
       return (
         <div>
           <Playerdata
@@ -61,7 +58,7 @@ export default class App extends Component {
             playerStatus={this.state.playerStatus}
           />
           <ChestList datac={this.state.chests} />
-          {/* <BattlelogList datab={this.state.battlelog} */}
+          <BattlelogList datab={this.state.battlelog} />
         </div>
       );
   }

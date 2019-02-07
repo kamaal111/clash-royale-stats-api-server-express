@@ -3,12 +3,12 @@
 // modules
 const express = require("express"),
   mongoose = require("mongoose"),
-  cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
-  createError = require("http-errors"),
   logger = require("morgan");
 
 let app = express();
+
+require("dotenv").config();
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -17,10 +17,6 @@ app.use(
     extended: false
   })
 );
-app.use(cookieParser());
-app.use(express.static(`${__dirname}/src/public`));
-
-// app.use(express.static("client"));
 
 // view engine setup
 app.set("view engine", "pug");
@@ -43,8 +39,8 @@ app.use(function(req, res, next) {
 });
 
 // home route
-const homePage = require("./src/routes");
-app.use("/api", homePage);
+const update = require("./src/routes");
+app.use("/api", update);
 
 // chest route
 const chestsRoute = require("./src/routes/chestRoute");
@@ -60,7 +56,9 @@ app.use("/api/battlelog", battlelogRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  next(createError(404));
+  const err = new Error("File Not Found");
+  err.status = 404;
+  next(err);
 });
 
 // error handler
