@@ -43,6 +43,7 @@ const getPlayerData = (playertag, callback) => {
             name: parsed.name,
             expLevel: parsed.expLevel,
             trophies: parsed.trophies,
+            bestTrophies: parsed.bestTrophies,
             wins: parsed.wins,
             losses: parsed.losses,
             battleCount: parsed.battleCount,
