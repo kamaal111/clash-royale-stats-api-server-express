@@ -12,36 +12,17 @@ const getChest = playertag => {
   const req = https.request(options(1, player), res => {
     let body = "";
 
-    res.on("data", function(data) {
+    res.on("data", data => {
       body += data;
     });
-    res.on("end", function() {
-      const Chest = require("../schemas/chest_schema");
-
+    res.on("end", () => {
       const parsed = JSON.parse(body);
 
-      let count = 0;
-
-      Chest.deleteMany({ id: player }, err => {
-        if (err) console.error(`1 - Save Failed(chest) ${player}`, err);
-        console.log(`1 - Refreshing Database(chest) ${player}`);
-
-        do {
-          let item = parsed.items[count];
-          Chest({
-            id: player,
-            name: item.name,
-            order: item.index
-          }).save(function(err) {
-            if (err) console.error(`2 - Save Failed(chest) ${player}`, err);
-          });
-          count++;
-        } while (count < parsed.items.length);
-        console.log(`2 - Saved Chests ${player}`);
-      });
+      const chestdb = require("../updateDB/chestdb");
+      chestdb(player, parsed);
     });
   });
   req.end();
 };
 
-module.exports.getChest = getChest;
+module.exports = getChest;
