@@ -8,7 +8,8 @@
     "start": " node bin/www",
     "dboff": "killall mongod",
     "watch": "nodemon bin/www",
-    "dbon": "mkdir -p ./db && mongod --dbpath ./db"
+    "dbon": "mkdir -p ./db && mongod --dbpath ./db",
+    "git": "git add -A && git commit -a"
   },
   "author": "Kamaal",
   "license": "MIT",

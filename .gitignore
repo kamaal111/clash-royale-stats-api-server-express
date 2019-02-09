@@ -2,5 +2,4 @@
 src/data/
 node_modules/
 db/
-client/
 .env

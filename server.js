@@ -2,7 +2,6 @@
 
 // modules
 const express = require("express"),
-  mongoose = require("mongoose"),
   bodyParser = require("body-parser"),
   logger = require("morgan");
 
@@ -22,7 +21,7 @@ app.use(
 app.set("view engine", "pug");
 app.set("views", `${__dirname}/src/views`);
 
-// mongoose connection
+// mongoDB connection
 const db = require("./src/database");
 
 app.use(function(req, res, next) {
@@ -38,7 +37,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-// home route
+// update route
 const update = require("./src/routes");
 app.use("/api", update);
 
