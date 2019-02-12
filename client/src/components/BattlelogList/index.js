@@ -14,19 +14,21 @@ const BattlelogList = props => {
         battleTime={b.battleTime}
         deckSelection={b.deckSelection}
         gameMode={b.gameMode.name}
-        opponentName={b.opponent.name}
-        opponentTag={b.opponent.tag}
-        opponentStartingTrophies={b.opponent.startingTrophies}
-        opponentTrophyChange={b.opponent.trophyChange}
-        opponentCrown={b.opponent.crown}
-        // opponentCards={b.opponent.cards}
+        opponentName={b.opponent[0].name}
+        opponentTag={b.opponent[0].tag}
+        opponentStartingTrophies={b.opponent[0].startingTrophies}
+        opponentTrophyChange={b.opponent[0].trophyChange}
+        opponentCrown={b.opponent[0].crowns}
+        // opponentCards={b.opponent[0].cards}
+        opponentClanName={b.opponent[0].clan.name}
+        opponentClanTag={b.opponent[0].clan.tag}
         playertag={b.id}
         key={b._id}
       />
     ));
   }
 
-  return <ul>{battlelog}</ul>;
+  return <div>{battlelog}</div>;
 };
 
 Battlelog.propTypes = {

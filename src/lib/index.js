@@ -1,8 +1,5 @@
 "use strict";
 
-// testing data
-const bearerToken = require("../data/bearerToken.json");
-
 const playerUrls = player => [
   `/v1/players/%23${player}`,
   `/v1/players/%23${player}/upcomingchests`,
@@ -10,15 +7,15 @@ const playerUrls = player => [
 ];
 
 const options = (num, player) => {
-  let cheese = {
+  let options = {
     method: "GET",
     hostname: "api.clashroyale.com",
     path: playerUrls(player)[num],
     headers: {
-      Authorization: bearerToken.key1
+      Authorization: process.env.BEARERTOKEN0
     }
   };
-  return cheese;
+  return options;
 };
 
 module.exports = options;

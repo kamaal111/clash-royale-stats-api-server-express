@@ -3,11 +3,13 @@
 const Player = require("../schemas/player_schema");
 
 const playerdb = (player, parsed) => {
+  // Check for clan
   const checkClan = team => {
     if (parsed.clan) return parsed.clan[team];
-    else return "";
+    else return undefined;
   };
 
+  // Check for league statistics
   const checkLeague = (team, name) => {
     if (parsed.leagueStatistics) {
       return parsed.leagueStatistics[team][name];

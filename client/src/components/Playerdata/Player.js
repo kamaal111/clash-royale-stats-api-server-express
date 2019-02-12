@@ -2,6 +2,37 @@ import React from "react";
 import propTypes from "prop-types";
 
 const Player = props => {
+  const checkLeague = () => {
+    if (props.curTrophies)
+      return (
+        <div>
+          <ul>
+            <b>Previous Season</b>
+            <li>Season: {props.prevId}</li>
+            <li>Trophies: {props.prevTrophies}</li>
+          </ul>
+
+          <ul>
+            <b>Best Season</b>
+            <li>Season: {props.bestSeasonId}</li>
+            <li>Trophies: {props.bestSeasonTrophies}</li>
+          </ul>
+
+          <ul>
+            <b>Current Season</b>
+            <li>Current Best Trophies: {props.curBestTrophies}</li>
+            <li>Current Trophies: {props.curTrophies}</li>
+          </ul>
+
+          <ul>
+            <b>League Season</b>
+            <li>Arena: {props.arena}</li>
+          </ul>
+        </div>
+      );
+    else return <p>no league</p>;
+  };
+
   return (
     <div>
       <p>updated At: {props.updatedAt}</p>
@@ -38,28 +69,7 @@ const Player = props => {
         <li>tournamentCardsWon: {props.tournamentCardsWon}</li>
       </ul>
 
-      <ul>
-        <b>Previous Season</b>
-        <li>Season: {props.prevId}</li>
-        <li>Trophies: {props.prevTrophies}</li>
-      </ul>
-
-      <ul>
-        <b>Best Season</b>
-        <li>Season: {props.bestSeasonId}</li>
-        <li>Trophies: {props.bestSeasonTrophies}</li>
-      </ul>
-
-      <ul>
-        <b>Current Season</b>
-        <li>Current Best Trophies: {props.curBestTrophies}</li>
-        <li>Current Trophies: {props.curTrophies}</li>
-      </ul>
-
-      <ul>
-        <b>League Season</b>
-        <li>Arena: {props.arena}</li>
-      </ul>
+      {checkLeague()}
 
       <ul>
         <li>Current Favourite Card Name: {props.currentfavouriteCardName}</li>
@@ -76,7 +86,6 @@ const Player = props => {
         <li>Name: {props.name}</li>
         <li>Role: {props.role}</li>
 
-        <li>updated At: {props.updatedAt}</li>
         <li>playertag: {props.playertag}</li>
       </ul>
     </div>
@@ -94,11 +103,11 @@ Player.propTypes = {
   donations: propTypes.number.isRequired,
   donationsReceived: propTypes.number.isRequired,
   totalDonations: propTypes.number.isRequired,
-  prevId: propTypes.string.isRequired,
-  prevTrophies: propTypes.number.isRequired,
-  bestSeasonId: propTypes.string.isRequired,
-  bestSeasonTrophies: propTypes.number.isRequired,
-  curTrophies: propTypes.number.isRequired,
+  prevId: propTypes.string,
+  prevTrophies: propTypes.number,
+  bestSeasonId: propTypes.string,
+  bestSeasonTrophies: propTypes.number,
+  curTrophies: propTypes.number,
   expLevel: propTypes.number.isRequired,
   losses: propTypes.number.isRequired,
   wins: propTypes.number.isRequired,
