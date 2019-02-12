@@ -4,33 +4,20 @@ import propTypes from "prop-types";
 // import Cards from "./Cards";
 
 const Battlelog = props => {
-  // let cards;
-
-  //   if (props.opponentCards.length > 0) {
-  //     cards = props.opponentCards.map(c => (
-  //       <Cards
-  //         iconUrls={c.iconUrls.medium}
-  //         level={c.level}
-  //         maxLevel={c.maxLevel}
-  //         name={c.name}
-  //       />
-  //     ));
-  //   }
   return (
-    <div>
-      <li>{props.arena}</li>
-      <li>{props.battleTime}</li>
-      <li>{props.deckSelection}</li>
-      <li>{props.gameMode}</li>
-      <li>{props.opponentName}</li>
-      <li>{props.opponentTag}</li>
-      <li>{props.opponentStartingTrophies}</li>
-      <li>{props.opponentTrophyChange}</li>
-      <li>{props.opponentCrown}</li>
-      {/* <ul>{cards}</ul> */}
-
-      <li>{props.playertag}</li>
-    </div>
+    <ul>
+      <li>Arena: {props.arena}</li>
+      <li>Battle Time: {props.battleTime}</li>
+      <li>Deck Selection: {props.deckSelection}</li>
+      <li>Game Mode: {props.gameMode}</li>
+      <li>Opponent Name: {props.opponentName}</li>
+      <li>Opponent Tag: {props.opponentTag}</li>
+      {/* <li>{props.opponentStartingTrophies}</li> */}
+      {/* <li>{props.opponentTrophyChange}</li> */}
+      <li>Opponent Crowns: {props.opponentCrown}</li>
+      <li>Opponent Clan Name: {props.opponentClanName}</li>
+      <li>Opponent Clan Tag: {props.opponentClanTag}</li>
+    </ul>
   );
 };
 
@@ -41,8 +28,10 @@ Battlelog.propTypes = {
   gameMode: propTypes.string.isRequired,
   opponentName: propTypes.string.isRequired,
   opponentTag: propTypes.string.isRequired,
-  opponentStartingTrophies: propTypes.number.isRequired,
-  opponentTrophyChange: propTypes.number.isRequired,
-  opponentCrown: propTypes.number.isRequired
+  opponentStartingTrophies: propTypes.number,
+  opponentTrophyChange: propTypes.number,
+  opponentCrown: propTypes.number.isRequired,
+  opponentClanName: propTypes.string.isRequired,
+  opponentClanTag: propTypes.string
 };
 export default Battlelog;

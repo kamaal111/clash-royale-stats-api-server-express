@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Alert } from "reactstrap";
 
 import Playertag from "./components/Playertag";
 import Playerdata from "./components/Playerdata/index";
@@ -33,17 +32,6 @@ export default class App extends Component {
       console.log("calling");
       this.callApi(playertag);
     }
-  }
-
-  checkCookie() {
-    let playertag = this.getCookie("playertag");
-    if (playertag !== false)
-      return (
-        <button className="update-button" onClick={this.handleUpdate}>
-          <i className="fas fa-sync-alt" />
-        </button>
-      );
-    else return <p>Please enter your playertag</p>;
   }
 
   dataLoading() {
@@ -84,21 +72,21 @@ export default class App extends Component {
   callApi = player => {
     console.log("Fetch all!");
     Promise.all([
-      fetch(`http://localhost:3001/api/chests/${player}`)
+      fetch(`http://localhost:8080/api/chests/${player}`)
         .then(results => {
           return results.json();
         })
         .then(data => {
           this.setState({ chests: data.doc, loading: false });
         }),
-      fetch(`http://localhost:3001/api/battlelog/${player}`)
+      fetch(`http://localhost:8080/api/battlelog/${player}`)
         .then(results => {
           return results.json();
         })
         .then(data => {
           this.setState({ battlelog: data.doc });
         }),
-      fetch(`http://localhost:3001/api/player/${player}`)
+      fetch(`http://localhost:8080/api/player/${player}`)
         .then(results => {
           return results.json();
         })
@@ -115,19 +103,19 @@ export default class App extends Component {
   checkForm = str => {
     if (str.length < 4) return "Playertag provided is too short";
     else if (str.length > 12) return "Playertag provide is too long";
-    else if (str.search(/[^a-zA-Z0-9]/) !== -1)
-      return "Please provide your playertag without symbols";
+    else if (str.search(/[^PYLQGRJCUV0289]/) !== -1)
+      return `Playertag should only include these characters: Numbers: 0, 2, 8, 9 Letters: P, Y, L, Q, G, R, J, C, U, V`;
     else return true;
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    let checks = this.checkForm(this.state.searchText);
+    let checks = this.checkForm(this.state.searchText.toUpperCase());
 
     if (checks !== true) this.setState({ formMessage: checks });
     else {
       this.setState({ formMessage: "" });
-      this.setCookie("playertag", this.state.searchText, 365);
+      this.setCookie("playertag", this.state.searchText.toUpperCase(), 365);
       let cooks = this.getCookie("playertag");
       this.setState({ cookie: cooks });
 
@@ -143,7 +131,7 @@ export default class App extends Component {
   updateData = () => {
     console.log("Update data!");
     let player = this.getCookie("playertag");
-    fetch(`http://localhost:3001/api/${player}`)
+    fetch(`http://localhost:8080/api/${player}`)
       .then(results => {
         return results.json();
       })
@@ -179,9 +167,8 @@ export default class App extends Component {
           onSearchChange={this.onSearchChange}
           handleSubmit={this.handleSubmit}
           playerCookie={this.state.cookie}
+          handleUpdate={this.handleUpdate}
         />
-
-        {this.checkCookie()}
         {this.dataLoading()}
       </div>
     );

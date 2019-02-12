@@ -4,7 +4,7 @@ let mongoose = require("mongoose"),
   chalk = require("chalk");
 
 const server = "127.0.0.1:27017";
-const database = "cr_api";
+const db = "cr_api";
 
 class Database {
   constructor() {
@@ -13,13 +13,15 @@ class Database {
 
   _connect() {
     mongoose
-      .connect(`mongodb://${server}/${database}`, {
+      .connect(`mongodb://${server}/${db}`, {
         useCreateIndex: true,
         useNewUrlParser: true
       })
       .then(() => {
         console.log(
-          chalk.greenBright.bgBlack.bold("Database connection successfull")
+          chalk.greenBright.bgBlack.bold(
+            `Database connection on ${server}${db} successfull`
+          )
         );
       })
       .catch(err => {

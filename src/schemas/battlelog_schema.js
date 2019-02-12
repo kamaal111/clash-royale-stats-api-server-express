@@ -18,16 +18,16 @@ const BattlelogSchema = Schema({
       tagTeam: String,
       name: String,
       nameTeam: String,
-      startingTrophies: { type: Number, default: "" },
-      trophyChange: { type: Number, default: "" },
+      startingTrophies: { type: Number, default: null },
+      trophyChange: { type: Number, default: null },
       crowns: Number,
 
       clan: {
-        tag: { type: String, default: "" },
+        tag: String,
         tagTeam: String,
-        name: { type: String, default: "" },
+        name: String,
         nameTeam: String,
-        badgeId: { type: Number, default: "" },
+        badgeId: Number,
         badgeIdTeam: Number
       },
 
@@ -45,6 +45,8 @@ const BattlelogSchema = Schema({
         ],
         cardsTeam: [
           {
+            type: Array,
+            default: undefined,
             name: String,
             id: Number,
             level: Number,
@@ -64,16 +66,16 @@ const BattlelogSchema = Schema({
       tagTeam: String,
       name: String,
       nameTeam: String,
-      startingTrophies: { type: Number, default: "" },
-      trophyChange: { type: Number, default: "" },
+      startingTrophies: { type: Number, default: null },
+      trophyChange: { type: Number, default: null },
       crowns: Number,
 
       clan: {
-        tag: { type: String, default: "" },
+        tag: String,
         tagTeam: String,
-        name: { type: String, default: "" },
+        name: String,
         nameTeam: String,
-        badgeId: { type: Number, default: "" },
+        badgeId: Number,
         badgeIdTeam: Number
       },
 
@@ -91,6 +93,8 @@ const BattlelogSchema = Schema({
         ],
         cardsTeam: [
           {
+            type: Array,
+            default: undefined,
             name: String,
             id: Number,
             level: Number,

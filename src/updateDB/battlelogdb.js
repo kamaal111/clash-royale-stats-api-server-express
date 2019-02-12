@@ -3,38 +3,37 @@
 const Battlelog = require("../schemas/battlelog_schema");
 
 const battlelogdb = (player, parsed) => {
+  // Check for clan {tag, team and badgeid}
   const check = (team, prop, name) => {
     if (parsed[count][team][0][prop]) return parsed[count][team][0][prop][name];
-    else return "";
+    else return undefined;
   };
 
+  // Check for clan {tag, team and badgeid} of teammate
   const checkMate = (team, prop, name) => {
     if (parsed[count].team.length >= 2 && parsed[count][team][1][prop])
       return parsed[count][team][1][prop][name];
-    else return "";
+    else return undefined;
   };
 
-  const checkTeam = (team, name) => {
-    if (parsed[count].team.length >= 2) {
-      return parsed[count][team][0][name];
-    } else return parsed[count][team][name];
-  };
-
+  // Check for tag, name of teammate
   const checkTeamMate = (team, name) => {
     if (parsed[count].team.length >= 2) return parsed[count][team][1][name];
-    else return "";
+    else return undefined;
   };
 
+  // Check for cards of teammate
   const checkCards = (team, prop, name) => {
     if (parsed[count].team.length >= 2)
       return parsed[count][team][1].cards[prop][name];
-    else return "";
+    else return undefined;
   };
 
+  // check for card images of teammate
   const checkCardsImg = (team, name) => {
     if (parsed[count].team.length >= 2)
       return parsed[count][team][1].cards[name].iconUrls.medium;
-    else return "";
+    else return undefined;
   };
 
   let count = 0;
@@ -59,9 +58,9 @@ const battlelogdb = (player, parsed) => {
 
         team: [
           {
-            tag: checkTeam("team", "tag"),
+            tag: log.team[0].tag,
             tagTeam: checkTeamMate("team", "tag"),
-            name: checkTeam("team", "name"),
+            name: log.team[0].name,
             nameTeam: checkTeamMate("team", "name"),
             startingTrophies: log.team[0].startingTrophies,
             trophyChange: log.team[0].trophyChange,
@@ -231,9 +230,9 @@ const battlelogdb = (player, parsed) => {
 
         opponent: [
           {
-            tag: checkTeam("opponent", "tag"),
+            tag: log.opponent[0].tag,
             tagTeam: checkTeamMate("opponent", "tag"),
-            name: checkTeam("opponent", "name"),
+            name: log.opponent[0].name,
             nameTeam: checkTeamMate("opponent", "name"),
             startingTrophies: log.opponent[0].startingTrophies,
             trophyChange: log.opponent[0].trophyChange,
