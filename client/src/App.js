@@ -27,17 +27,18 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log("Mount!");
-    let playertag = this.getCookie("playertag");
-    if (playertag !== false) {
+    // let playertag = this.getCookie("playertag");
+    if (this.state.cookie !== false) {
       console.log("calling");
-      this.callApi(playertag);
+      this.callApi(this.state.cookie);
     }
   }
 
   dataLoading() {
-    let playertag = this.getCookie("playertag");
-    if (this.state.loading && playertag !== false) return <p>Loading.....</p>;
-    else if (playertag === false) return <p>No Playertag</p>;
+    // let playertag = this.getCookie("playertag");
+    if (this.state.loading && this.state.cookie !== false)
+      return <p>Loading.....</p>;
+    else if (this.state.cookie === false) return <p>No Playertag</p>;
     else
       return (
         <div>
@@ -62,6 +63,7 @@ export default class App extends Component {
     let pairs = document.cookie.split("; "),
       count = pairs.length,
       parts;
+    console.log("Get cookie");
     while (count--) {
       parts = pairs[count].split("=");
       if (parts[0] === name) return parts[1];
