@@ -3,3 +3,4 @@ src/data/
 node_modules/
 db/
 .env
+.text
