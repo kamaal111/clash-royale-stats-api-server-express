@@ -74,21 +74,21 @@ export default class App extends Component {
   callApi = player => {
     console.log("Fetch all!");
     Promise.all([
-      fetch(`http://localhost:8080/api/chests/${player}`)
+      fetch(`http://localhost:3001/api/chests/${player}`)
         .then(results => {
           return results.json();
         })
         .then(data => {
           this.setState({ chests: data.doc, loading: false });
         }),
-      fetch(`http://localhost:8080/api/battlelog/${player}`)
+      fetch(`http://localhost:3001/api/battlelog/${player}`)
         .then(results => {
           return results.json();
         })
         .then(data => {
           this.setState({ battlelog: data.doc });
         }),
-      fetch(`http://localhost:8080/api/player/${player}`)
+      fetch(`http://localhost:3001/api/player/${player}`)
         .then(results => {
           return results.json();
         })
@@ -112,9 +112,11 @@ export default class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    // this.setState({playerStatus: 'player not found'})
     let checks = this.checkForm(this.state.searchText.toUpperCase());
 
     if (checks !== true) this.setState({ formMessage: checks });
+    // else if (this.state.formMessage === '')
     else {
       this.setState({ formMessage: "" });
       this.setCookie("playertag", this.state.searchText.toUpperCase(), 365);
@@ -133,7 +135,7 @@ export default class App extends Component {
   updateData = () => {
     console.log("Update data!");
     let player = this.getCookie("playertag");
-    fetch(`http://localhost:8080/api/${player}`)
+    fetch(`http://localhost:3001/api/${player}`)
       .then(results => {
         return results.json();
       })
@@ -145,6 +147,7 @@ export default class App extends Component {
         if (this.state.playerStatus === "OK") {
           this.callApi(player);
           this.setState({ playerNotFound: false });
+          window.location.reload();
         } else this.setState({ playerNotFound: true });
       });
   };

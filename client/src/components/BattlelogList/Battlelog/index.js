@@ -5,23 +5,14 @@ import Team from "./Team/index";
 
 const Battlelog = props => {
   return (
-    <ul>
+    <ul className={"battlelog"}>
       <li>Arena: {props.arena}</li>
       <li>Type: {props.type}</li>
       <li>Battle Time: {props.battleTime}</li>
       <li>Deck Selection: {props.deckSelection}</li>
       <li>Game Mode: {props.gameMode}</li>
-      <Team
-        title={"Opponent"}
-        name={props.opponentName}
-        tag={props.opponentTag}
-        startingTrophies={props.opponentStartingTrophies}
-        trophyChange={props.opponentTrophyChange}
-        crown={props.opponentCrown}
-        clanName={props.opponentClanName}
-        clanTag={props.opponentClanTag}
-        cards={props.opponentCards}
-      />
+
+      <br />
 
       <Team
         title={"Team"}
@@ -33,6 +24,20 @@ const Battlelog = props => {
         clanName={props.teamClanName}
         clanTag={props.teamClanTag}
         cards={props.teamCards}
+      />
+
+      <br />
+
+      <Team
+        title={"Opponent"}
+        name={props.opponentName}
+        tag={props.opponentTag}
+        startingTrophies={props.opponentStartingTrophies}
+        trophyChange={props.opponentTrophyChange}
+        crown={props.opponentCrown}
+        clanName={props.opponentClanName}
+        clanTag={props.opponentClanTag}
+        cards={props.opponentCards}
       />
     </ul>
   );

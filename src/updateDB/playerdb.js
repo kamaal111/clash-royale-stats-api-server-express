@@ -3,10 +3,21 @@
 const Player = require("../schemas/player_schema");
 
 const playerdb = (player, parsed) => {
+  const checkFavoCard = name => {
+    if (parsed.currentFavouriteCard) return parsed.currentFavouriteCard[name];
+    else return "";
+  };
+
+  const checkFavoCardImg = () => {
+    if (parsed.currentFavouriteCard)
+      return parsed.currentFavouriteCard.iconUrls.medium;
+    else return "";
+  };
+
   // Check for clan
   const checkClan = team => {
     if (parsed.clan) return parsed.clan[team];
-    else return undefined;
+    else return "";
   };
 
   // Check for league statistics
@@ -67,9 +78,9 @@ const playerdb = (player, parsed) => {
       },
 
       currentFavouriteCard: {
-        name: parsed.currentFavouriteCard.name,
-        maxLevel: parsed.currentFavouriteCard.maxLevel,
-        iconUrls: { medium: parsed.currentFavouriteCard.iconUrls.medium }
+        name: checkFavoCard("name"),
+        maxLevel: checkFavoCard("maxLevel"),
+        iconUrls: { medium: checkFavoCardImg() }
       }
     }).save(function(err) {
       if (err) console.error(`2 - Save Failed(player) ${player}`, err);

@@ -4,6 +4,16 @@ import propTypes from "prop-types";
 import Cards from "./Cards/index";
 
 const Team = props => {
+  const checkTrophyChange = () => {
+    if (props.trophyChange !== null) {
+      return <li>{props.trophyChange}</li>;
+    }
+  };
+
+  const checkClan = name => {
+    if (!props[name]) return "This player has no clan";
+    else return props[name];
+  };
   return (
     <div>
       <li>
@@ -12,16 +22,18 @@ const Team = props => {
       <li>
         {props.title} Tag: {props.tag}
       </li>
-      {/* <li>{props.startingTrophies}</li>
-      <li>{props.trophyChange}</li> */}
+      <li>
+        {props.title} Starting Trophies: {props.startingTrophies}
+      </li>
+      {checkTrophyChange()}
       <li>
         {props.title}Crowns: {props.crown}
       </li>
       <li>
-        {props.title} Clan Name: {props.clanName}
+        {props.title} Clan Name: {checkClan("clanName")}
       </li>
       <li>
-        {props.title} Clan Tag: {props.clanTag}
+        {props.title} Clan Tag: {checkClan("clanTag")}
       </li>
 
       <Cards title={props.title} cards={props.cards} />

@@ -59,3 +59,14 @@ body {
   background-color: #a4fe7e;
   color: rgb(1, 60, 8);
 }
+
+.card {
+  height: 4rem;
+}
+
+.battlelog {
+  width: 300px;
+  border: 0.2rem solid #000000;
+  padding: 2rem;
+  margin: 2rem;
+}
