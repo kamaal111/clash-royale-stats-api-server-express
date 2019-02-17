@@ -20,6 +20,7 @@ const getPlayerData = (playertag, callback) => {
 
       res.on("end", () => {
         const parsed = JSON.parse(body);
+        // console.log(parsed);
 
         const playerdb = require("../updateDB/playerdb");
         playerdb(player, parsed);

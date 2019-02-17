@@ -16,7 +16,6 @@ const Playerdata = props => {
         challengeMaxWins={p.challengeMaxWins}
         clanCardsCollected={p.clanCardsCollected}
         currentfavouriteCardIcon={p.currentFavouriteCard.iconUrls.medium}
-        currentfavouriteCardMaxLevel={p.currentFavouriteCard.maxLevel}
         currentfavouriteCardName={p.currentFavouriteCard.name}
         donations={p.donations}
         donationsReceived={p.donationsReceived}

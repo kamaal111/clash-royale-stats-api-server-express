@@ -28,10 +28,8 @@ const Cards = props => {
 };
 
 Cards.propTypes = {
-  // name: propTypes.string.isRequired,
-  // lvl: propTypes.number.isRequired,
-  // maxlvl: propTypes.number.isRequired
-  // img: propTypes.string.isRequired
+  cards: propTypes.array.isRequired,
+  title: propTypes.string.isRequired
 };
 
 export default Cards;

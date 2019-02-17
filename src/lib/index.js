@@ -12,7 +12,7 @@ const options = (num, player) => {
     hostname: "api.clashroyale.com",
     path: playerUrls(player)[num],
     headers: {
-      Authorization: process.env.BEARERTOKEN0
+      Authorization: process.env.BEARERTOKEN1
     }
   };
   return options;

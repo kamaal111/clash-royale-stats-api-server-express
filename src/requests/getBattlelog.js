@@ -18,6 +18,7 @@ const getBattlelog = playertag => {
 
     res.on("end", function() {
       const parsed = JSON.parse(body);
+      // console.log(parsed);
 
       const battlelogdb = require("../updateDB/battlelogdb");
       battlelogdb(player, parsed);

@@ -3,9 +3,6 @@
 let mongoose = require("mongoose"),
   chalk = require("chalk");
 
-const server = "127.0.0.1:27017";
-const db = "cr_api";
-
 class Database {
   constructor() {
     this._connect();
@@ -13,15 +10,19 @@ class Database {
 
   _connect() {
     mongoose
-      .connect(`mongodb://${server}/${db}`, {
-        useCreateIndex: true,
-        useNewUrlParser: true
-      })
+      .connect(
+        // `${process.env.DBPATH}${process.env.DBUSER}${process.env.DBPASS}${
+        //   process.env.DBSERVER
+        // }`
+        process.env.DBLOCAL,
+        {
+          useCreateIndex: true,
+          useNewUrlParser: true
+        }
+      )
       .then(() => {
         console.log(
-          chalk.greenBright.bgBlack.bold(
-            `Database connection on ${server}${db} successfull`
-          )
+          chalk.greenBright.bgBlack.bold(`Database connection successfull`)
         );
       })
       .catch(err => {

@@ -30,7 +30,6 @@ const Player = props => {
           </ul>
         </div>
       );
-    else return <p>no league</p>;
   };
 
   return (
@@ -73,10 +72,7 @@ const Player = props => {
 
       <ul>
         <li>Current Favourite Card Name: {props.currentfavouriteCardName}</li>
-        <img alt="" src={props.currentfavouriteCardIcon} />
-        <li>
-          CurrentFavourite Card Max Level: {props.currentfavouriteCardMaxLevel}
-        </li>
+        <img className="card" alt="" src={props.currentfavouriteCardIcon} />
 
         <li>Donations: {props.donations}</li>
         <li>Donations Received: {props.donationsReceived}</li>
@@ -98,7 +94,6 @@ Player.propTypes = {
   challengeMaxWins: propTypes.number.isRequired,
   clanCardsCollected: propTypes.number.isRequired,
   currentfavouriteCardIcon: propTypes.string.isRequired,
-  currentfavouriteCardMaxLevel: propTypes.number.isRequired,
   currentfavouriteCardName: propTypes.string.isRequired,
   donations: propTypes.number.isRequired,
   donationsReceived: propTypes.number.isRequired,

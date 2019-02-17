@@ -5,6 +5,7 @@ import Battlelog from "./Battlelog/index";
 
 const BattlelogList = props => {
   const { datab } = props;
+
   let battlelog;
 
   if (datab.length > 0) {
