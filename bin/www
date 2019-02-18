@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require("../server"),
+const app = require("../server/app"),
   debug = require("debug")("react-backend:server"),
   http = require("http"),
   chalk = require("chalk");
@@ -13,7 +13,7 @@ const app = require("../server"),
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || 3001);
+var port = normalizePort(process.env.PORTSERVER || 3000);
 app.set("port", port);
 
 /**

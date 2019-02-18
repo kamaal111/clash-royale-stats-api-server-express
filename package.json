@@ -4,12 +4,16 @@
   "main": "app.js",
   "scripts": {
     "lint": "eslint ./",
-    "test": "jest -i --verbose --coverage --runInBand",
-    "start": " node bin/www",
+    "testserver": "jest -i --verbose --coverage --runInBand",
+    "startserver": " node bin/www",
     "dboff": "killall mongod",
     "watch": "nodemon bin/www",
     "dbon": "mkdir -p ./db && mongod --dbpath ./db",
-    "git": "git add -A && git commit -a"
+    "git": "git add -A && git commit -a",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "author": "Kamaal",
   "license": "MIT",
@@ -21,8 +25,22 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.1",
     "morgan": "^1.9.1",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.5"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {},
   "keywords": [],
   "repository": {
