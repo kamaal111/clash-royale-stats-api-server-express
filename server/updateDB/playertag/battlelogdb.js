@@ -1,4 +1,4 @@
-const Battlelog = require("../schemas/battlelog_schema");
+const Battlelog = require("../../schemas/playertag/battlelog_schema");
 
 const battlelogdb = (player, parsed) => {
   // Check for clan {tag, team and badgeid}

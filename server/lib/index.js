@@ -1,19 +1,22 @@
-const playerUrls = player => [
-  `/v1/players/%23${player}`,
-  `/v1/players/%23${player}/upcomingchests`,
-  `/v1/players/%23${player}/battlelog`
+const urls = tag => [
+  `/v1/players/%23${tag}`,
+  `/v1/players/%23${tag}/upcomingchests`,
+  `/v1/players/%23${tag}/battlelog`,
+  `/v1/clans?name=%23${tag}`
 ];
 
-const options = (num, player) => {
+let token = process.env.BEARERTOKEN0;
+
+const playerOptions = (num, tag) => {
   let options = {
     method: "GET",
     hostname: "api.clashroyale.com",
-    path: playerUrls(player)[num],
+    path: urls(tag)[num],
     headers: {
-      Authorization: process.env.BEARERTOKEN0
+      Authorization: token
     }
   };
   return options;
 };
 
-module.exports = options;
+module.exports = playerOptions;

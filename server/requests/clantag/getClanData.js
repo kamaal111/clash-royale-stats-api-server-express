@@ -1,14 +1,12 @@
-// modules
 const https = require("https"),
   http = require("http");
 
-// options
-const options = require("../lib");
+const options = require("../../lib");
 
-const getPlayerData = (playertag, callback) => {
-  let player = playertag;
+const getClanData = (clantag, callback) => {
+  let clan = clantag;
 
-  const req = https.request(options(0, player), res => {
+  const req = https.request(options(3, clan), res => {
     if (res.statusCode === 200) {
       let body = "";
 
@@ -18,10 +16,10 @@ const getPlayerData = (playertag, callback) => {
 
       res.on("end", () => {
         const parsed = JSON.parse(body);
-        // console.log(parsed);
+        // console.log(parsed.items[0].location);
 
-        const playerdb = require("../updateDB/playerdb");
-        playerdb(player, parsed);
+        const clandb = require("../../updateDB/clantag/clandb");
+        clandb(clan, parsed);
 
         const statusCode = http.STATUS_CODES[res.statusCode];
         const statusCodeError = new Error(statusCode);
@@ -36,4 +34,4 @@ const getPlayerData = (playertag, callback) => {
   req.end();
 };
 
-module.exports = getPlayerData;
+module.exports = getClanData;

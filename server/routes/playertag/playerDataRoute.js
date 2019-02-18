@@ -2,10 +2,10 @@
 const express = require("express"),
   router = express.Router();
 
-const Chest = require("../schemas/chest_schema");
+const Player = require("../../schemas/playertag/player_schema");
 
 router.param("player", function(req, res, next, id) {
-  Chest.find({ id }, function(err, doc) {
+  Player.find({ id }, function(err, doc) {
     if (err) return res.json({ succes: false, error: err });
     return res.json({ succes: true, doc: doc });
   });

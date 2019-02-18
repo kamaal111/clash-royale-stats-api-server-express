@@ -1,4 +1,4 @@
-const Chest = require("../schemas/chest_schema");
+const Chest = require("../../schemas/playertag/chest_schema");
 
 const chestdb = (player, parsed) => {
   let count = 0;

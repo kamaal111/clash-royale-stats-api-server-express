@@ -36,21 +36,29 @@ app.use(function(req, res, next) {
   next();
 });
 
-// update route
-const update = require("./routes");
+// update player route
+const update = require("./routes/playertag");
 app.use("/api", update);
 
-// chest route
-const chestsRoute = require("./routes/chestRoute");
+// chest player route
+const chestsRoute = require("./routes/playertag/chestRoute");
 app.use("/api/chests", chestsRoute);
 
-// player route
-const playerRoute = require("./routes/playerDataRoute");
+// player data route
+const playerRoute = require("./routes/playertag/playerDataRoute");
 app.use("/api/player", playerRoute);
 
-// battlelog route
-const battlelogRoute = require("./routes/battlelogRoute");
+// battlelog playerroute
+const battlelogRoute = require("./routes/playertag/battlelogRoute");
 app.use("/api/battlelog", battlelogRoute);
+
+// update clan route
+const updateClanRoute = require("./routes/clantag/index");
+app.use("/api/clan", updateClanRoute);
+
+// clan data route
+const clanRoute = require("./routes/clantag/clanData");
+app.use("/api/clan/data", clanRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
