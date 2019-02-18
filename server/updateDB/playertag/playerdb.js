@@ -1,4 +1,4 @@
-const Player = require("../schemas/player_schema");
+const Player = require("../../schemas/playertag/player_schema");
 
 const playerdb = (player, parsed) => {
   const checkFavoCard = name => {

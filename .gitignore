@@ -1,6 +1,7 @@
 
-src/data/
+data/
 node_modules/
 db/
 .env
 .text
+.DS_Store

@@ -2,7 +2,7 @@
 const https = require("https");
 
 // options
-const options = require("../lib");
+const options = require("../../lib");
 
 const getChest = playertag => {
   let player = playertag;
@@ -16,7 +16,7 @@ const getChest = playertag => {
     res.on("end", () => {
       const parsed = JSON.parse(body);
 
-      const chestdb = require("../updateDB/chestdb");
+      const chestdb = require("../../updateDB/playertag/chestdb");
       chestdb(player, parsed);
     });
   });

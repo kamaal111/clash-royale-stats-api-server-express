@@ -52,7 +52,10 @@ const Player = props => {
 
       <ul>
         <b>Clan War Stats</b>
+        <li>War Day Wins: {props.warDayWins}</li>
         <li>Clan Cards Collected: {props.clanCardsCollected}</li>
+        <li>Clan Name: {props.clanName}</li>
+        <li>Clan Tag: {props.clanTag}</li>
       </ul>
 
       <ul>
@@ -107,10 +110,13 @@ Player.propTypes = {
   losses: propTypes.number.isRequired,
   wins: propTypes.number.isRequired,
   name: propTypes.string.isRequired,
-  role: propTypes.string.isRequired,
+  role: propTypes.string,
   threeCrownWins: propTypes.number.isRequired,
   tournamentBattleCount: propTypes.number.isRequired,
   trophies: propTypes.number.isRequired,
+  clanName: propTypes.string,
+  clanTag: propTypes.string,
+  warDayWins: propTypes.number,
   updatedAt: propTypes.string.isRequired,
   playertag: propTypes.string.isRequired
 };

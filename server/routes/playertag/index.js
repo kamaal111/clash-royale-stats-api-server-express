@@ -3,9 +3,9 @@ const express = require("express"),
   router = express.Router(),
   chalk = require("chalk");
 
-const getChests = require("../requests/getChests"),
-  getBattlelog = require("../requests/getBattlelog"),
-  getPlayerData = require("../requests/getPlayerData");
+const getChests = require("../../requests/playertag/getChests"),
+  getBattlelog = require("../../requests/playertag/getBattlelog"),
+  getPlayerData = require("../../requests/playertag/getPlayerData");
 
 router.param("player", function(req, res, next, id) {
   getPlayerData(id, response => {

@@ -37,6 +37,9 @@ const Playerdata = props => {
         tournamentCardsWon={p.tournamentCardsWon}
         trophies={p.trophies}
         bestTrophies={p.bestTrophies}
+        clanName={p.clan.name}
+        clanTag={p.clan.tag}
+        warDayWins={p.warDayWins}
         updatedAt={p.updatedAt}
         playertag={p.id}
         key={p._id}
