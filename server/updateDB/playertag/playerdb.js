@@ -1,30 +1,6 @@
 const Player = require("../../schemas/playertag/player_schema");
 
 const playerdb = (player, parsed) => {
-  const checkFavoCard = name => {
-    if (parsed.currentFavouriteCard) return parsed.currentFavouriteCard[name];
-    else return "";
-  };
-
-  const checkFavoCardImg = () => {
-    if (parsed.currentFavouriteCard)
-      return parsed.currentFavouriteCard.iconUrls.medium;
-    else return "";
-  };
-
-  // Check for clan
-  const checkClan = team => {
-    if (parsed.clan) return parsed.clan[team];
-    else return "";
-  };
-
-  // Check for league statistics
-  const checkLeague = (team, name) => {
-    if (parsed.leagueStatistics) {
-      return parsed.leagueStatistics[team][name];
-    } else return "";
-  };
-
   Player.deleteMany({ id: player }, function(err) {
     if (err) console.error(`1 - Save Failed(player) ${player}`, err);
     console.log(`1 - Refreshing Database(player) ${player}`);
@@ -50,35 +26,13 @@ const playerdb = (player, parsed) => {
       warDayWins: parsed.warDayWins,
       clanCardsCollected: parsed.clanCardsCollected,
 
-      clan: {
-        tag: checkClan("tag"),
-        name: checkClan("name"),
-        badgeId: checkClan("badgeId")
-      },
+      clan: parsed.clan,
 
-      arena: { id: parsed.arena.id, name: parsed.arena.name },
+      arena: parsed.arena,
 
-      leagueStatistics: {
-        currentSeason: {
-          trophies: checkLeague("currentSeason", "trophies"),
-          bestTrophies: checkLeague("currentSeason", "bestTrophies")
-        },
-        previousSeason: {
-          id: checkLeague("previousSeason", "id"),
-          trophies: checkLeague("previousSeason", "trophies"),
-          bestTrophies: checkLeague("previousSeason", "bestTrophies")
-        },
-        bestSeason: {
-          id: checkLeague("bestSeason", "id"),
-          trophies: checkLeague("bestSeason", "trophies")
-        }
-      },
+      leagueStatistics: parsed.leagueStatistics,
 
-      currentFavouriteCard: {
-        name: checkFavoCard("name"),
-        maxLevel: checkFavoCard("maxLevel"),
-        iconUrls: { medium: checkFavoCardImg() }
-      }
+      currentFavouriteCard: parsed.currentFavouriteCard
     }).save(function(err) {
       if (err) console.error(`2 - Save Failed(player) ${player}`, err);
     });

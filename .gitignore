@@ -1,6 +1,7 @@
 
 data/
 node_modules/
+build/
 db/
 .env
 .text

@@ -407,7 +407,7 @@ const battlelogdb = (player, parsed) => {
 
       console.log(`2 - Saved battlelog ${player}`);
     });
-  } else return console.log("Battle log is empty");
+  } else return console.log("You have not played enough battles!!!");
 };
 
 module.exports = battlelogdb;

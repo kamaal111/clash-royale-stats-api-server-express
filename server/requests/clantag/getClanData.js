@@ -16,7 +16,7 @@ const getClanData = (clantag, callback) => {
 
       res.on("end", () => {
         const parsed = JSON.parse(body);
-        // console.log(parsed.items[0].location);
+        // console.log(parsed.items[0]);
 
         const clandb = require("../../updateDB/clantag/clandb");
         clandb(clan, parsed);
