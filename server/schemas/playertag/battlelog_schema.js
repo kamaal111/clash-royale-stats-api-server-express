@@ -13,20 +13,20 @@ const BattlelogSchema = Schema({
   team: [
     {
       tag: String,
-      tagTeam: String,
+      // tagTeam: String,
       name: String,
-      nameTeam: String,
+      // nameTeam: String,
       startingTrophies: { type: Number, default: null },
       trophyChange: { type: Number, default: null },
       crowns: Number,
 
       clan: {
         tag: String,
-        tagTeam: String,
+        // tagTeam: String,
         name: String,
-        nameTeam: String,
-        badgeId: Number,
-        badgeIdTeam: Number
+        // nameTeam: String,
+        badgeId: Number
+        // badgeIdTeam: Number
       },
 
       cards: {

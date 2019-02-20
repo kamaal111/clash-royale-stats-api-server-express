@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 
 const ChestSchema = Schema({
   id: String,
-
-  name: String,
-  order: {
-    unique: false,
-    type: String
+  items: {
+    type: Array,
+    name: String,
+    index: {
+      unique: false,
+      type: String
+    }
   }
 });
 
