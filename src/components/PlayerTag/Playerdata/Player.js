@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 const Player = props => {
   const checkLeague = () => {
-    if (props.curTrophies)
+    if (props.curTrophies !== 0)
       return (
         <div>
           <ul>

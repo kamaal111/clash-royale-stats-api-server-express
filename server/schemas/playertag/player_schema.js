@@ -35,17 +35,17 @@ const PlayerSchema = Schema({
 
   leagueStatistics: {
     currentSeason: {
-      trophies: Number,
-      bestTrophies: Number
+      trophies: { type: Number, default: 0 },
+      bestTrophies: { type: Number, default: 0 }
     },
     previousSeason: {
-      id: String,
-      trophies: Number,
-      bestTrophies: Number
+      id: { type: String, default: "" },
+      trophies: { type: Number, default: 0 },
+      bestTrophies: { type: Number, default: 0 }
     },
     bestSeason: {
-      id: String,
-      trophies: Number
+      id: { type: String, default: "" },
+      trophies: { type: Number, default: 0 }
     }
   },
 

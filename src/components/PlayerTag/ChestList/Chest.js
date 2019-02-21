@@ -9,7 +9,7 @@ const Chest = props => (
 
 Chest.propTypes = {
   name: propTypes.string.isRequired,
-  id: propTypes.string.isRequired
+  id: propTypes.number.isRequired
 };
 
 export default Chest;

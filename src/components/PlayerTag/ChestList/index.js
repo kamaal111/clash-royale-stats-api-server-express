@@ -7,8 +7,10 @@ const ChestList = props => {
   const { datac } = props;
   let chests;
 
-  if (datac.length > 0) {
-    chests = datac.map(c => <Chest name={c.name} id={c.order} key={c._id} />);
+  if (datac[0].items.length > 0) {
+    chests = datac[0].items.map(c => (
+      <Chest name={c.name} id={c.index} key={c.index} />
+    ));
   }
 
   return <ul>{chests}</ul>;
