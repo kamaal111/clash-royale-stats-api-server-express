@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
-import Playertag from "./components/Playertag";
-import Playerdata from "./components/Playerdata/index";
-import ChestList from "./components/ChestList/index";
-import BattlelogList from "./components/BattlelogList/index";
+import SearchForm from "./components/SearchForm";
+import Playerdata from "./components/PlayerTag/Playerdata/index";
+import ChestList from "./components/PlayerTag/ChestList/index";
+import BattlelogList from "./components/PlayerTag/BattlelogList/index";
 
 let port = 3000;
 
@@ -182,12 +182,11 @@ export default class App extends Component {
       <BrowserRouter>
         <div className="container">
           <header>
-            <div className="alert-success">
-              <p>Welcome Clasher</p>
-            </div>
+            <h1>Welcome Clasher</h1>
+
             {this.alertClient()}
             <NavBar />
-            <Playertag
+            <SearchForm
               onSearchChange={this.onSearchChange}
               handleSubmit={this.handleSubmit}
               playerCookie={this.state.cookie}
