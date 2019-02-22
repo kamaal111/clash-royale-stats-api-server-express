@@ -1,18 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const NavBar = () => (
+const NavBar = props => (
   <ul className="nav-bar">
     <li>
-      <NavLink exact to="/">
-        Home
+      <NavLink exact to={`/${props.firLink}`}>
+        {props.firTitle}
       </NavLink>
     </li>
     <li>
-      <NavLink to="/chests">Chests</NavLink>
+      <NavLink to={`/${props.secLink}`}>{props.secTitle}</NavLink>
     </li>
     <li>
-      <NavLink to="/battlelog">Battlelog</NavLink>
+      <NavLink to={`/${props.thirLink}`}>{props.thirTitle}</NavLink>
     </li>
   </ul>
 );
