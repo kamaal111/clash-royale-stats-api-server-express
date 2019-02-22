@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 
-import NavBar from "./components/NavBar";
-import SearchForm from "./components/SearchForm";
-import Playerdata from "./components/PlayerTag/Playerdata/index";
-import ChestList from "./components/PlayerTag/ChestList/index";
-import BattlelogList from "./components/PlayerTag/BattlelogList/index";
+import SearchForm from "./components/SearchForm/index";
+import Routes from "./components/Routes";
 
 let port = 3000;
 
@@ -19,59 +16,30 @@ export default class App extends Component {
       battlelog: [],
 
       playerStatus: "player not found",
-      playerNotFound: false,
 
-      cookie: this.getCookie("playertag"),
+      playerCookie: this.getCookie("playertag"),
+      clanCookie: this.getCookie("clantag"),
       formMessage: "",
 
       loading: true,
-      searchText: ""
+      searchText: "",
+      selection: "playertag"
     };
   }
 
   componentDidMount() {
     console.log("Mount!");
-    // let playertag = this.getCookie("playertag");
-    if (this.state.cookie !== false) {
+
+    if (this.state.playerCookie !== false) {
       console.log("calling");
-      this.callApi(this.state.cookie);
+      this.callPlayerAPI(this.state.playerCookie);
     }
   }
 
-  loadData() {
-    // let playertag = this.getCookie("playertag");
-    if (this.state.loading && this.state.cookie !== false)
-      return <p>Loading.....</p>;
-    else if (this.state.cookie === false) return <p>No Playertag</p>;
-    else
-      return (
-        <div>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <Playerdata
-                datap={this.state.player}
-                playerStatus={this.state.playerStatus}
-              />
-            )}
-          />
-          <Route
-            path="/chests"
-            render={() => <ChestList datac={this.state.chests} />}
-          />
-          <Route
-            path="/battlelog"
-            render={() => <BattlelogList datab={this.state.battlelog} />}
-          />
-        </div>
-      );
-  }
-
   setCookie(cname, cvalue, exdays) {
-    let d = new Date();
-    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-    let expires = `expires=${d.toUTCString()}`;
+    let date = new Date();
+    date.setTime(date.getTime() + exdays * 24 * 60 * 60 * 1000);
+    let expires = `expires=${date.toUTCString()}`;
     document.cookie = `${cname}=${cvalue};${expires};path=/`;
   }
 
@@ -87,7 +55,7 @@ export default class App extends Component {
     return false;
   }
 
-  callApi = player => {
+  callPlayerAPI = player => {
     console.log("Fetch all!");
     Promise.all([
       fetch(`http://localhost:${port}/api/chests/${player}`)
@@ -122,24 +90,29 @@ export default class App extends Component {
     if (str.length < 4) return "Playertag provided is too short";
     else if (str.length > 12) return "Playertag provide is too long";
     else if (str.search(/[^PYLQGRJCUV0289]/) !== -1)
-      return `Playertag should only include these characters: Numbers: 0, 2, 8, 9 Letters: P, Y, L, Q, G, R, J, C, U, V`;
+      return `Playertag should only include these characters: 
+      Numbers: 0, 2, 8, 9 
+      Letters: P, Y, L, Q, G, R, J, C, U, V`;
     else return true;
+  };
+
+  handleSelect = e => {
+    this.setState({ selection: e.target.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    // this.setState({playerStatus: 'player not found'})
+
     let checks = this.checkForm(this.state.searchText.toUpperCase());
 
     if (checks !== true) this.setState({ formMessage: checks });
-    // else if (this.state.formMessage === '')
     else {
       this.setState({ formMessage: "" });
       this.setCookie("playertag", this.state.searchText.toUpperCase(), 365);
       let cooks = this.getCookie("playertag");
-      this.setState({ cookie: cooks });
+      this.setState({ playerCookie: cooks });
 
-      this.callApi(cooks);
+      this.callPlayerAPI(cooks);
     }
   };
 
@@ -161,10 +134,9 @@ export default class App extends Component {
       })
       .then(() => {
         if (this.state.playerStatus === "OK") {
-          this.callApi(player);
-          this.setState({ playerNotFound: false });
+          this.callPlayerAPI(player);
           window.location.reload();
-        } else this.setState({ playerNotFound: true });
+        }
       });
   };
 
@@ -185,15 +157,26 @@ export default class App extends Component {
             <h1>Welcome Clasher</h1>
 
             {this.alertClient()}
-            <NavBar />
+
             <SearchForm
               onSearchChange={this.onSearchChange}
               handleSubmit={this.handleSubmit}
-              playerCookie={this.state.cookie}
+              playerCookie={this.state.playerCookie}
               handleUpdate={this.handleUpdate}
+              handleSelect={this.handleSelect}
+              selection={this.selection}
             />
           </header>
-          <Switch>{this.loadData()}</Switch>
+          <Switch>
+            <Routes
+              loading={this.state.loading}
+              playerCookie={this.state.playerCookie}
+              player={this.state.player}
+              playerStatus={this.state.playerStatus}
+              chests={this.state.chests}
+              battlelog={this.state.battlelog}
+            />
+          </Switch>
         </div>
       </BrowserRouter>
     );
