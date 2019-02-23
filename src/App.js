@@ -15,13 +15,17 @@ export default class App extends Component {
       player: [],
       battlelog: [],
 
-      playerStatus: "player not found",
+      clan: [],
+
+      playerStatus: "player not found, try updating",
+      clanStatus: "clan not found, try updating",
 
       playerCookie: this.getCookie("playertag"),
       clanCookie: this.getCookie("clantag"),
       formMessage: "",
 
       loading: true,
+      route: "playertag",
       searchText: "",
       selection: "playertag"
     };
@@ -82,13 +86,26 @@ export default class App extends Component {
     ]);
   };
 
+  callClanAPI = clan => {
+    console.log("Fetch all!");
+    Promise.all([
+      fetch(`http://localhost:${port}/api/clan/data/${clan}`)
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ clan: data.doc });
+        })
+    ]);
+  };
+
   onSearchChange = e => {
     this.setState({ searchText: e.target.value });
   };
 
   checkForm = str => {
     if (str.length < 4) return "Playertag provided is too short";
-    else if (str.length > 12) return "Playertag provide is too long";
+    else if (str.length > 10) return "Playertag provide is too long";
     else if (str.search(/[^PYLQGRJCUV0289]/) !== -1)
       return `Playertag should only include these characters: 
       Numbers: 0, 2, 8, 9 
@@ -102,17 +119,22 @@ export default class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    let { selection, searchText } = this.state;
 
-    let checks = this.checkForm(this.state.searchText.toUpperCase());
+    let checks = this.checkForm(searchText.toUpperCase());
 
     if (checks !== true) this.setState({ formMessage: checks });
     else {
       this.setState({ formMessage: "" });
-      this.setCookie("playertag", this.state.searchText.toUpperCase(), 365);
-      let cooks = this.getCookie("playertag");
-      this.setState({ playerCookie: cooks });
-
-      this.callPlayerAPI(cooks);
+      this.setCookie(selection, searchText.toUpperCase(), 365);
+      let cooks = this.getCookie(selection);
+      if (selection === "playertag") {
+        this.setState({ playerCookie: cooks, route: selection });
+        this.callPlayerAPI(cooks);
+      } else if (selection === "clantag") {
+        this.setState({ clanCookie: cooks, route: selection });
+        this.callClanAPI(cooks);
+      }
     }
   };
 
@@ -135,9 +157,11 @@ export default class App extends Component {
       .then(() => {
         if (this.state.playerStatus === "OK") {
           this.callPlayerAPI(player);
-          window.location.reload();
+          if (this.state.selection === "playertag")
+            window.location.reload(true);
         }
       });
+    // .then();
   };
 
   alertClient = () => {
@@ -175,6 +199,9 @@ export default class App extends Component {
               playerStatus={this.state.playerStatus}
               chests={this.state.chests}
               battlelog={this.state.battlelog}
+              clan={this.state.clan}
+              clanStatus={this.state.clanStatus}
+              route={this.state.route}
             />
           </Switch>
         </div>
