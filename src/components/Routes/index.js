@@ -6,12 +6,16 @@ import Playerdata from "./Playerdata/index";
 import ChestList from "./ChestList/index";
 import BattlelogList from "./BattlelogList/index";
 
+import ClanTag from "./ClanTag/index";
+
 export default class PlayerTag extends Component {
   loadData() {
-    if (this.props.loading && this.props.playerCookie !== false)
-      return <p>Loading.....</p>;
-    else if (this.props.playerCookie === false) return <p>No Playertag</p>;
-    else return this.playerRoutes;
+    if (this.props.route === "playertag") {
+      if (this.props.loading && this.props.playerCookie !== false)
+        return <p>Loading.....</p>;
+      else if (this.props.playerCookie === false) return <p>No Playertag</p>;
+      else return this.playerRoutes;
+    } else return this.clanRoutes;
   }
 
   playerRoutes = (
@@ -28,11 +32,33 @@ export default class PlayerTag extends Component {
       />
       <Route
         path={`/chests/`}
-        render={() => <ChestList datac={this.props.chests} />}
+        render={() => (
+          <ChestList
+            datac={this.props.chests}
+            playerStatus={this.props.playerStatus}
+          />
+        )}
       />
       <Route
         path={`/battlelog/`}
-        render={() => <BattlelogList datab={this.props.battlelog} />}
+        render={() => (
+          <BattlelogList
+            datab={this.props.battlelog}
+            playerStatus={this.props.playerStatus}
+          />
+        )}
+      />
+    </div>
+  );
+
+  clanRoutes = (
+    <div>
+      <Route
+        exact
+        path={`/`}
+        render={() => (
+          <ClanTag datac={this.props.clan} clanStatus={this.props.clanStatus} />
+        )}
       />
     </div>
   );
@@ -44,9 +70,12 @@ export default class PlayerTag extends Component {
 
 PlayerTag.propTypes = {
   loading: propTypes.bool.isRequired,
-  playerCookie: propTypes.string.isRequired,
+  playerCookie: propTypes.oneOfType([propTypes.string, propTypes.bool]),
   player: propTypes.array,
   playerStatus: propTypes.string.isRequired,
   chests: propTypes.array,
-  battlelog: propTypes.array
+  battlelog: propTypes.array,
+  clan: propTypes.array,
+  clanStatus: propTypes.string,
+  route: propTypes.string
 };

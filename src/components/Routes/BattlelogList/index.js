@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import Battlelog from "./Battlelog/index";
 
 const BattlelogList = props => {
-  const { datab } = props;
+  const { datab, playerStatus } = props;
 
   let battlelog;
 
@@ -36,7 +36,7 @@ const BattlelogList = props => {
         key={b._id}
       />
     ));
-  }
+  } else return (battlelog = playerStatus);
 
   return <div>{battlelog}</div>;
 };
