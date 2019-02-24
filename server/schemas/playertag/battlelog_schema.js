@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const BattlelogSchema = Schema({
   id: String,
@@ -107,6 +107,4 @@ const BattlelogSchema = Schema({
   ]
 });
 
-const Battlelogs = mongoose.model("Battlelogs", BattlelogSchema);
-
-module.exports = Battlelogs;
+module.exports = mongoose.model("Battlelogs", BattlelogSchema);

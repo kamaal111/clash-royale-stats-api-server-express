@@ -4,9 +4,7 @@ const https = require("https");
 // options
 const options = require("../../lib");
 
-const getChest = playertag => {
-  let player = playertag;
-
+module.exports = player => {
   const req = https.request(options(1, player), res => {
     let body = "";
 
@@ -22,5 +20,3 @@ const getChest = playertag => {
   });
   req.end();
 };
-
-module.exports = getChest;

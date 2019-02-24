@@ -42,6 +42,4 @@ const clanWarlogSchema = Schema({
   ]
 });
 
-const ClanWarlog = mongoose.model("clanWarlog", clanWarlogSchema);
-
-module.exports = ClanWarlog;
+module.exports = mongoose.model("clanWarlog", clanWarlogSchema);

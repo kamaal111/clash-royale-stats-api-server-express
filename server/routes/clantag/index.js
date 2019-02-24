@@ -11,6 +11,9 @@ router.param("clan", function(req, res, next, id) {
       getWarlog(id);
       console.log(chalk.yellowBright.bgBlack(response));
       res.json(response);
+    } else {
+      console.log(chalk.redBright.bgBlack(response));
+      res.json(response);
     }
   });
 });

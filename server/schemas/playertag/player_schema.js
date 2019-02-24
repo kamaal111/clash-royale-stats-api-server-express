@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const PlayerSchema = Schema({
   updatedAt: { type: Date, default: Date.now },
@@ -58,6 +58,4 @@ const PlayerSchema = Schema({
   }
 });
 
-const Player = mongoose.model("playerData", PlayerSchema);
-
-module.exports = Player;
+module.exports = mongoose.model("playerData", PlayerSchema);

@@ -19,7 +19,6 @@ router.param("player", function(req, res, next, id) {
       res.json(response);
     }
   });
-  // res.json("YES");
 });
 
 router.get("/:player", function(req, res, next) {});

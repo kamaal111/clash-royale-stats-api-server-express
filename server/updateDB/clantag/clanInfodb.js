@@ -1,6 +1,6 @@
 const ClanInfo = require("../../schemas/clantag/clanInfo_schema");
 
-const clanInfodb = (clan, parsed) => {
+module.exports = (clan, parsed) => {
   ClanInfo.deleteMany({ id: clan }, function(err) {
     if (err) console.error(`1 - Save Failed(clan info) ${clan}`, err);
     console.log(`1 - Refreshing Database(clan info) ${clan}`);
@@ -31,5 +31,3 @@ const clanInfodb = (clan, parsed) => {
     console.log(`2 - Saved clan info ${clan}`);
   });
 };
-
-module.exports = clanInfodb;

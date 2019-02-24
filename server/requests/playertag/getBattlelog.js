@@ -4,9 +4,7 @@ const https = require("https");
 // options
 const options = require("../../lib");
 
-const getBattlelog = playertag => {
-  let player = playertag;
-
+module.exports = player => {
   const req = https.request(options(2, player), res => {
     let body = "";
 
@@ -25,5 +23,3 @@ const getBattlelog = playertag => {
 
   req.end();
 };
-
-module.exports = getBattlelog;

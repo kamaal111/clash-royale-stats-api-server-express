@@ -1,6 +1,6 @@
 const Player = require("../../schemas/playertag/player_schema");
 
-const playerdb = (player, parsed) => {
+module.exports = (player, parsed) => {
   Player.deleteMany({ id: player }, function(err) {
     if (err) console.error(`1 - Save Failed(player) ${player}`, err);
     console.log(`1 - Refreshing Database(player) ${player}`);
@@ -39,5 +39,3 @@ const playerdb = (player, parsed) => {
     console.log(`2 - Saved playerdata ${player}`);
   });
 };
-
-module.exports = playerdb;
