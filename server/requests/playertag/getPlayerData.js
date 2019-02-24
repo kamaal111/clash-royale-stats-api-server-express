@@ -5,10 +5,14 @@ const https = require("https"),
 // options
 const options = require("../../lib");
 
-const getPlayerData = (playertag, callback) => {
-  let player = playertag;
-
+module.exports = (player, callback) => {
   const req = https.request(options(0, player), res => {
+    let status = () => {
+      const statusCode = http.STATUS_CODES[res.statusCode];
+      const statusCodeError = new Error(statusCode);
+      return callback(statusCodeError.message);
+    };
+
     if (res.statusCode === 200) {
       let body = "";
 
@@ -23,17 +27,11 @@ const getPlayerData = (playertag, callback) => {
         const playerdb = require("../../updateDB/playertag/playerdb");
         playerdb(player, parsed);
 
-        const statusCode = http.STATUS_CODES[res.statusCode];
-        const statusCodeError = new Error(statusCode);
-        return callback(statusCodeError.message);
+        status();
       });
     } else {
-      const statusCode = http.STATUS_CODES[res.statusCode];
-      const statusCodeError = new Error(statusCode);
-      return callback(statusCodeError.message);
+      status();
     }
   });
   req.end();
 };
-
-module.exports = getPlayerData;

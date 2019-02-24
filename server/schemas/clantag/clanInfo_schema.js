@@ -50,6 +50,4 @@ const ClanInfoSchema = Schema({
   }
 });
 
-const ClanInfo = mongoose.model("clanInfo", ClanInfoSchema);
-
-module.exports = ClanInfo;
+module.exports = mongoose.model("clanInfo", ClanInfoSchema);

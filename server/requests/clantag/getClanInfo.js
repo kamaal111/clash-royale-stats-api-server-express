@@ -3,9 +3,7 @@ const https = require("https"),
 
 const options = require("../../lib");
 
-const getClanInfo = (clantag, callback) => {
-  let clan = clantag;
-
+module.exports = (clan, callback) => {
   const req = https.request(options(4, clan), res => {
     if (res.statusCode === 200) {
       let body = "";
@@ -33,5 +31,3 @@ const getClanInfo = (clantag, callback) => {
   });
   req.end();
 };
-
-module.exports = getClanInfo;

@@ -1,6 +1,6 @@
 const Battlelog = require("../../schemas/playertag/battlelog_schema");
 
-const battlelogdb = (player, parsed) => {
+module.exports = (player, parsed) => {
   // Check for clan {tag, team and badgeid}
   const check = (team, prop, name) => {
     if (parsed[count][team][0][prop]) return parsed[count][team][0][prop][name];
@@ -409,5 +409,3 @@ const battlelogdb = (player, parsed) => {
     });
   } else return console.log("You have not played enough battles!!!");
 };
-
-module.exports = battlelogdb;

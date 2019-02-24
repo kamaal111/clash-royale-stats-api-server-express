@@ -11,8 +11,6 @@ router.param("player", function(req, res, next, id) {
   });
 });
 
-router.get("/:player", function(req, res, next) {
-  // res.json(doc);
-});
+router.get("/:player", function(req, res, next) {});
 
 module.exports = router;

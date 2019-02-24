@@ -10,9 +10,9 @@ const urls = tag => [
   `/v1/clans/%23${tag}/warlog`
 ];
 
-let token = process.env.BEARERTOKEN1;
+let token = process.env.BEARERTOKEN0;
 
-const playerOptions = (num, tag) => {
+module.exports = (num, tag) => {
   let options = {
     method: "GET",
     hostname: "api.clashroyale.com",
@@ -23,5 +23,3 @@ const playerOptions = (num, tag) => {
   };
   return options;
 };
-
-module.exports = playerOptions;

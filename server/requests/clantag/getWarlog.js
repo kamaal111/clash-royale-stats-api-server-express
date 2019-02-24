@@ -2,9 +2,7 @@ const https = require("https");
 
 const options = require("../../lib");
 
-const getWarlog = clantag => {
-  let clan = clantag;
-
+module.exports = clan => {
   const req = https.request(options(5, clan), res => {
     let body = "";
 
@@ -22,5 +20,3 @@ const getWarlog = clantag => {
   });
   req.end();
 };
-
-module.exports = getWarlog;
