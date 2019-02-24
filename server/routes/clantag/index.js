@@ -2,14 +2,14 @@ const express = require("express"),
   chalk = require("chalk"),
   router = express.Router();
 
-const getClanData = require("../../requests/clantag/getClanData"),
-  getClanIfo = require("../../requests/clantag/getClanInfo");
+const getClanIfo = require("../../requests/clantag/getClanInfo"),
+  getWarlog = require("../../requests/clantag/getWarlog");
 
 router.param("clan", function(req, res, next, id) {
-  getClanData(id, response => {
+  getClanIfo(id, response => {
     if (response === "OK") {
+      getWarlog(id);
       console.log(chalk.yellowBright.bgBlack(response));
-      getClanIfo(id);
       res.json(response);
     }
   });

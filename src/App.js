@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
 
+import NavBar from "./components/NavBar";
 import SearchForm from "./components/SearchForm/index";
 import Routes from "./components/Routes";
 
@@ -16,16 +17,18 @@ export default class App extends Component {
       battlelog: [],
 
       clan: [],
+      warlog: [],
 
       playerStatus: "player not found, try updating",
       clanStatus: "clan not found, try updating",
 
       playerCookie: this.getCookie("playertag"),
       clanCookie: this.getCookie("clantag"),
-      formMessage: "",
+      route: this.getCookie("freshestCookie"),
 
       loading: true,
-      route: "playertag",
+
+      formMessage: "",
       searchText: "",
       selection: "playertag"
     };
@@ -34,9 +37,16 @@ export default class App extends Component {
   componentDidMount() {
     console.log("Mount!");
 
-    if (this.state.playerCookie !== false) {
-      console.log("calling");
-      this.callPlayerAPI(this.state.playerCookie);
+    if (this.state.route === "clantag") {
+      if (this.state.clanCookie !== false) {
+        console.log("calling");
+        this.callClanAPI(this.state.clanCookie);
+      }
+    } else {
+      if (this.state.playerCookie !== false) {
+        console.log("calling");
+        this.callPlayerAPI(this.state.playerCookie);
+      }
     }
   }
 
@@ -95,6 +105,13 @@ export default class App extends Component {
         })
         .then(data => {
           this.setState({ clan: data.doc });
+        }),
+      fetch(`http://localhost:${port}/api/clan/warlog/${clan}`)
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ warlog: data.doc });
         })
     ]);
   };
@@ -113,10 +130,12 @@ export default class App extends Component {
     else return true;
   };
 
+  // Changes state of option selection
   handleSelect = e => {
     this.setState({ selection: e.target.value });
   };
 
+  // Handles submit button
   handleSubmit = e => {
     e.preventDefault();
     let { selection, searchText } = this.state;
@@ -127,6 +146,7 @@ export default class App extends Component {
     else {
       this.setState({ formMessage: "" });
       this.setCookie(selection, searchText.toUpperCase(), 365);
+      this.setCookie("freshestCookie", selection, 365);
       let cooks = this.getCookie(selection);
       if (selection === "playertag") {
         this.setState({ playerCookie: cooks, route: selection });
@@ -138,32 +158,52 @@ export default class App extends Component {
     }
   };
 
+  // Handle update button
   handleUpdate = e => {
     e.preventDefault();
     this.updateData();
   };
 
+  // Updates player data
   updateData = () => {
     console.log("Update data!");
-    let player = this.getCookie("playertag");
-    fetch(`http://localhost:${port}/api/${player}`)
-      .then(results => {
-        return results.json();
-      })
-      .then(data => {
-        this.setState({ playerStatus: data });
-        console.log(data);
-      })
-      .then(() => {
-        if (this.state.playerStatus === "OK") {
-          this.callPlayerAPI(player);
-          if (this.state.selection === "playertag")
+    let tag = this.getCookie(this.state.route);
+    if (this.state.route === "playertag") {
+      fetch(`http://localhost:${port}/api/${tag}`)
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ playerStatus: data });
+          console.log(data);
+        })
+
+        .then(() => {
+          if (this.state.playerStatus === "OK") {
+            this.callPlayerAPI(tag);
             window.location.reload(true);
-        }
-      });
-    // .then();
+          }
+        });
+    } else if (this.state.route === "clantag") {
+      fetch(`http://localhost:${port}/api/clan/${tag}`)
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ clanStatus: data });
+          console.log(data);
+        })
+
+        .then(() => {
+          if (this.state.clanStatus === "OK") {
+            this.callClanAPI(tag);
+            window.location.reload(true);
+          }
+        });
+    }
   };
 
+  // Alerts client if form is not filled in correctly
   alertClient = () => {
     if (this.state.formMessage !== "")
       return (
@@ -173,6 +213,17 @@ export default class App extends Component {
       );
   };
 
+  nameNavBar = () => {
+    let namer = [];
+    if (this.state.route === "playertag") {
+      namer = ["chests", "Chests", "battlelog", "Battlelog"];
+      return namer;
+    } else {
+      namer = ["currentWar", "Current War", "pastWar", "Past War"];
+      return namer;
+    }
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -180,15 +231,24 @@ export default class App extends Component {
           <header>
             <h1>Welcome Clasher</h1>
 
+            <NavBar
+              firLink={""}
+              firTitle={"Home"}
+              secLink={`${this.nameNavBar()[0]}/`}
+              secTitle={this.nameNavBar()[1]}
+              thirLink={`${this.nameNavBar()[2]}/`}
+              thirTitle={this.nameNavBar()[3]}
+            />
             {this.alertClient()}
-
             <SearchForm
               onSearchChange={this.onSearchChange}
               handleSubmit={this.handleSubmit}
               playerCookie={this.state.playerCookie}
               handleUpdate={this.handleUpdate}
               handleSelect={this.handleSelect}
-              selection={this.selection}
+              selection={this.state.selection}
+              route={this.state.route}
+              clanCookie={this.state.clanCookie}
             />
           </header>
           <Switch>
@@ -202,6 +262,7 @@ export default class App extends Component {
               clan={this.state.clan}
               clanStatus={this.state.clanStatus}
               route={this.state.route}
+              clanCookie={this.state.clanCookie}
             />
           </Switch>
         </div>
