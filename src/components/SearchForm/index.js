@@ -2,7 +2,6 @@ import React from "react";
 import propTypes from "prop-types";
 
 import DropDown from "./DropDown";
-import NavBar from "../NavBar";
 
 const SearchForm = props => {
   const {
@@ -10,16 +9,19 @@ const SearchForm = props => {
     handleSubmit,
     playerCookie,
     handleSelect,
-    selection
+    selection,
+    route,
+    clanCookie
   } = props;
 
   const holder = () => {
-    if (playerCookie === false) return "";
-    else return playerCookie;
+    if (route === false) return "";
+    else if (route === "playertag") return playerCookie;
+    else return clanCookie;
   };
 
   const updatebtn = () => {
-    if (playerCookie !== false)
+    if (route !== false)
       return (
         <button className="update-button" onClick={props.handleUpdate}>
           <i className="fas fa-sync-alt" />
@@ -30,15 +32,6 @@ const SearchForm = props => {
 
   return (
     <div>
-      <NavBar
-        firLink={""}
-        firTitle={"Home"}
-        secLink={`chests/`}
-        secTitle={"Chests"}
-        thirLink={`battlelog/`}
-        thirTitle={"Battlelog"}
-      />
-
       <form className="form-playertag" onSubmit={handleSubmit}>
         <label>
           <input

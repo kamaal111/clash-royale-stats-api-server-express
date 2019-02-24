@@ -10,9 +10,9 @@ const getChests = require("../../requests/playertag/getChests"),
 router.param("player", function(req, res, next, id) {
   getPlayerData(id, response => {
     if (response === "OK") {
-      console.log(chalk.yellowBright.bgBlack(response));
       getBattlelog(id);
       getChests(id);
+      console.log(chalk.yellowBright.bgBlack(response));
       res.json(response);
     } else {
       console.log(chalk.redBright.bgBlack(response));

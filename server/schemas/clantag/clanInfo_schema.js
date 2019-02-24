@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const ClanInfoSchema = Schema({
+  updatedAt: { type: Date, default: Date.now },
+
   id: String,
 
   name: String,

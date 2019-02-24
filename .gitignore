@@ -6,3 +6,5 @@ db/
 .env
 .text
 .DS_Store
+.vscode/
+yarn.lock

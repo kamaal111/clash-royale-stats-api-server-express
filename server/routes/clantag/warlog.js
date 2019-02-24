@@ -1,10 +1,10 @@
 const express = require("express"),
   router = express.Router();
 
-const Clan = require("../../schemas/clantag/clan_schema");
+const ClanWarlog = require("../../schemas/clantag/clanWarlog_schema");
 
 router.param("clan", function(req, res, next, id) {
-  Clan.find({ id }, function(err, doc) {
+  ClanWarlog.find({ id }, function(err, doc) {
     if (err) return res.json({ succes: false, error: err });
     return res.json({ succes: true, doc: doc });
   });

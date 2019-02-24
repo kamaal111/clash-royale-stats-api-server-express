@@ -52,8 +52,11 @@ app.use("/api/battlelog", battlelogRoute);
 const updateClanRoute = require("./routes/clantag/index");
 app.use("/api/clan", updateClanRoute);
 // clan data route
-const clanRoute = require("./routes/clantag/clanData");
+const clanRoute = require("./routes/clantag/clanInfo");
 app.use("/api/clan/data", clanRoute);
+// clan warlog route
+const warlogRoute = require("./routes/clantag/warlog");
+app.use("/api/clan/warlog", warlogRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

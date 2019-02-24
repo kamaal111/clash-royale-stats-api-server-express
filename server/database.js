@@ -12,7 +12,7 @@ class Database {
         `${process.env.DBPATH}${process.env.DBUSER}${process.env.DBPASS}${
           process.env.DBSERVER
         }`,
-        // process.env.DBLOCAL,
+        // 'mongodb://127.0.0.1:27017/cr_api',
         {
           useCreateIndex: true,
           useNewUrlParser: true
