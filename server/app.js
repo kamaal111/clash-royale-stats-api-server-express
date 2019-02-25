@@ -50,6 +50,8 @@ app.use("/api/clan", require("./routes/clantag/index"));
 app.use("/api/clan/data", require("./routes/clantag/clanInfo"));
 // clan warlog route
 app.use("/api/clan/warlog", require("./routes/clantag/warlog"));
+// clan current war route
+app.use("/api/clan/curwar", require("./routes/clantag/curWar"));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

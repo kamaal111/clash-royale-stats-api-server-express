@@ -7,19 +7,23 @@ const urls = tag => [
   // clan urls
   `/v1/clans?name=%23${tag}`,
   `/v1/clans/%23${tag}`,
-  `/v1/clans/%23${tag}/warlog`
+  `/v1/clans/%23${tag}/warlog`,
+  `/v1/clans/%23${tag}/currentwar`
 ];
 
 let token = process.env.BEARERTOKEN0;
 
 module.exports = (num, tag) => {
-  let options = {
+  return {
     method: "GET",
     hostname: "api.clashroyale.com",
     path: urls(tag)[num],
     headers: {
-      Authorization: token
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: token,
+      "cache-control": "max-age=120",
+      "content-type": "application/json; charset=utf-8"
     }
   };
-  return options;
 };

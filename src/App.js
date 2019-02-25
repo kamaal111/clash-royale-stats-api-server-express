@@ -18,6 +18,7 @@ export default class App extends Component {
 
       clan: [],
       warlog: [],
+      curwar: [],
 
       playerStatus: "player not found, try updating",
       clanStatus: "clan not found, try updating",
@@ -112,6 +113,13 @@ export default class App extends Component {
         })
         .then(data => {
           this.setState({ warlog: data.doc });
+        }),
+      fetch(`http://localhost:${port}/api/clan/curwar/${clan}`)
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          this.setState({ curwar: data.doc });
         })
     ]);
   };
