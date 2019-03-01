@@ -1,8 +1,10 @@
 import React from "react";
 import propTypes from "prop-types";
 
+import MemberList from "./MemberList/index";
+
 const Clan = props => (
-  <div>
+  <ul>
     <li>Updated At: {props.updatedAt}</li>
     {/* <li>{props.badgeId}</li> */}
     <li>Clan Chest Level: {props.clanChestLevel}</li>
@@ -13,9 +15,17 @@ const Clan = props => (
     <li>Clan Tag: {props.id}</li>
     <li>Member: {props.members}</li>
     <li>Clan Name: {props.name}</li>
+    <li>Description: {props.description}</li>
     <li>Required Trophies: {props.requiredTrophies}</li>
     <li>Type: {props.type}</li>
-  </div>
+    <li>Country: {props.country}</li>
+
+    {/* <ul> */}
+    <div>
+      <MemberList memberList={props.memberList} />
+    </div>
+    {/* </ul> */}
+  </ul>
 );
 
 Clan.propTypes = {
@@ -29,7 +39,8 @@ Clan.propTypes = {
   members: propTypes.number.isRequired,
   name: propTypes.string.isRequired,
   type: propTypes.string.isRequired,
-  updatedAt: propTypes.string.isRequired
+  updatedAt: propTypes.string.isRequired,
+  country: propTypes.string.isRequired
 };
 
 export default Clan;

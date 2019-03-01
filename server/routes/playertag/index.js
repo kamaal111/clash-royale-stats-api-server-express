@@ -3,15 +3,18 @@ const express = require("express"),
   router = express.Router(),
   chalk = require("chalk");
 
-const getChests = require("../../requests/playertag/getChests"),
-  getBattlelog = require("../../requests/playertag/getBattlelog"),
-  getPlayerData = require("../../requests/playertag/getPlayerData");
+const getPlayerData = require("../../requests/playertag/getPlayerData");
+
+const requests = require("../../requests");
+
+const chestdb = require("../../updateDB/playertag/chestdb"),
+  battlelogdb = require("../../updateDB/playertag/battlelogdb");
 
 router.param("player", function(req, res, next, id) {
   getPlayerData(id, response => {
     if (response === "OK") {
-      getBattlelog(id);
-      getChests(id);
+      requests(id, 1, chestdb);
+      requests(id, 2, battlelogdb);
       console.log(chalk.yellowBright.bgBlack(response));
       res.json(response);
     } else {

@@ -70,6 +70,7 @@ export default class App extends Component {
     return false;
   }
 
+  // Retrieve clan data from database
   callPlayerAPI = player => {
     console.log("Fetch all!");
     Promise.all([
@@ -97,6 +98,7 @@ export default class App extends Component {
     ]);
   };
 
+  // Retrieve clan data from database
   callClanAPI = clan => {
     console.log("Fetch all!");
     Promise.all([
@@ -105,7 +107,7 @@ export default class App extends Component {
           return results.json();
         })
         .then(data => {
-          this.setState({ clan: data.doc });
+          this.setState({ clan: data.doc, loading: false });
         }),
       fetch(`http://localhost:${port}/api/clan/warlog/${clan}`)
         .then(results => {
@@ -124,15 +126,17 @@ export default class App extends Component {
     ]);
   };
 
+  // Save on search change in state
   onSearchChange = e => {
     this.setState({ searchText: e.target.value });
   };
 
+  // check tag form
   checkForm = str => {
-    if (str.length < 4) return "Playertag provided is too short";
-    else if (str.length > 10) return "Playertag provide is too long";
+    if (str.length < 4) return "Tag provided is too short";
+    else if (str.length > 10) return "Tag provide is too long";
     else if (str.search(/[^PYLQGRJCUV0289]/) !== -1)
-      return `Playertag should only include these characters: 
+      return `Tag should only include these characters: 
       Numbers: 0, 2, 8, 9 
       Letters: P, Y, L, Q, G, R, J, C, U, V`;
     else return true;
@@ -221,6 +225,7 @@ export default class App extends Component {
       );
   };
 
+  // Name of navbar and route
   nameNavBar = () => {
     let namer = [];
     if (this.state.route === "playertag") {

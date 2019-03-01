@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const PlayerSchema = Schema({
-  updatedAt: { type: Date, default: Date.now },
+  updatedAt: String,
 
   id: String,
   name: String,

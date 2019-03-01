@@ -5,8 +5,16 @@ module.exports = (clan, parsed) => {
     if (err) console.error(`1 - Save Failed(clan info) ${clan}`, err);
     console.log(`1 - Refreshing Database(clan info) ${clan}`);
 
+    let time = () => {
+      let date = new Date();
+      date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+      return date.toUTCString();
+    };
+
     ClanInfo({
       id: clan,
+
+      updatedAt: time(),
 
       name: parsed.name,
       type: parsed.name,
