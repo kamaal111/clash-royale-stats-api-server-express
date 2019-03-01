@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 
-import Clan from "./Clan";
+import Clan from "./Clan/index";
 
 const ClanData = props => {
   const { datac, clanStatus } = props;
@@ -21,13 +21,16 @@ const ClanData = props => {
         name={c.name}
         requiredTrophies={c.requiredTrophies}
         type={c.type}
+        country={c.location[0].name}
+        description={c.description}
+        memberList={c.memberList}
         updatedAt={c.updatedAt}
         key={c._id}
       />
     ));
   } else return (clanData = clanStatus);
 
-  return <ul>{clanData}</ul>;
+  return <div>{clanData}</div>;
 };
 
 ClanData.propTypes = {

@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 import { Route } from "react-router-dom";
 
-import Playerdata from "./Playerdata/index";
-import ChestList from "./ChestList/index";
-import BattlelogList from "./BattlelogList/index";
+import Playerdata from "./PlayerTag/Playerdata/index";
+import ChestList from "./PlayerTag/ChestList/index";
+import BattlelogList from "./PlayerTag/BattlelogList/index";
 
-import ClanTag from "./ClanTag/index";
+import ClanTag from "./ClanTag/ClanData/index";
 
-export default class PlayerTag extends Component {
+export default class Routes extends Component {
   loadData() {
     if (this.props.route === "playertag") {
       if (this.props.loading && this.props.playerCookie !== false)
@@ -68,7 +68,7 @@ export default class PlayerTag extends Component {
   }
 }
 
-PlayerTag.propTypes = {
+Routes.propTypes = {
   loading: propTypes.bool.isRequired,
   playerCookie: propTypes.oneOfType([propTypes.string, propTypes.bool]),
   player: propTypes.array,

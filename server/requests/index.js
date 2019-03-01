@@ -1,9 +1,9 @@
 const https = require("https");
 
-const options = require("../../lib");
+const options = require("../lib");
 
-module.exports = clan => {
-  const req = https.request(options(6, clan), res => {
+module.exports = (tag, num, update) => {
+  const req = https.request(options(num, tag), res => {
     let body = "";
 
     res.on("data", data => {
@@ -14,8 +14,7 @@ module.exports = clan => {
       const parsed = JSON.parse(body);
       // console.log(parsed)
 
-      const curWardb = require("../../updateDB/clantag/curWardb");
-      curWardb(clan, parsed);
+      update(tag, parsed);
     });
   });
   req.end();
