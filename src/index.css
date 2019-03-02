@@ -64,9 +64,9 @@ body {
   height: 4rem;
 }
 
-.battlelog {
+.border {
   width: 300px;
-  border: 0.2rem solid #000000;
+  border: 0.3rem solid #000000;
   padding: 2rem;
   margin: 2rem;
 }

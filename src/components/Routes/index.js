@@ -7,6 +7,7 @@ import ChestList from "./PlayerTag/ChestList/index";
 import BattlelogList from "./PlayerTag/BattlelogList/index";
 
 import ClanTag from "./ClanTag/ClanData/index";
+import CurrentWar from "./ClanTag/CurrentWar/index";
 
 export default class Routes extends Component {
   loadData() {
@@ -58,6 +59,15 @@ export default class Routes extends Component {
         path={`/`}
         render={() => (
           <ClanTag datac={this.props.clan} clanStatus={this.props.clanStatus} />
+        )}
+      />
+      <Route
+        path={`/currentWar/`}
+        render={() => (
+          <CurrentWar
+            datac={this.props.curwar}
+            clanStatus={this.props.clanStatus}
+          />
         )}
       />
     </div>

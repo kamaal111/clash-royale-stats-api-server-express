@@ -3,7 +3,7 @@ import React from "react";
 
 const Member = props => {
   return (
-    <ul>
+    <ul className={"border"}>
       <b>Member</b>
       <li>Trophies: {props.trophies}</li>
       <li>Exp Level: {props.expLvel}</li>

@@ -20,11 +20,9 @@ const Clan = props => (
     <li>Type: {props.type}</li>
     <li>Country: {props.country}</li>
 
-    {/* <ul> */}
     <div>
       <MemberList memberList={props.memberList} />
     </div>
-    {/* </ul> */}
   </ul>
 );
 
