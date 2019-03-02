@@ -276,6 +276,7 @@ export default class App extends Component {
               clanStatus={this.state.clanStatus}
               route={this.state.route}
               clanCookie={this.state.clanCookie}
+              curwar={this.state.curwar}
             />
           </Switch>
         </div>

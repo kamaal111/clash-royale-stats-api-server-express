@@ -5,7 +5,7 @@ import Team from "./Team/index";
 
 const Battlelog = props => {
   return (
-    <ul className="battlelog">
+    <ul className="border">
       <li>Arena: {props.arena}</li>
       <li>Type: {props.type}</li>
       <li>Battle Time: {props.battleTime}</li>
