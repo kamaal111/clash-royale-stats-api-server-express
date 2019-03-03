@@ -1,5 +1,5 @@
 import React from "react";
-// import propTypes from "prop-types";
+import propTypes from "prop-types";
 
 import MemberList from "./MemberList/index";
 
@@ -21,8 +21,15 @@ const Clan = props => (
   </ul>
 );
 
-// Clan.propTypes = {
-
-// };
+Clan.propTypes = {
+  state: propTypes.string.isRequired,
+  battlesPlayed: propTypes.number.isRequired,
+  clanScore: propTypes.number.isRequired,
+  crowns: propTypes.number.isRequired,
+  name: propTypes.string.isRequired,
+  id: propTypes.string.isRequired,
+  participants: propTypes.number.isRequired,
+  participantsList: propTypes.array
+};
 
 export default Clan;

@@ -8,32 +8,28 @@ import Routes from "./components/Routes";
 let port = 3000;
 
 export default class App extends Component {
-  constructor() {
-    super();
+  state = {
+    chests: [],
+    player: [],
+    battlelog: [],
 
-    this.state = {
-      chests: [],
-      player: [],
-      battlelog: [],
+    clan: [],
+    warlog: [],
+    curwar: [],
 
-      clan: [],
-      warlog: [],
-      curwar: [],
+    playerStatus: "player not found, try updating",
+    clanStatus: "clan not found, try updating",
 
-      playerStatus: "player not found, try updating",
-      clanStatus: "clan not found, try updating",
+    playerCookie: this.getCookie("playertag"),
+    clanCookie: this.getCookie("clantag"),
+    route: this.getCookie("freshestCookie"),
 
-      playerCookie: this.getCookie("playertag"),
-      clanCookie: this.getCookie("clantag"),
-      route: this.getCookie("freshestCookie"),
+    loading: true,
 
-      loading: true,
-
-      formMessage: "",
-      searchText: "",
-      selection: "playertag"
-    };
-  }
+    formMessage: "",
+    searchText: "",
+    selection: "playertag"
+  };
 
   componentDidMount() {
     console.log("Mount!");
@@ -276,7 +272,8 @@ export default class App extends Component {
               clanStatus={this.state.clanStatus}
               route={this.state.route}
               clanCookie={this.state.clanCookie}
-              curwar={this.state.curwar}
+              curWar={this.state.curwar}
+              pastWar={this.state.pastWar}
             />
           </Switch>
         </div>

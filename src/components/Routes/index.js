@@ -8,13 +8,14 @@ import BattlelogList from "./PlayerTag/BattlelogList/index";
 
 import ClanTag from "./ClanTag/ClanData/index";
 import CurrentWar from "./ClanTag/CurrentWar/index";
+// import PastWar from './ClanTag/PastWar/index'
 
 export default class Routes extends Component {
   loadData() {
-    if (this.props.route === "playertag") {
-      if (this.props.loading && this.props.playerCookie !== false)
-        return <p>Loading.....</p>;
-      else if (this.props.playerCookie === false) return <p>No Playertag</p>;
+    let { route, loading, playerCookie } = this.props;
+    if (route === "playertag") {
+      if (loading && playerCookie !== false) return <p>Loading.....</p>;
+      else if (playerCookie === false) return <p>No Playertag</p>;
       else return this.playerRoutes;
     } else return this.clanRoutes;
   }
@@ -65,11 +66,20 @@ export default class Routes extends Component {
         path={`/currentWar/`}
         render={() => (
           <CurrentWar
-            datac={this.props.curwar}
+            datac={this.props.curWar}
             clanStatus={this.props.clanStatus}
           />
         )}
       />
+      {/* <Route 
+        path={`/pastWar/`}
+        render={() => (
+          <PastWar
+            datap={this.props.pastWar}
+            clanStatus={this.props.clanStatus}
+          />
+        )}
+      /> */}
     </div>
   );
 

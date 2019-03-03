@@ -17,13 +17,18 @@ const Battlelog = props => {
       <Team
         title={"Team"}
         name={props.teamName}
+        nameMate={props.teamNameMate}
         tag={props.teamTag}
+        tagMate={props.teamTagMate}
         startingTrophies={props.teamStartingTrophies}
         trophyChange={props.teamTrophyChange}
         crown={props.teamCrown}
         clanName={props.teamClanName}
+        clanNameMate={props.teamClanNameMate}
         clanTag={props.teamClanTag}
+        clanTagMate={props.teamClanTagMate}
         cards={props.teamCards}
+        cardsMate={props.teamCardsMate}
       />
 
       <br />
@@ -31,13 +36,18 @@ const Battlelog = props => {
       <Team
         title={"Opponent"}
         name={props.opponentName}
+        nameMate={props.opponentNameMate}
         tag={props.opponentTag}
+        tagMate={props.opponentTagMate}
         startingTrophies={props.opponentStartingTrophies}
         trophyChange={props.opponentTrophyChange}
         crown={props.opponentCrown}
         clanName={props.opponentClanName}
+        clanNameMate={props.opponentClanNameMate}
         clanTag={props.opponentClanTag}
+        clanTagMate={props.opponentClanTagMate}
         cards={props.opponentCards}
+        cardsMate={props.opponentCardsMate}
       />
     </ul>
   );
