@@ -6,6 +6,16 @@ import Battlelog from "./Battlelog/index";
 const BattlelogList = props => {
   const { datab, playerStatus } = props;
 
+  const checkTeamMate = (data, team, prop) => {
+    if (data[team].length > 1) return data[team][1][prop];
+    else return "";
+  };
+
+  const checkClanMate = (data, team, prop) => {
+    if (data[team].length > 1) return data[team][1].clan[0][prop];
+    else return "";
+  };
+
   let battlelog;
 
   if (datab.length > 0) {
@@ -17,21 +27,31 @@ const BattlelogList = props => {
         deckSelection={b.deckSelection}
         gameMode={b.gameMode.name}
         opponentName={b.opponent[0].name}
+        opponentNameMate={checkTeamMate(b, "opponent", "name")}
         opponentTag={b.opponent[0].tag}
+        opponentTagMate={checkTeamMate(b, "opponent", "tag")}
         opponentStartingTrophies={b.opponent[0].startingTrophies}
         opponentTrophyChange={b.opponent[0].trophyChange}
         opponentCrown={b.opponent[0].crowns}
-        opponentCards={b.opponent[0].cards.cards}
-        opponentClanName={b.opponent[0].clan.name}
-        opponentClanTag={b.opponent[0].clan.tag}
+        opponentCards={b.opponent[0].cards}
+        opponentCardsMate={checkTeamMate(b, "opponent", "cards")}
+        opponentClanName={b.opponent[0].clan[0].name}
+        opponentClanNameMate={checkClanMate(b, "opponent", "name")}
+        opponentClanTag={b.opponent[0].clan[0].tag}
+        opponentClanTagMate={checkClanMate(b, "opponent", "tag")}
         teamName={b.team[0].name}
+        teamNameMate={checkTeamMate(b, "team", "name")}
         teamTag={b.team[0].tag}
+        teamTagMate={checkTeamMate(b, "team", "tag")}
         teamStartingTrophies={b.team[0].startingTrophies}
         teamTrophyChange={b.team[0].trophyChange}
         teamCrown={b.team[0].crowns}
-        teamCards={b.team[0].cards.cards}
-        teamClanName={b.team[0].clan.name}
-        teamClanTag={b.team[0].clan.tag}
+        teamCards={b.team[0].cards}
+        teamCardsMate={checkTeamMate(b, "team", "cards")}
+        teamClanName={b.team[0].clan[0].name}
+        teamClanNameMate={checkClanMate(b, "team", "name")}
+        teamClanTag={b.team[0].clan[0].tag}
+        teamClanTagMate={checkClanMate(b, "team", "tag")}
         playertag={b.id}
         key={b._id}
       />

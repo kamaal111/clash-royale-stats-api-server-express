@@ -13,96 +13,56 @@ const BattlelogSchema = Schema({
   team: [
     {
       tag: String,
-      tagTeam: String,
       name: String,
-      nameTeam: String,
       startingTrophies: { type: Number, default: null },
       trophyChange: { type: Number, default: null },
       crowns: Number,
-
       clan: {
+        type: Array,
+        default: {},
         tag: String,
-        tagTeam: String,
         name: String,
-        nameTeam: String,
-        badgeId: Number,
-        badgeIdTeam: Number
+        badgeId: Number
       },
-
-      cards: {
-        cards: [
-          {
-            name: String,
-            id: Number,
-            level: Number,
-            maxLevel: Number,
-            iconUrls: {
-              medium: String
-            }
+      cards: [
+        {
+          name: String,
+          id: Number,
+          level: Number,
+          maxLevel: Number,
+          iconUrls: {
+            medium: String
           }
-        ],
-        cardsTeam: [
-          {
-            type: Array,
-            default: undefined,
-            name: String,
-            id: Number,
-            level: Number,
-            maxLevel: Number,
-            iconUrls: {
-              medium: String
-            }
-          }
-        ]
-      }
+        }
+      ]
     }
   ],
 
   opponent: [
     {
       tag: String,
-      tagTeam: String,
       name: String,
-      nameTeam: String,
       startingTrophies: { type: Number, default: null },
       trophyChange: { type: Number, default: null },
       crowns: Number,
-
       clan: {
+        type: Array,
+        default: {},
         tag: String,
-        tagTeam: String,
         name: String,
-        nameTeam: String,
-        badgeId: Number,
-        badgeIdTeam: Number
+        badgeId: Number
       },
-
-      cards: {
-        cards: [
-          {
-            name: String,
-            id: Number,
-            level: Number,
-            maxLevel: Number,
-            iconUrls: {
-              medium: String
-            }
+      cards: [
+        {
+          name: String,
+          id: Number,
+          level: Number,
+          maxLevel: Number,
+          iconUrls: {
+            medium: String
           }
-        ],
-        cardsTeam: [
-          {
-            type: Array,
-            default: undefined,
-            name: String,
-            id: Number,
-            level: Number,
-            maxLevel: Number,
-            iconUrls: {
-              medium: String
-            }
-          }
-        ]
-      }
+        }
+      ]
     }
   ]
 });
