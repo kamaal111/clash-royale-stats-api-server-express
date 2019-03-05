@@ -6,6 +6,10 @@ const PlayerSchema = Schema({
   updatedAt: String,
 
   id: String,
+
+  // player: {
+  //   type: Array
+  // }
   name: String,
   expLevel: Number,
   trophies: Number,
@@ -18,7 +22,7 @@ const PlayerSchema = Schema({
   challengeMaxWins: { type: Number, default: undefined },
   tournamentCardsWon: { type: Number, default: undefined },
   tournamentBattleCount: { type: Number, default: undefined },
-  role: { type: String, default: undefined },
+  role: { type: String, default: "No Clan" },
   donations: Number,
   donationsReceived: Number,
   totalDonations: Number,

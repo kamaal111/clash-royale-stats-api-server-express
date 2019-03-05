@@ -5,6 +5,12 @@ import Player from "./Player";
 
 const Playerdata = props => {
   const { datap, playerStatus } = props;
+
+  const checkClan = (data, prop) => {
+    if (data.clan) return data.clan[prop];
+    else return "This player does not have a clan";
+  };
+
   let playerdata;
 
   if (datap.length > 0) {
@@ -37,8 +43,8 @@ const Playerdata = props => {
         tournamentCardsWon={p.tournamentCardsWon}
         trophies={p.trophies}
         bestTrophies={p.bestTrophies}
-        clanName={p.clan.name}
-        clanTag={p.clan.tag}
+        clanName={checkClan(p, "name")} // clan checker
+        clanTag={checkClan(p, "tag")}
         warDayWins={p.warDayWins}
         updatedAt={p.updatedAt}
         playertag={p.id}

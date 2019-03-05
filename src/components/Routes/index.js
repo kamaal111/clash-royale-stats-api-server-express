@@ -12,12 +12,24 @@ import CurrentWar from "./ClanTag/CurrentWar/index";
 
 export default class Routes extends Component {
   loadData() {
-    let { route, loading, playerCookie } = this.props;
-    if (route === "playertag") {
+    let {
+      route,
+      loading,
+      playerCookie,
+      clanCookie,
+      playerStatus,
+      clanStatus
+    } = this.props;
+
+    if (route === "playertag" && playerStatus !== "Not Found") {
       if (loading && playerCookie !== false) return <p>Loading.....</p>;
       else if (playerCookie === false) return <p>No Playertag</p>;
       else return this.playerRoutes;
-    } else return this.clanRoutes;
+    } else if (route === "clantag" && clanStatus !== "Not Found") {
+      if (loading && clanCookie !== false) return <p>Loading.....</p>;
+      else if (clanCookie === false) return <p>No ClanTag</p>;
+      else return this.clanRoutes;
+    }
   }
 
   playerRoutes = (

@@ -6,6 +6,7 @@ import Card from "./Card";
 const Cards = props => {
   const { cards, title } = props;
   let card;
+  let i = 0;
 
   if (cards.length > 0) {
     card = cards.map(c => (
@@ -14,7 +15,7 @@ const Cards = props => {
         img={c.iconUrls.medium}
         lvl={c.level}
         maxlvl={c.maxLevel}
-        key={c._id}
+        key={i++}
       />
     ));
   }

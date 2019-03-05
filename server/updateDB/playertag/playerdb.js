@@ -16,6 +16,7 @@ module.exports = (player, parsed) => {
 
       updatedAt: time(),
 
+      // player: parsed
       name: parsed.name,
       expLevel: parsed.expLevel,
       trophies: parsed.trophies,
