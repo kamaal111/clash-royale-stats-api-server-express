@@ -132,7 +132,7 @@ export default class App extends Component {
     if (str.length < 4) return "Tag provided is too short";
     else if (str.length > 10) return "Tag provide is too long";
     else if (str.search(/[^PYLQGRJCUV0289]/) !== -1)
-      return `Tag should only include these characters: 
+      return `Hashtag should only include these characters: 
       Numbers: 0, 2, 8, 9 
       Letters: P, Y, L, Q, G, R, J, C, U, V`;
     else return true;
@@ -153,7 +153,7 @@ export default class App extends Component {
     if (checks !== true) this.setState({ formMessage: checks });
     else {
       this.setState({ formMessage: "" });
-      this.setCookie(selection, searchText.toUpperCase(), 365);
+      this.setCookie(selection, `${searchText.toUpperCase()}`, 365);
       this.setCookie("freshestCookie", selection, 365);
       let cooks = this.getCookie(selection);
       if (selection === "playertag") {
