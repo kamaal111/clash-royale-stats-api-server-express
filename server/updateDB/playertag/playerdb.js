@@ -1,22 +1,21 @@
 const Player = require("../../schemas/playertag/player_schema");
 
 module.exports = (player, parsed) => {
-  Player.deleteMany({ id: player }, function(err) {
+  Player.deleteOne({ id: player }, function(err) {
     if (err) console.error(`1 - Save Failed(player) ${player}`, err);
     console.log(`1 - Refreshing Database(player) ${player}`);
 
-    let time = () => {
+    let timeNow = () => {
       let date = new Date();
-      date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+      date.setTime(date.getTime() + 24 * 60 * 60);
       return date.toUTCString();
     };
 
     Player({
       id: player,
 
-      updatedAt: time(),
+      updatedAt: timeNow(),
 
-      // player: parsed
       name: parsed.name,
       expLevel: parsed.expLevel,
       trophies: parsed.trophies,

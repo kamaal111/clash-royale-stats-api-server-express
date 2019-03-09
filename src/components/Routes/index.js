@@ -10,6 +10,8 @@ import ClanTag from "./ClanTag/ClanData/index";
 import CurrentWar from "./ClanTag/CurrentWar/index";
 // import PastWar from './ClanTag/PastWar/index'
 
+import NotFound from "./NotFound";
+
 export default class Routes extends Component {
   loadData() {
     let {
@@ -29,7 +31,7 @@ export default class Routes extends Component {
       if (loading && clanCookie !== false) return <p>Loading.....</p>;
       else if (clanCookie === false) return <p>No ClanTag</p>;
       else return this.clanRoutes;
-    }
+    } else return <p>Tag Not Found</p>;
   }
 
   playerRoutes = (
@@ -62,6 +64,7 @@ export default class Routes extends Component {
           />
         )}
       />
+      <Route render={() => <NotFound />} />
     </div>
   );
 
@@ -92,6 +95,7 @@ export default class Routes extends Component {
           />
         )}
       /> */}
+      <Route render={() => <NotFound />} />
     </div>
   );
 
