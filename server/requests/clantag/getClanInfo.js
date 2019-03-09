@@ -5,6 +5,12 @@ const options = require("../../lib");
 
 module.exports = (clan, callback) => {
   const req = https.request(options(4, clan), res => {
+    let status = () => {
+      const statusCode = http.STATUS_CODES[res.statusCode];
+      const statusCodeError = new Error(statusCode);
+      return callback(statusCodeError.message);
+    };
+
     if (res.statusCode === 200) {
       let body = "";
 
@@ -19,14 +25,10 @@ module.exports = (clan, callback) => {
         const clanInfodb = require("../../updateDB/clantag/clanInfodb");
         clanInfodb(clan, parsed);
 
-        const statusCode = http.STATUS_CODES[res.statusCode];
-        const statusCodeError = new Error(statusCode);
-        return callback(statusCodeError.message);
+        status();
       });
     } else {
-      const statusCode = http.STATUS_CODES[res.statusCode];
-      const statusCodeError = new Error(statusCode);
-      return callback(statusCodeError.message);
+      status();
     }
   });
   req.end();

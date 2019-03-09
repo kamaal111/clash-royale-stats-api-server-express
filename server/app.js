@@ -1,6 +1,5 @@
 // modules
 const express = require("express"),
-  bodyParser = require("body-parser"),
   logger = require("morgan");
 
 let app = express();
@@ -9,15 +8,6 @@ require("dotenv").config();
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-);
-
-// view engine setup
-app.set("view engine", "pug");
-app.set("views", `${__dirname}/views`);
 
 // mongoDB connection
 require("./database");
@@ -65,10 +55,11 @@ app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
+  let error = { message: err.message, status: err.status, stack: err.stack };
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  console.log(`${err.message}\n${err.status}`);
+  res.json(error);
 });
 
 module.exports = app;

@@ -1,7 +1,7 @@
 const ClanCurWar = require("../../schemas/clantag/clanCurWar_schema");
 
 module.exports = (clan, parsed) => {
-  ClanCurWar.deleteMany({ id: clan }, function(err) {
+  ClanCurWar.deleteOne({ id: clan }, function(err) {
     if (err) console.error(`1 - Save Failed(current war) ${clan}`, err);
     console.log(`1 - Refreshing Database(current war) ${clan}`);
 
