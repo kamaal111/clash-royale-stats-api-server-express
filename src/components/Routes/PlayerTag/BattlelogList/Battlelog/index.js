@@ -6,6 +6,7 @@ import Team from "./Team/index";
 const Battlelog = props => {
   return (
     <ul className="border">
+      <li>{props.updatedAt}</li>
       <li>Arena: {props.arena}</li>
       <li>Type: {props.type}</li>
       <li>Battle Time: {props.battleTime}</li>

@@ -15,6 +15,11 @@ const BattlelogList = props => {
     else return "";
   };
 
+  const checkClan = (data, team, prop) => {
+    if (data[team][0].clan) return data[team][0].clan[prop];
+    else return "This player has no clan";
+  };
+
   let battlelog;
   let i = 0;
 
@@ -22,6 +27,7 @@ const BattlelogList = props => {
     if (datab[0].battlelog.length > 0) {
       battlelog = datab[0].battlelog.map(b => (
         <Battlelog
+          updatedAt={datab[0].updatedAt}
           arena={b.arena.name}
           type={b.type}
           battleTime={b.battleTime}
@@ -36,9 +42,9 @@ const BattlelogList = props => {
           opponentCrown={b.opponent[0].crowns}
           opponentCards={b.opponent[0].cards}
           opponentCardsMate={checkTeamMate(b, "opponent", "cards")}
-          opponentClanName={b.opponent[0].clan.name}
+          opponentClanName={checkClan(b, "opponent", "name")}
           opponentClanNameMate={checkClanMate(b, "opponent", "name")}
-          opponentClanTag={b.opponent[0].clan.tag}
+          opponentClanTag={checkClan(b, "opponent", "tag")}
           opponentClanTagMate={checkClanMate(b, "opponent", "tag")}
           teamName={b.team[0].name}
           teamNameMate={checkTeamMate(b, "team", "name")}
@@ -49,9 +55,9 @@ const BattlelogList = props => {
           teamCrown={b.team[0].crowns}
           teamCards={b.team[0].cards}
           teamCardsMate={checkTeamMate(b, "team", "cards")}
-          teamClanName={b.team[0].clan.name}
+          teamClanName={checkClan(b, "team", "name")}
           teamClanNameMate={checkClanMate(b, "team", "name")}
-          teamClanTag={b.team[0].clan.tag}
+          teamClanTag={checkClan(b, "team", "tag")}
           teamClanTagMate={checkClanMate(b, "team", "tag")}
           playertag={b.id}
           key={i++}

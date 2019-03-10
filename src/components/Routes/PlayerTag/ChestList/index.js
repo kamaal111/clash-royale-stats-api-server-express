@@ -10,7 +10,12 @@ const ChestList = props => {
   if (props.datac[0]) {
     if (datac[0].items.length > 0) {
       chests = datac[0].items.map(c => (
-        <Chest name={c.name} id={c.index} key={c.index} />
+        <Chest
+          updatedAt={datac[0].updatedAt}
+          name={c.name}
+          id={c.index}
+          key={c.index}
+        />
       ));
     }
   } else return (chests = playerStatus);

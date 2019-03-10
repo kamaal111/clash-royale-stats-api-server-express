@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Playerdata from "./PlayerTag/Playerdata/index";
 import ChestList from "./PlayerTag/ChestList/index";
@@ -8,7 +8,7 @@ import BattlelogList from "./PlayerTag/BattlelogList/index";
 
 import ClanTag from "./ClanTag/ClanData/index";
 import CurrentWar from "./ClanTag/CurrentWar/index";
-// import PastWar from './ClanTag/PastWar/index'
+import PastWar from "./ClanTag/PastWar/index";
 
 import NotFound from "./NotFound";
 
@@ -35,7 +35,7 @@ export default class Routes extends Component {
   }
 
   playerRoutes = (
-    <div>
+    <Switch>
       <Route
         exact
         path={`/`}
@@ -47,6 +47,7 @@ export default class Routes extends Component {
         )}
       />
       <Route
+        exact
         path={`/chests/`}
         render={() => (
           <ChestList
@@ -64,12 +65,12 @@ export default class Routes extends Component {
           />
         )}
       />
-      <Route render={() => <NotFound />} />
-    </div>
+      <NotFound />
+    </Switch>
   );
 
   clanRoutes = (
-    <div>
+    <Switch>
       <Route
         exact
         path={`/`}
@@ -86,7 +87,7 @@ export default class Routes extends Component {
           />
         )}
       />
-      {/* <Route 
+      <Route
         path={`/pastWar/`}
         render={() => (
           <PastWar
@@ -94,9 +95,9 @@ export default class Routes extends Component {
             clanStatus={this.props.clanStatus}
           />
         )}
-      /> */}
+      />
       <Route render={() => <NotFound />} />
-    </div>
+    </Switch>
   );
 
   render() {

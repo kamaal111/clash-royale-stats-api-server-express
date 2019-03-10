@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
 import SearchForm from "./components/SearchForm/index";
@@ -15,7 +15,7 @@ export default class App extends Component {
 
     clan: [],
     warlog: [],
-    curwar: [],
+    pastWar: [],
 
     playerStatus: "player not found, try updating",
     clanStatus: "clan not found, try updating",
@@ -110,7 +110,7 @@ export default class App extends Component {
           return results.json();
         })
         .then(data => {
-          this.setState({ warlog: data.doc });
+          this.setState({ pastWar: data.doc });
         }),
       fetch(`http://localhost:${port}/api/clan/curwar/${clan}`)
         .then(results => {
@@ -260,22 +260,21 @@ export default class App extends Component {
               clanCookie={this.state.clanCookie}
             />
           </header>
-          <Switch>
-            <Routes
-              loading={this.state.loading}
-              playerCookie={this.state.playerCookie}
-              player={this.state.player}
-              playerStatus={this.state.playerStatus}
-              chests={this.state.chests}
-              battlelog={this.state.battlelog}
-              clan={this.state.clan}
-              clanStatus={this.state.clanStatus}
-              route={this.state.route}
-              clanCookie={this.state.clanCookie}
-              curWar={this.state.curwar}
-              pastWar={this.state.pastWar}
-            />
-          </Switch>
+
+          <Routes
+            loading={this.state.loading}
+            playerCookie={this.state.playerCookie}
+            player={this.state.player}
+            playerStatus={this.state.playerStatus}
+            chests={this.state.chests}
+            battlelog={this.state.battlelog}
+            clan={this.state.clan}
+            clanStatus={this.state.clanStatus}
+            route={this.state.route}
+            clanCookie={this.state.clanCookie}
+            curWar={this.state.curwar}
+            pastWar={this.state.pastWar}
+          />
         </div>
       </BrowserRouter>
     );
