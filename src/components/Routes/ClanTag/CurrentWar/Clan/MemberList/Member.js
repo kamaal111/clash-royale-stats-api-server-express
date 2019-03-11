@@ -1,5 +1,5 @@
 import React from "react";
-// import propTypes from "prop-types";
+import propTypes from "prop-types";
 
 const Member = props => {
   return (
@@ -14,6 +14,15 @@ const Member = props => {
       <li>Collection Day Battles Played: {props.collectionDayBattlesPlayed}</li>
     </ul>
   );
+};
+
+Member.propTypes = {
+  name: propTypes.string.isRequired,
+  tag: propTypes.string.isRequired,
+  wins: propTypes.number.isRequired,
+  battlesPlayed: propTypes.number.isRequired,
+  cardsEarned: propTypes.number.isRequired,
+  collectionDayBattlesPlayed: propTypes.number.isRequired
 };
 
 export default Member;

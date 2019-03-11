@@ -57,7 +57,8 @@ const Playerdata = props => {
 };
 
 Playerdata.propTypes = {
-  datap: propTypes.array.isRequired
+  datap: propTypes.array.isRequired,
+  playerStatus: propTypes.string
 };
 
 export default Playerdata;

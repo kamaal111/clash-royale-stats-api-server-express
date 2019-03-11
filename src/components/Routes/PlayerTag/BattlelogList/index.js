@@ -5,19 +5,22 @@ import Battlelog from "./Battlelog/index";
 
 const BattlelogList = props => {
   const { datab, playerStatus } = props;
+
   const checkTeamMate = (data, team, prop) => {
-    if (data[team].length > 1) return data[team][1][prop];
+    if (data[team][1]) return data[team][1][prop];
     else return "";
   };
 
   const checkClanMate = (data, team, prop) => {
-    if (data[team].length > 1) return data[team][1].clan[prop];
-    else return "";
+    if (data[team][1]) {
+      if (data[team][1].clan) return data[team][1].clan[prop];
+    } else return "";
   };
 
   const checkClan = (data, team, prop) => {
-    if (data[team][0].clan) return data[team][0].clan[prop];
-    else return "This player has no clan";
+    if (data[team][0]) {
+      if (data[team][0].clan) return data[team][0].clan[prop];
+    } else return "";
   };
 
   let battlelog;
@@ -27,7 +30,6 @@ const BattlelogList = props => {
     if (datab[0].battlelog.length > 0) {
       battlelog = datab[0].battlelog.map(b => (
         <Battlelog
-          updatedAt={datab[0].updatedAt}
           arena={b.arena.name}
           type={b.type}
           battleTime={b.battleTime}

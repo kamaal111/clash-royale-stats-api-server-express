@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 const Chest = props => (
   <li>
-    {props.name} {props.id} {props.updatedAt}
+    {props.name} {props.id}
   </li>
 );
 

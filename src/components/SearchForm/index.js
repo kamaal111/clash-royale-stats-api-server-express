@@ -11,7 +11,8 @@ const SearchForm = props => {
     handleSelect,
     selection,
     route,
-    clanCookie
+    clanCookie,
+    handleUpdate
   } = props;
 
   const holder = () => {
@@ -23,7 +24,7 @@ const SearchForm = props => {
   const updatebtn = () => {
     if (route !== false)
       return (
-        <button className="update-button" onClick={props.handleUpdate}>
+        <button className="update-button" onClick={handleUpdate}>
           <i className="fas fa-sync-alt" />
         </button>
       );
@@ -55,7 +56,12 @@ const SearchForm = props => {
 SearchForm.propTypes = {
   onSearchChange: propTypes.func.isRequired,
   handleSubmit: propTypes.func.isRequired,
-  playerCookie: propTypes.oneOfType([propTypes.string, propTypes.bool])
+  playerCookie: propTypes.oneOfType([propTypes.string, propTypes.bool]),
+  handleSelect: propTypes.func.isRequired,
+  selection: propTypes.string,
+  handleUpdate: propTypes.func.isRequired,
+  clanCookie: propTypes.oneOfType([propTypes.string, propTypes.bool]),
+  route: propTypes.oneOfType([propTypes.string, propTypes.bool])
 };
 
 export default SearchForm;

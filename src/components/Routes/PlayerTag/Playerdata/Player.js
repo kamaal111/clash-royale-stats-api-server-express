@@ -75,7 +75,11 @@ const Player = props => {
 
       <ul>
         <li>Current Favourite Card Name: {props.currentfavouriteCardName}</li>
-        <img className="card" alt="" src={props.currentfavouriteCardIcon} />
+        <img
+          className="card"
+          alt="current favourite card icon"
+          src={props.currentfavouriteCardIcon}
+        />
 
         <li>Donations: {props.donations}</li>
         <li>Donations Received: {props.donationsReceived}</li>
@@ -118,6 +122,9 @@ Player.propTypes = {
   clanTag: propTypes.string,
   warDayWins: propTypes.number,
   updatedAt: propTypes.string.isRequired,
-  playertag: propTypes.string.isRequired
+  playertag: propTypes.string.isRequired,
+  tournamentCardsWon: propTypes.number,
+  bestTrophies: propTypes.number,
+  curBestTrophies: propTypes.number
 };
 export default Player;

@@ -2,15 +2,17 @@ const express = require("express"),
   chalk = require("chalk"),
   router = express.Router();
 
-const requests = require("../../requests");
+const requests = require("../../requests"),
+  requestscb = require("../../requests/reqcb");
 
-const getClanIfo = require("../../requests/clantag/getClanInfo");
+// const getClanIfo = require("../../requests/clantag/getClanInfo");
 
 const warlogdb = require("../../updateDB/clantag/warlogdb"),
-  curWardb = require("../../updateDB/clantag/curWardb");
+  curWardb = require("../../updateDB/clantag/curWardb"),
+  clanInfodb = require("../../updateDB/clantag/clanInfodb");
 
 router.param("clan", function(req, res, next, id) {
-  getClanIfo(id, response => {
+  requestscb(id, 4, clanInfodb, response => {
     if (response === "OK") {
       requests(id, 5, warlogdb);
       requests(id, 6, curWardb);

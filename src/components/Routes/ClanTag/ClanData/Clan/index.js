@@ -38,7 +38,10 @@ Clan.propTypes = {
   name: propTypes.string.isRequired,
   type: propTypes.string.isRequired,
   updatedAt: propTypes.string.isRequired,
-  country: propTypes.string.isRequired
+  country: propTypes.string.isRequired,
+  memberList: propTypes.array.isRequired,
+  requiredTrophies: propTypes.number.isRequired,
+  description: propTypes.string
 };
 
 export default Clan;

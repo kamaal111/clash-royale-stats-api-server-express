@@ -96,7 +96,7 @@ export default class Routes extends Component {
           />
         )}
       />
-      <Route render={() => <NotFound />} />
+      <NotFound />
     </Switch>
   );
 
@@ -114,5 +114,7 @@ Routes.propTypes = {
   battlelog: propTypes.array,
   clan: propTypes.array,
   clanStatus: propTypes.string,
-  route: propTypes.string
+  route: propTypes.string,
+  pastWar: propTypes.array,
+  curWar: propTypes.array
 };
