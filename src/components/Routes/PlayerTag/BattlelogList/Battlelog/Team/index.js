@@ -4,7 +4,6 @@ import propTypes from "prop-types";
 import Cards from "./Cards/index";
 
 const Team = props => {
-  //
   const checkTrophyChange = () => {
     if (props.trophyChange !== null) {
       return <li>Trophy Change: {props.trophyChange}</li>;
@@ -79,7 +78,10 @@ Team.propTypes = {
   crown: propTypes.number.isRequired,
   clanName: propTypes.string,
   clanTag: propTypes.string,
-  cards: propTypes.array.isRequired
+  cards: propTypes.array.isRequired,
+  cardsMate: propTypes.oneOfType([propTypes.string, propTypes.array]),
+  tagMate: propTypes.string,
+  nameMate: propTypes.string
 };
 
 export default Team;

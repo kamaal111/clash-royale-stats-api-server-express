@@ -1,10 +1,10 @@
 const https = require("https"),
   http = require("http");
 
-const options = require("../../lib");
+const options = require("../lib");
 
-module.exports = (clan, callback) => {
-  const req = https.request(options(4, clan), res => {
+module.exports = (tag, num, update, callback) => {
+  const req = https.request(options(num, tag), res => {
     let status = () => {
       const statusCode = http.STATUS_CODES[res.statusCode];
       const statusCodeError = new Error(statusCode);
@@ -22,8 +22,7 @@ module.exports = (clan, callback) => {
         const parsed = JSON.parse(body);
         // console.log(parsed);
 
-        const clanInfodb = require("../../updateDB/clantag/clanInfodb");
-        clanInfodb(clan, parsed);
+        update(tag, parsed);
 
         status();
       });

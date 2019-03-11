@@ -1,7 +1,7 @@
 import React from "react";
-// import propTypes from "prop-types";
+import propTypes from "prop-types";
 
-import Member from "./Member";
+import Member from "../../../CurrentWar/Clan/MemberList/Member";
 
 const MemberList = props => {
   const { memberList } = props;
@@ -22,6 +22,10 @@ const MemberList = props => {
     ));
   }
   return <div>{member}</div>;
+};
+
+MemberList.propTypes = {
+  memberList: propTypes.array.isRequired
 };
 
 export default MemberList;

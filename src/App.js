@@ -159,9 +159,11 @@ export default class App extends Component {
       if (selection === "playertag") {
         this.setState({ playerCookie: cooks, route: selection });
         this.callPlayerAPI(cooks);
+        //  TODO: redirect to '/' from here
       } else if (selection === "clantag") {
         this.setState({ clanCookie: cooks, route: selection });
         this.callClanAPI(cooks);
+        //  TODO: redirect to '/' from here
       }
     }
   };

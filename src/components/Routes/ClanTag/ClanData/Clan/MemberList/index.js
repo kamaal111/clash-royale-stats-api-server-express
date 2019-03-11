@@ -1,5 +1,5 @@
 import React from "react";
-// import propTypes from "prop-types";
+import propTypes from "prop-types";
 
 import Member from "./Member";
 
@@ -26,6 +26,10 @@ const MemberList = props => {
     ));
   }
   return <div>{member}</div>;
+};
+
+MemberList.propTypes = {
+  memberList: propTypes.array.isRequired
 };
 
 export default MemberList;

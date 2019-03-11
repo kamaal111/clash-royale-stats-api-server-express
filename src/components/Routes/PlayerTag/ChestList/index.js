@@ -7,15 +7,10 @@ const ChestList = props => {
   const { datac, playerStatus } = props;
   let chests;
 
-  if (props.datac[0]) {
+  if (datac[0]) {
     if (datac[0].items.length > 0) {
       chests = datac[0].items.map(c => (
-        <Chest
-          updatedAt={datac[0].updatedAt}
-          name={c.name}
-          id={c.index}
-          key={c.index}
-        />
+        <Chest name={c.name} id={c.index} key={c.index} />
       ));
     }
   } else return (chests = playerStatus);
