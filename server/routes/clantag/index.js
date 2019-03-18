@@ -5,8 +5,6 @@ const express = require("express"),
 const requests = require("../../requests"),
   requestscb = require("../../requests/reqcb");
 
-// const getClanIfo = require("../../requests/clantag/getClanInfo");
-
 const warlogdb = require("../../updateDB/clantag/warlogdb"),
   curWardb = require("../../updateDB/clantag/curWardb"),
   clanInfodb = require("../../updateDB/clantag/clanInfodb");

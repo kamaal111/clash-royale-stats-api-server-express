@@ -8,12 +8,12 @@ const War = props => {
   let time = date => {
     let s = date.split("");
 
-    let year = `${s[0]}${s[1]}${s[2]}${s[3]}`;
-    let month = `${s[4]}${s[5]}`;
-    let day = `${s[6]}${s[7]}`;
-    let hour = `${s[9]}${s[10]}`;
-    let minute = `${s[11]}${s[12]}`;
-    let second = `${s[13]}${s[14]}`;
+    let year = `${s.slice(0, 4).join("")}`;
+    let month = `${s.slice(4, 6).join("")}`;
+    let day = `${s.slice(6, 8).join("")}`;
+    let hour = `${s.slice(9, 11).join("")}`;
+    let minute = `${s.slice(11, 13).join("")}`;
+    let second = `${s.slice(13, 15).join("")}`;
 
     return `${day}-${month}-${year} ${hour}:${minute}:${second}`;
   };

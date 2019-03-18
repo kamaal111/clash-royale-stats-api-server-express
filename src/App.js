@@ -9,44 +9,47 @@ let port = 3000;
 
 export default class App extends Component {
   state = {
+    // Player States
     chests: [],
     player: [],
     battlelog: [],
 
+    // Clan States
     clan: [],
     warlog: [],
     pastWar: [],
 
+    // Player & clan status
     playerStatus: "player not found, try updating",
     clanStatus: "clan not found, try updating",
 
+    // Cookie states
     playerCookie: this.getCookie("playertag"),
     clanCookie: this.getCookie("clantag"),
     route: this.getCookie("freshestCookie"),
 
+    // Loading page
     loading: true,
 
+    // Message provided if user doesn't put in the correct playertag
     formMessage: "",
+
+    // Text in form
     searchText: "",
+
+    // Selected option selection under form
     selection: "playertag"
   };
 
   componentDidMount() {
-    console.log("Mount!");
-
-    if (this.state.route === "clantag") {
-      if (this.state.clanCookie !== false) {
-        console.log("calling");
+    if (this.state.route === "clantag")
+      if (this.state.clanCookie !== false)
         this.callClanAPI(this.state.clanCookie);
-      }
-    } else {
-      if (this.state.playerCookie !== false) {
-        console.log("calling");
+      else if (this.state.playerCookie !== false)
         this.callPlayerAPI(this.state.playerCookie);
-      }
-    }
   }
 
+  // Set new cookie
   setCookie(cname, cvalue, exdays) {
     let date = new Date();
     date.setTime(date.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -54,11 +57,12 @@ export default class App extends Component {
     document.cookie = `${cname}=${cvalue};${expires};path=/`;
   }
 
+  // Look for matching cookie
   getCookie(name) {
-    let pairs = document.cookie.split("; "),
-      count = pairs.length,
-      parts;
-    console.log("Get cookie");
+    let pairs = document.cookie.split("; ");
+    let count = pairs.length;
+    let parts;
+    // console.log("Get cookie");
     while (count--) {
       parts = pairs[count].split("=");
       if (parts[0] === name) return parts[1];
@@ -68,92 +72,71 @@ export default class App extends Component {
 
   // Retrieve clan data from database
   callPlayerAPI = player => {
-    console.log("Fetch all!");
+    // console.log("Fetch all!");
     Promise.all([
       fetch(`http://localhost:${port}/api/chests/${player}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ chests: data.doc, loading: false });
-        }),
+        .then(results => results.json())
+        .then(data => this.setState({ chests: data.doc, loading: false })),
       fetch(`http://localhost:${port}/api/battlelog/${player}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ battlelog: data.doc });
-        }),
+        .then(results => results.json())
+        .then(data => this.setState({ battlelog: data.doc })),
       fetch(`http://localhost:${port}/api/player/${player}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ player: data.doc });
-        })
+        .then(results => results.json())
+        .then(data => this.setState({ player: data.doc }))
     ]);
   };
 
   // Retrieve clan data from database
   callClanAPI = clan => {
-    console.log("Fetch all!");
+    // console.log("Fetch all!");
     Promise.all([
       fetch(`http://localhost:${port}/api/clan/data/${clan}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ clan: data.doc, loading: false });
-        }),
+        .then(results => results.json())
+        .then(data => this.setState({ clan: data.doc, loading: false })),
       fetch(`http://localhost:${port}/api/clan/warlog/${clan}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ pastWar: data.doc });
-        }),
+        .then(results => results.json())
+        .then(data => this.setState({ pastWar: data.doc })),
       fetch(`http://localhost:${port}/api/clan/curwar/${clan}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ curwar: data.doc });
-        })
+        .then(results => results.json())
+        .then(data => this.setState({ curwar: data.doc }))
     ]);
   };
 
   // Save on search change in state
-  onSearchChange = e => {
-    this.setState({ searchText: e.target.value });
+  onSearchChange = e => this.setState({ searchText: e.target.value });
+
+  // Hides '#'
+  hideTag = str => {
+    if (str.slice(0, 1) === "#") return str.slice(1);
+    else return str;
   };
 
-  // check tag form
+  // Check tag form
   checkForm = str => {
     if (str.length < 4) return "Tag provided is too short";
     else if (str.length > 10) return "Tag provide is too long";
     else if (str.search(/[^PYLQGRJCUV0289]/) !== -1)
-      return `Hashtag should only include these characters: 
-      Numbers: 0, 2, 8, 9 
+      return `# should only include these characters:
+      Numbers: 0, 2, 8, 9
       Letters: P, Y, L, Q, G, R, J, C, U, V`;
     else return true;
   };
 
   // Changes state of option selection
-  handleSelect = e => {
-    this.setState({ selection: e.target.value });
-  };
+  handleSelect = e => this.setState({ selection: e.target.value });
 
   // Handles submit button
   handleSubmit = e => {
     e.preventDefault();
     let { selection, searchText } = this.state;
 
-    let checks = this.checkForm(searchText.toUpperCase());
+    let string = this.hideTag(searchText.replace(/O/g, "0").toUpperCase());
+    let checks = this.checkForm(string);
 
     if (checks !== true) this.setState({ formMessage: checks });
     else {
       this.setState({ formMessage: "" });
-      this.setCookie(selection, `${searchText.toUpperCase()}`, 365);
+      this.setCookie(selection, string, 365);
       this.setCookie("freshestCookie", selection, 365);
       let cooks = this.getCookie(selection);
       if (selection === "playertag") {
@@ -180,14 +163,8 @@ export default class App extends Component {
     let tag = this.getCookie(this.state.route);
     if (this.state.route === "playertag") {
       fetch(`http://localhost:${port}/api/${tag}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ playerStatus: data });
-          console.log(data);
-        })
-
+        .then(results => results.json())
+        .then(data => this.setState({ playerStatus: data }))
         .then(() => {
           if (this.state.playerStatus === "OK") {
             this.callPlayerAPI(tag);
@@ -196,14 +173,8 @@ export default class App extends Component {
         });
     } else if (this.state.route === "clantag") {
       fetch(`http://localhost:${port}/api/clan/${tag}`)
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          this.setState({ clanStatus: data });
-          console.log(data);
-        })
-
+        .then(results => results.json())
+        .then(data => this.setState({ clanStatus: data }))
         .then(() => {
           if (this.state.clanStatus === "OK") {
             this.callClanAPI(tag);
@@ -215,12 +186,13 @@ export default class App extends Component {
 
   // Alerts client if form is not filled in correctly
   alertClient = () => {
-    if (this.state.formMessage !== "")
+    if (this.state.formMessage !== "") {
       return (
         <div className="alert-warning">
           <p>{this.state.formMessage}</p>
         </div>
       );
+    }
   };
 
   // Name of navbar and route

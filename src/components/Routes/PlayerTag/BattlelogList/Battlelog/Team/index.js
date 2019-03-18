@@ -5,9 +5,8 @@ import Cards from "./Cards/index";
 
 const Team = props => {
   const checkTrophyChange = () => {
-    if (props.trophyChange !== null) {
+    if (props.trophyChange !== null)
       return <li>Trophy Change: {props.trophyChange}</li>;
-    }
   };
 
   const checkClan = name => {
