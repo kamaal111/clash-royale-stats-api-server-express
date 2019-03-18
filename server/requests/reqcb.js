@@ -14,16 +14,11 @@ module.exports = (tag, num, update, callback) => {
     if (res.statusCode === 200) {
       let body = "";
 
-      res.on("data", data => {
-        body += data;
-      });
+      res.on("data", data => (body += data));
 
       res.on("end", () => {
         const parsed = JSON.parse(body);
-        // console.log(parsed);
-
         update(tag, parsed);
-
         status();
       });
     } else {

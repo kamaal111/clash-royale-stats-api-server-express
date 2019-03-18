@@ -17,8 +17,8 @@ const SearchForm = props => {
 
   const holder = () => {
     if (route === false) return "";
-    else if (route === "playertag") return playerCookie;
-    else return clanCookie;
+    else if (route === "playertag") return `#${playerCookie}`;
+    else if (route === "clantag") return `#${clanCookie}`;
   };
 
   const updatebtn = () => {
