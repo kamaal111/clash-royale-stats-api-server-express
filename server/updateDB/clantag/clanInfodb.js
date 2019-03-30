@@ -1,7 +1,7 @@
-const ClanInfo = require("../../schemas/clantag/clanInfo_schema");
+const CLAN_INFO = require('../../schemas/clantag/clanInfo_schema');
 
 module.exports = (clan, parsed) => {
-  ClanInfo.deleteOne({ id: clan }, function(err) {
+  CLAN_INFO.deleteOne({ id: clan }, err => {
     if (err) console.error(`1 - Save Failed(clan info) ${clan}`, err);
     console.log(`1 - Refreshing Database(clan info) ${clan}`);
 
@@ -11,7 +11,7 @@ module.exports = (clan, parsed) => {
       return date.toUTCString();
     };
 
-    ClanInfo({
+    CLAN_INFO({
       id: clan,
 
       updatedAt: time(),
@@ -33,7 +33,7 @@ module.exports = (clan, parsed) => {
       members: parsed.members,
 
       memberList: parsed.memberList
-    }).save(function(err) {
+    }).save(err => {
       if (err) console.error(`2 - Save Failed(clan info) ${clan}`, err);
     });
     console.log(`2 - Saved clan info ${clan}`);

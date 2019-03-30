@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const MONGOOSE = require('mongoose');
 
-const { Schema } = mongoose;
+const { Schema } = MONGOOSE;
 
-const BattlelogSchema = Schema({
+const BATTLELOG_SCHEMA = Schema({
   id: String,
 
   battlelog: {
@@ -10,4 +10,4 @@ const BattlelogSchema = Schema({
   }
 });
 
-module.exports = mongoose.model("Battlelogs", BattlelogSchema);
+module.exports = MONGOOSE.model('Battlelogs', BATTLELOG_SCHEMA);

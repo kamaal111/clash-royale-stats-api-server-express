@@ -1,29 +1,29 @@
 // modules
-const express = require("express"),
-  router = express.Router(),
-  chalk = require("chalk");
+const EXPRESS = require('express'),
+  ROUTER = EXPRESS.Router(),
+  CHALK = require('chalk');
 
-const requests = require("../../requests"),
-  requestscb = require("../../requests/reqcb");
+const REQUESTS = require('../../requests'),
+  REQUESTS_CB = require('../../requests/reqcb');
 
-const chestdb = require("../../updateDB/playertag/chestdb"),
-  battlelogdb = require("../../updateDB/playertag/battlelogdb"),
-  playerdb = require("../../updateDB/playertag/playerdb");
+const CHEST_DB = require('../../updateDB/playertag/chestdb'),
+  BATTLELOG_DB = require('../../updateDB/playertag/battlelogdb'),
+  PLAYER_DB = require('../../updateDB/playertag/playerdb');
 
-router.param("player", function(req, res, next, id) {
-  requestscb(id, 0, playerdb, response => {
-    if (response === "OK") {
-      requests(id, 1, chestdb);
-      requests(id, 2, battlelogdb);
-      console.log(chalk.yellowBright.bgBlack(response));
+ROUTER.param('player', (req, res, next, id) => {
+  REQUESTS_CB(id, 0, PLAYER_DB, response => {
+    if (response === 'OK') {
+      REQUESTS(id, 1, CHEST_DB);
+      REQUESTS(id, 2, BATTLELOG_DB);
+      console.log(CHALK.yellowBright.bgBlack(response));
       res.json(response);
     } else {
-      console.log(chalk.redBright.bgBlack(response));
+      console.log(CHALK.redBright.bgBlack(response));
       res.json(response);
     }
   });
 });
 
-router.get("/:player", function(req, res, next) {});
+ROUTER.get('/:player', (req, res, next) => {});
 
-module.exports = router;
+module.exports = ROUTER;

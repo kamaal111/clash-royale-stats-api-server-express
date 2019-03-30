@@ -1,16 +1,16 @@
 // modules
-const express = require("express"),
-  router = express.Router();
+const EXPRESS = require('express'),
+  ROUTER = EXPRESS.Router();
 
-const Battlelog = require("../../schemas/playertag/battlelog_schema");
+const BATTLELOG = require('../../schemas/playertag/battlelog_schema');
 
-router.param("player", function(req, res, next, id) {
-  Battlelog.find({ id }, function(err, doc) {
+ROUTER.param('player', (req, res, next, id) => {
+  BATTLELOG.find({ id }, (err, doc) => {
     if (err) return res.json({ succes: false, error: err });
     return res.json({ succes: true, doc: doc });
   });
 });
 
-router.get("/:player", function(req, res, next) {});
+ROUTER.get('/:player', (req, res, next) => {});
 
-module.exports = router;
+module.exports = ROUTER;

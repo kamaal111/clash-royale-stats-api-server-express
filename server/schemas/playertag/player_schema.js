@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const MONGOOSE = require('mongoose');
 
-const { Schema } = mongoose;
+const { Schema } = MONGOOSE;
 
-const PlayerSchema = Schema({
+const PLAYER_SCHEMA = Schema({
   updatedAt: String,
 
   id: String,
@@ -22,7 +22,7 @@ const PlayerSchema = Schema({
   challengeMaxWins: { type: Number, default: undefined },
   tournamentCardsWon: { type: Number, default: undefined },
   tournamentBattleCount: { type: Number, default: undefined },
-  role: { type: String, default: "No Clan" },
+  role: { type: String, default: 'No Clan' },
   donations: Number,
   donationsReceived: Number,
   totalDonations: Number,
@@ -43,12 +43,12 @@ const PlayerSchema = Schema({
       bestTrophies: { type: Number, default: 0 }
     },
     previousSeason: {
-      id: { type: String, default: "" },
+      id: { type: String, default: '' },
       trophies: { type: Number, default: 0 },
       bestTrophies: { type: Number, default: 0 }
     },
     bestSeason: {
-      id: { type: String, default: "" },
+      id: { type: String, default: '' },
       trophies: { type: Number, default: 0 }
     }
   },
@@ -62,4 +62,4 @@ const PlayerSchema = Schema({
   }
 });
 
-module.exports = mongoose.model("playerData", PlayerSchema);
+module.exports = MONGOOSE.model('playerData', PLAYER_SCHEMA);

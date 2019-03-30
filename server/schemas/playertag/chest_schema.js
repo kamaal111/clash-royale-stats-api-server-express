@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const MONGOOSE = require('mongoose');
 
-const { Schema } = mongoose;
+const { Schema } = MONGOOSE;
 
-const ChestSchema = Schema({
+const CHEST_SCHEMA = Schema({
   id: String,
 
   items: {
@@ -12,4 +12,4 @@ const ChestSchema = Schema({
   }
 });
 
-module.exports = mongoose.model("Chests", ChestSchema);
+module.exports = MONGOOSE.model('Chests', CHEST_SCHEMA);

@@ -1,15 +1,15 @@
-const express = require("express"),
-  router = express.Router();
+const EXPRESS = require('express'),
+  ROUTER = EXPRESS.Router();
 
-const ClanWarlog = require("../../schemas/clantag/clanWarlog_schema");
+const CLAN_WARLOG = require('../../schemas/clantag/clanWarlog_schema');
 
-router.param("clan", function(req, res, next, id) {
-  ClanWarlog.find({ id }, function(err, doc) {
+ROUTER.param('clan', (req, res, next, id) => {
+  CLAN_WARLOG.find({ id }, (err, doc) => {
     if (err) return res.json({ succes: false, error: err });
     return res.json({ succes: true, doc: doc });
   });
 });
 
-router.get("/:clan", function(req, res, next) {});
+ROUTER.get('/:clan', (req, res, next) => {});
 
-module.exports = router;
+module.exports = ROUTER;

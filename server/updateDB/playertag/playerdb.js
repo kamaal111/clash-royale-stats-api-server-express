@@ -1,7 +1,7 @@
-const Player = require("../../schemas/playertag/player_schema");
+const PLAYER = require('../../schemas/playertag/player_schema');
 
 module.exports = (player, parsed) => {
-  Player.deleteOne({ id: player }, function(err) {
+  PLAYER.deleteOne({ id: player }, err => {
     if (err) console.error(`1 - Save Failed(player) ${player}`, err);
     console.log(`1 - Refreshing Database(player) ${player}`);
 
@@ -11,7 +11,7 @@ module.exports = (player, parsed) => {
       return date.toUTCString();
     };
 
-    Player({
+    PLAYER({
       id: player,
 
       updatedAt: timeNow(),
@@ -42,7 +42,7 @@ module.exports = (player, parsed) => {
       leagueStatistics: parsed.leagueStatistics,
 
       currentFavouriteCard: parsed.currentFavouriteCard
-    }).save(function(err) {
+    }).save(err => {
       if (err) console.error(`2 - Save Failed(player) ${player}`, err);
     });
     console.log(`2 - Saved playerdata ${player}`);

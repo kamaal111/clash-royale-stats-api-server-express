@@ -1,5 +1,5 @@
-let mongoose = require("mongoose"),
-  chalk = require("chalk");
+let mongoose = require('mongoose'),
+  chalk = require('chalk');
 
 class Database {
   constructor() {
@@ -9,9 +9,9 @@ class Database {
   _connect() {
     mongoose
       .connect(
-        `${process.env.DBPATH}${process.env.DBUSER}${process.env.DBPASS}${
-          process.env.DBSERVER
-        }`,
+        `mongodb${process.env.DBPATH}${process.env.DBUSER}${
+          process.env.DBPASS
+        }${process.env.DBSERVER}`,
         // 'mongodb://127.0.0.1:27017/cr_api',
         {
           useCreateIndex: true,
@@ -24,7 +24,7 @@ class Database {
         );
       })
       .catch(err => {
-        console.error(chalk.redBright.bgBlack.bold("connection error:"), err);
+        console.error(chalk.redBright.bgBlack.bold('connection error:'), err);
       });
   }
 }
