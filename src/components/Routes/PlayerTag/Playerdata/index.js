@@ -1,14 +1,15 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import Player from "./Player";
+import Player from './Player';
+import Progress from '../../Progress';
 
 const Playerdata = props => {
-  const { datap, playerStatus } = props;
+  const { datap, playerStatus, playerChart } = props;
 
   const checkClan = (data, prop) => {
     if (data.clan) return data.clan[prop];
-    else return "This player does not have a clan";
+    else return 'This player does not have a clan';
   };
 
   let playerdata;
@@ -43,8 +44,8 @@ const Playerdata = props => {
         tournamentCardsWon={p.tournamentCardsWon}
         trophies={p.trophies}
         bestTrophies={p.bestTrophies}
-        clanName={checkClan(p, "name")} // clan checker
-        clanTag={checkClan(p, "tag")}
+        clanName={checkClan(p, 'name')} // clan checker
+        clanTag={checkClan(p, 'tag')}
         warDayWins={p.warDayWins}
         updatedAt={p.updatedAt}
         playertag={p.id}
@@ -53,12 +54,18 @@ const Playerdata = props => {
     ));
   } else return (playerdata = playerStatus);
 
-  return <div>{playerdata}</div>;
+  return (
+    <div>
+      <Progress playerChart={playerChart} />
+      {playerdata}
+    </div>
+  );
 };
 
 Playerdata.propTypes = {
   datap: propTypes.array.isRequired,
-  playerStatus: propTypes.string
+  playerStatus: propTypes.string,
+  playerChart: propTypes.array
 };
 
 export default Playerdata;

@@ -13,6 +13,7 @@ export default class App extends Component {
     chests: [],
     player: [],
     battlelog: [],
+    playerChart: [],
 
     // Clan States
     clan: [],
@@ -46,8 +47,9 @@ export default class App extends Component {
       if (this.state.clanCookie !== false)
         this.callClanAPI(this.state.clanCookie);
     } else if (this.state.route === 'playertag') {
-      if (this.state.playerCookie !== false)
+      if (this.state.playerCookie !== false) {
         this.callPlayerAPI(this.state.playerCookie);
+      }
     }
   }
 
@@ -81,7 +83,9 @@ export default class App extends Component {
         .then(data => this.setState({ chests: data.doc, loading: false })),
       fetch(`http://localhost:${port}/v1/api/battlelog/${player}`)
         .then(results => results.json())
-        .then(data => this.setState({ battlelog: data.doc })),
+        .then(data =>
+          this.setState({ battlelog: data.doc, playerChart: data.data })
+        ),
       fetch(`http://localhost:${port}/v1/api/player/${player}`)
         .then(results => results.json())
         .then(data => this.setState({ player: data.doc }))
@@ -252,6 +256,7 @@ export default class App extends Component {
             clanCookie={this.state.clanCookie}
             curWar={this.state.curwar}
             pastWar={this.state.pastWar}
+            playerChart={this.state.playerChart}
           />
         </div>
       </BrowserRouter>
