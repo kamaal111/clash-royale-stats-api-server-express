@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { BrowserRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import NavBar from "./components/NavBar";
-import SearchForm from "./components/SearchForm/index";
-import Routes from "./components/Routes";
+import NavBar from './components/NavBar';
+import SearchForm from './components/SearchForm/index';
+import Routes from './components/Routes';
 
 let port = 3000;
 
@@ -20,33 +20,35 @@ export default class App extends Component {
     pastWar: [],
 
     // Player & clan status
-    playerStatus: "player not found, try updating",
-    clanStatus: "clan not found, try updating",
+    playerStatus: 'player not found, try updating',
+    clanStatus: 'clan not found, try updating',
 
     // Cookie states
-    playerCookie: this.getCookie("playertag"),
-    clanCookie: this.getCookie("clantag"),
-    route: this.getCookie("freshestCookie"),
+    playerCookie: this.getCookie('playertag'),
+    clanCookie: this.getCookie('clantag'),
+    route: this.getCookie('freshestCookie'),
 
     // Loading page
     loading: true,
 
     // Message provided if user doesn't put in the correct playertag
-    formMessage: "",
+    formMessage: '',
 
     // Text in form
-    searchText: "",
+    searchText: '',
 
     // Selected option selection under form
-    selection: "playertag"
+    selection: 'playertag'
   };
 
   componentDidMount() {
-    if (this.state.route === "clantag")
+    if (this.state.route === 'clantag') {
       if (this.state.clanCookie !== false)
         this.callClanAPI(this.state.clanCookie);
-      else if (this.state.playerCookie !== false)
+    } else if (this.state.route === 'playertag') {
+      if (this.state.playerCookie !== false)
         this.callPlayerAPI(this.state.playerCookie);
+    }
   }
 
   // Set new cookie
@@ -59,12 +61,12 @@ export default class App extends Component {
 
   // Look for matching cookie
   getCookie(name) {
-    let pairs = document.cookie.split("; ");
+    let pairs = document.cookie.split('; ');
     let count = pairs.length;
     let parts;
     // console.log("Get cookie");
     while (count--) {
-      parts = pairs[count].split("=");
+      parts = pairs[count].split('=');
       if (parts[0] === name) return parts[1];
     }
     return false;
@@ -74,13 +76,13 @@ export default class App extends Component {
   callPlayerAPI = player => {
     // console.log("Fetch all!");
     Promise.all([
-      fetch(`http://localhost:${port}/api/chests/${player}`)
+      fetch(`http://localhost:${port}/v1/api/chests/${player}`)
         .then(results => results.json())
         .then(data => this.setState({ chests: data.doc, loading: false })),
-      fetch(`http://localhost:${port}/api/battlelog/${player}`)
+      fetch(`http://localhost:${port}/v1/api/battlelog/${player}`)
         .then(results => results.json())
         .then(data => this.setState({ battlelog: data.doc })),
-      fetch(`http://localhost:${port}/api/player/${player}`)
+      fetch(`http://localhost:${port}/v1/api/player/${player}`)
         .then(results => results.json())
         .then(data => this.setState({ player: data.doc }))
     ]);
@@ -90,13 +92,13 @@ export default class App extends Component {
   callClanAPI = clan => {
     // console.log("Fetch all!");
     Promise.all([
-      fetch(`http://localhost:${port}/api/clan/data/${clan}`)
+      fetch(`http://localhost:${port}/v1/api/clan/data/${clan}`)
         .then(results => results.json())
         .then(data => this.setState({ clan: data.doc, loading: false })),
-      fetch(`http://localhost:${port}/api/clan/warlog/${clan}`)
+      fetch(`http://localhost:${port}/v1/api/clan/warlog/${clan}`)
         .then(results => results.json())
         .then(data => this.setState({ pastWar: data.doc })),
-      fetch(`http://localhost:${port}/api/clan/curwar/${clan}`)
+      fetch(`http://localhost:${port}/v1/api/clan/curwar/${clan}`)
         .then(results => results.json())
         .then(data => this.setState({ curwar: data.doc }))
     ]);
@@ -107,18 +109,20 @@ export default class App extends Component {
 
   // Hides '#'
   hideTag = str => {
-    if (str.slice(0, 1) === "#") return str.slice(1);
+    if (str.slice(0, 1) === '#') return str.slice(1);
     else return str;
   };
 
   // Check tag form
   checkForm = str => {
-    if (str.length < 4) return "Tag provided is too short";
-    else if (str.length > 10) return "Tag provide is too long";
+    if (str.length < 4) return 'Tag provided is too short';
+    else if (str.length > 10) return 'Tag provide is too long';
     else if (str.search(/[^PYLQGRJCUV0289]/) !== -1)
-      return `# should only include these characters:
-      Numbers: 0, 2, 8, 9
-      Letters: P, Y, L, Q, G, R, J, C, U, V`;
+      return (
+        '# should only include these characters: ' +
+        'Numbers: 0, 2, 8, 9 ' +
+        'Letters: P, Y, L, Q, G, R, J, C, U, V'
+      );
     else return true;
   };
 
@@ -130,20 +134,20 @@ export default class App extends Component {
     e.preventDefault();
     let { selection, searchText } = this.state;
 
-    let string = this.hideTag(searchText.replace(/O/g, "0").toUpperCase());
+    let string = this.hideTag(searchText.replace(/O/g, '0').toUpperCase());
     let checks = this.checkForm(string);
 
     if (checks !== true) this.setState({ formMessage: checks });
     else {
-      this.setState({ formMessage: "" });
+      this.setState({ formMessage: '' });
       this.setCookie(selection, string, 365);
-      this.setCookie("freshestCookie", selection, 365);
+      this.setCookie('freshestCookie', selection, 365);
       let cooks = this.getCookie(selection);
-      if (selection === "playertag") {
+      if (selection === 'playertag') {
         this.setState({ playerCookie: cooks, route: selection });
         this.callPlayerAPI(cooks);
         //  TODO: redirect to '/' from here
-      } else if (selection === "clantag") {
+      } else if (selection === 'clantag') {
         this.setState({ clanCookie: cooks, route: selection });
         this.callClanAPI(cooks);
         //  TODO: redirect to '/' from here
@@ -159,24 +163,24 @@ export default class App extends Component {
 
   // Updates player data
   updateData = () => {
-    console.log("Update data!");
+    console.log('Update data!');
     let tag = this.getCookie(this.state.route);
-    if (this.state.route === "playertag") {
-      fetch(`http://localhost:${port}/api/${tag}`)
+    if (this.state.route === 'playertag') {
+      fetch(`http://localhost:${port}/v1/api/${tag}`)
         .then(results => results.json())
         .then(data => this.setState({ playerStatus: data }))
         .then(() => {
-          if (this.state.playerStatus === "OK") {
+          if (this.state.playerStatus === 'OK') {
             this.callPlayerAPI(tag);
             window.location.reload(true);
           }
         });
-    } else if (this.state.route === "clantag") {
-      fetch(`http://localhost:${port}/api/clan/${tag}`)
+    } else if (this.state.route === 'clantag') {
+      fetch(`http://localhost:${port}/v1/api/clan/${tag}`)
         .then(results => results.json())
         .then(data => this.setState({ clanStatus: data }))
         .then(() => {
-          if (this.state.clanStatus === "OK") {
+          if (this.state.clanStatus === 'OK') {
             this.callClanAPI(tag);
             window.location.reload(true);
           }
@@ -186,7 +190,7 @@ export default class App extends Component {
 
   // Alerts client if form is not filled in correctly
   alertClient = () => {
-    if (this.state.formMessage !== "") {
+    if (this.state.formMessage !== '') {
       return (
         <div className="alert-warning">
           <p>{this.state.formMessage}</p>
@@ -198,11 +202,11 @@ export default class App extends Component {
   // Name of navbar and route
   nameNavBar = () => {
     let namer = [];
-    if (this.state.route === "playertag") {
-      namer = ["chests", "Chests", "battlelog", "Battlelog"];
+    if (this.state.route === 'playertag') {
+      namer = ['chests', 'Chests', 'battlelog', 'Battlelog'];
       return namer;
     } else {
-      namer = ["currentWar", "Current War", "pastWar", "Past War"];
+      namer = ['currentWar', 'Current War', 'pastWar', 'Past War'];
       return namer;
     }
   };
@@ -215,8 +219,8 @@ export default class App extends Component {
             <h1>Welcome Clasher</h1>
 
             <NavBar
-              firLink={""}
-              firTitle={"Home"}
+              firLink={''}
+              firTitle={'Home'}
               secLink={`${this.nameNavBar()[0]}/`}
               secTitle={this.nameNavBar()[1]}
               thirLink={`${this.nameNavBar()[2]}/`}

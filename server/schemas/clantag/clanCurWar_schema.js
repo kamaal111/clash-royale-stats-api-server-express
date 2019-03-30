@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const MONGOOSE = require('mongoose');
 
-const { Schema } = mongoose;
+const { Schema } = MONGOOSE;
 
-const clanCurWarSchema = Schema({
+const CLAN_CUR_WAR_SCHEMA = Schema({
   id: String,
 
   state: String,
@@ -31,4 +31,4 @@ const clanCurWarSchema = Schema({
   ]
 });
 
-module.exports = mongoose.model("clanCurWar", clanCurWarSchema);
+module.exports = MONGOOSE.model('clanCurWar', CLAN_CUR_WAR_SCHEMA);

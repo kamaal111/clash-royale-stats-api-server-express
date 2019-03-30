@@ -1,4 +1,4 @@
-const urls = tag => [
+const URLS = tag => [
   // player urls
   `/v1/players/%23${tag}`,
   `/v1/players/%23${tag}/upcomingchests`,
@@ -11,19 +11,19 @@ const urls = tag => [
   `/v1/clans/%23${tag}/currentwar`
 ];
 
-let token = process.env.BEARERTOKEN0;
+let token = `Bearer ${process.env.BEARERTOKEN3}`;
 
 module.exports = (num, tag) => {
   return {
-    method: "GET",
-    hostname: "api.clashroyale.com",
-    path: urls(tag)[num],
+    method: 'GET',
+    hostname: 'api.clashroyale.com',
+    path: URLS(tag)[num],
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
       Authorization: token,
-      "cache-control": "max-age=120",
-      "content-type": "application/json; charset=utf-8"
+      'cache-control': 'max-age=120',
+      'content-type': 'application/json; charset=utf-8'
     }
   };
 };

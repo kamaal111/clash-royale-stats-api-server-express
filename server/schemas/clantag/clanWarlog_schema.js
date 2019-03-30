@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const MONGOOSE = require('mongoose');
 
-const { Schema } = mongoose;
+const { Schema } = MONGOOSE;
 
-const clanWarlogSchema = Schema({
+const CLAN_WARLOG_SCHEMA = Schema({
   id: String,
 
   items: [
@@ -42,4 +42,4 @@ const clanWarlogSchema = Schema({
   ]
 });
 
-module.exports = mongoose.model("clanWarlog", clanWarlogSchema);
+module.exports = MONGOOSE.model('clanWarlog', CLAN_WARLOG_SCHEMA);

@@ -1,65 +1,42 @@
 // modules
-const express = require("express"),
-  logger = require("morgan");
+const EXPRESS = require('express'),
+  LOGGER = require('morgan');
 
-let app = express();
+let app = EXPRESS();
 
-require("dotenv").config();
+require('dotenv').config();
 
-app.use(logger("dev"));
-app.use(express.json());
+app.use(LOGGER('dev'));
+app.use(EXPRESS.json());
 
 // mongoDB connection
-require("./database");
+require('./database');
 
 // CORS
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
-    return res.status(200).json({});
-  }
-  next();
-});
+const CORS = require('./lib/CORS');
+CORS(app);
 
 // update player route
-app.use("/api", require("./routes/playertag"));
+app.use('/v1/api', require('./routes/playertag'));
 // chest player route
-app.use("/api/chests", require("./routes/playertag/chestRoute"));
+app.use('/v1/api/chests', require('./routes/playertag/chestRoute'));
 // player data route
-app.use("/api/player", require("./routes/playertag/playerDataRoute"));
+app.use('/v1/api/player', require('./routes/playertag/playerDataRoute'));
 // battlelog playerroute
-app.use("/api/battlelog", require("./routes/playertag/battlelogRoute"));
+app.use('/v1/api/battlelog', require('./routes/playertag/battlelogRoute'));
 // update clan route
-app.use("/api/clan", require("./routes/clantag/index"));
+app.use('/v1/api/clan', require('./routes/clantag/index'));
 // clan data route
-app.use("/api/clan/data", require("./routes/clantag/clanInfo"));
+app.use('/v1/api/clan/data', require('./routes/clantag/clanInfo'));
 // clan warlog route
-app.use("/api/clan/warlog", require("./routes/clantag/warlog"));
+app.use('/v1/api/clan/warlog', require('./routes/clantag/warlog'));
 // clan current war route
-app.use("/api/clan/curwar", require("./routes/clantag/curWar"));
+app.use('/v1/api/clan/curwar', require('./routes/clantag/curWar'));
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new Error("File Not Found");
-  err.status = 404;
-  next(err);
-});
+require('./lib/errors').NOT_FOUND(app);
 
 // error handler
-app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-  let error = { message: err.message, status: err.status, stack: err.stack };
-  // render the error page
-  res.status(err.status || 500);
-  console.log(`${err.message}\n${err.status}`);
-  res.json(error);
-});
+require('./lib/errors').errorHandler(app);
 
 module.exports = app;

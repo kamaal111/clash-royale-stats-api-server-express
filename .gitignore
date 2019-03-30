@@ -7,4 +7,5 @@ db/
 .text
 .DS_Store
 .vscode/
+.idea/
 yarn.lock
