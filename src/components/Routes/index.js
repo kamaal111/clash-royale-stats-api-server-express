@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import propTypes from "prop-types";
-import { Route, Switch } from "react-router-dom";
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import { Route, Switch } from 'react-router-dom';
 
-import Playerdata from "./PlayerTag/Playerdata/index";
-import ChestList from "./PlayerTag/ChestList/index";
-import BattlelogList from "./PlayerTag/BattlelogList/index";
+import Playerdata from './PlayerTag/Playerdata/index';
+import ChestList from './PlayerTag/ChestList/index';
+import BattlelogList from './PlayerTag/BattlelogList/index';
 
-import ClanTag from "./ClanTag/ClanData/index";
-import CurrentWar from "./ClanTag/CurrentWar/index";
-import PastWar from "./ClanTag/PastWar/index";
+import ClanTag from './ClanTag/ClanData/index';
+import CurrentWar from './ClanTag/CurrentWar/index';
+import PastWar from './ClanTag/PastWar/index';
 
-import NotFound from "./NotFound";
+import NotFound from './NotFound';
 
 export default class Routes extends Component {
   loadData() {
@@ -23,11 +23,11 @@ export default class Routes extends Component {
       clanStatus
     } = this.props;
 
-    if (route === "playertag" && playerStatus !== "Not Found") {
+    if (route === 'playertag' && playerStatus !== 'Not Found') {
       if (loading && playerCookie !== false) return <p>Loading.....</p>;
       else if (playerCookie === false) return <p>No Playertag</p>;
       else return this.playerRoutes;
-    } else if (route === "clantag" && clanStatus !== "Not Found") {
+    } else if (route === 'clantag' && clanStatus !== 'Not Found') {
       if (loading && clanCookie !== false) return <p>Loading.....</p>;
       else if (clanCookie === false) return <p>No ClanTag</p>;
       else return this.clanRoutes;
@@ -43,6 +43,7 @@ export default class Routes extends Component {
           <Playerdata
             datap={this.props.player}
             playerStatus={this.props.playerStatus}
+            playerChart={this.props.playerChart}
           />
         )}
       />
@@ -116,5 +117,6 @@ Routes.propTypes = {
   clanStatus: propTypes.string,
   route: propTypes.string,
   pastWar: propTypes.array,
-  curWar: propTypes.array
+  curWar: propTypes.array,
+  playerChart: propTypes.array
 };
