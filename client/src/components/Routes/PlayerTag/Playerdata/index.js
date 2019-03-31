@@ -56,8 +56,13 @@ const Playerdata = props => {
 
   return (
     <div>
-      <Progress playerChart={playerChart} />
       {playerdata}
+      <Progress
+        allSets={playerChart}
+        firstSet={'startingTrophies'}
+        secondSet={'battleTime'}
+        thirdSet={'trophyChange'}
+      />
     </div>
   );
 };

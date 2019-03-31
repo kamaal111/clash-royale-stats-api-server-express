@@ -13,13 +13,11 @@ ROUTER.param('player', (req, res, next, id) => {
           trophyChange = [],
           battleTime = [],
           logs = doc[0].battlelog;
+
         for (let i = 0; i < logs.length; i++) {
-          let st = logs[i].team[0].startingTrophies,
-            tc = logs[i].team[0].trophyChange,
-            bt = logs[i].battleTime;
-          startingTrophies.push(st);
-          trophyChange.push(tc);
-          battleTime.push(bt);
+          startingTrophies.push(logs[i].team[0].startingTrophies);
+          trophyChange.push(logs[i].team[0].trophyChange);
+          battleTime.push(logs[i].battleTime);
         }
         let data = [{ startingTrophies, trophyChange, battleTime }];
 

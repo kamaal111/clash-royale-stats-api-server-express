@@ -2,20 +2,42 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const Progress = props => {
-  let setters = props.playerChart[0];
+  let checks = (allSets, firstSet, secondSet, thirdSet) => {
+    let chartSetter = allSets;
 
-  let { startingTrophies } = setters;
-  let { battleTime } = setters;
-  let { trophyChange } = setters;
+    if (chartSetter) {
+      return [
+        // Starting Trophies
+        chartSetter[firstSet],
+        // Time
+        chartSetter[secondSet],
+        // Trophy Change
+        chartSetter[thirdSet]
+      ];
+    } else return [undefined, undefined, undefined];
+  };
+
+  let collection = checks(
+    props.allSets[0],
+    props.firstSet,
+    props.secondSet,
+    props.thirdSet
+  );
 
   const TROPHIES = () => {
-    let liste = [];
-    for (let i = 0; i < startingTrophies.length; i++) {
-      let sumUp = startingTrophies[i] + trophyChange[i];
-      if (sumUp !== 0) liste.push(sumUp);
-      else liste.push(undefined);
-    }
-    return liste;
+    let liste = [],
+      startingTrophies = collection[0],
+      trophyChange = collection[2];
+
+    if (startingTrophies !== undefined) {
+      for (let i = 0; i < startingTrophies.length; i++) {
+        let sumUp = startingTrophies[i] + trophyChange[i];
+        if (sumUp !== 0) liste.unshift(sumUp);
+        else liste.unshift(undefined);
+      }
+
+      return liste;
+    } else return [undefined];
   };
 
   let time = date => {
@@ -24,25 +46,25 @@ const Progress = props => {
     let year = `${s.slice(0, 4).join('')}`;
     let month = `${s.slice(4, 6).join('')}`;
     let day = `${s.slice(6, 8).join('')}`;
-    let hour = `${s.slice(9, 11).join('')}`;
-    let minute = `${s.slice(11, 13).join('')}`;
-    let second = `${s.slice(13, 15).join('')}`;
 
-    return `${day}-${month}-${year} ${hour}:${minute}:${second}`;
+    return `${day}-${month}-${year}`;
   };
 
   const TIMEFY = () => {
-    let liste = [];
-    for (let i = 0; i < battleTime.length; i++) {
-      let timefy = time(battleTime[i]);
-      liste.push(timefy);
-    }
-    return liste;
+    let liste = [],
+      battleTime = collection[1];
+
+    if (battleTime !== undefined) {
+      for (let i = 0; i < battleTime.length; i++) {
+        let timefy = time(battleTime[i]);
+        liste.unshift(timefy);
+      }
+      return liste;
+    } else return [undefined];
   };
 
   let data = {
     labels: TIMEFY(),
-
     datasets: [
       {
         label: 'Trophy Progress',
