@@ -76,7 +76,11 @@ export default class Routes extends Component {
         exact
         path={`/`}
         render={() => (
-          <ClanTag datac={this.props.clan} clanStatus={this.props.clanStatus} />
+          <ClanTag
+            datac={this.props.clan}
+            clanStatus={this.props.clanStatus}
+            clanChart={this.props.clanChart}
+          />
         )}
       />
       <Route

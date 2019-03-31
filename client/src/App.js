@@ -19,6 +19,7 @@ export default class App extends Component {
     clan: [],
     warlog: [],
     pastWar: [],
+    clanChart: [],
 
     // Player & clan status
     playerStatus: 'player not found, try updating',
@@ -101,7 +102,9 @@ export default class App extends Component {
         .then(data => this.setState({ clan: data.doc, loading: false })),
       fetch(`http://localhost:${port}/v1/api/clan/warlog/${clan}`)
         .then(results => results.json())
-        .then(data => this.setState({ pastWar: data.doc })),
+        .then(data =>
+          this.setState({ pastWar: data.doc, clanChart: data.data })
+        ),
       fetch(`http://localhost:${port}/v1/api/clan/curwar/${clan}`)
         .then(results => results.json())
         .then(data => this.setState({ curwar: data.doc }))
@@ -257,6 +260,7 @@ export default class App extends Component {
             curWar={this.state.curwar}
             pastWar={this.state.pastWar}
             playerChart={this.state.playerChart}
+            clanChart={this.state.clanChart}
           />
         </div>
       </BrowserRouter>

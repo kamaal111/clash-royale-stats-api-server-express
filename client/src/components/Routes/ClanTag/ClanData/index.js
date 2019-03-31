@@ -1,10 +1,11 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import Clan from "./Clan/index";
+import Clan from './Clan/index';
+import Progress from '../../Progress';
 
 const ClanData = props => {
-  const { datac, clanStatus } = props;
+  const { datac, clanStatus, clanChart } = props;
   let clanData;
 
   if (datac) {
@@ -32,7 +33,18 @@ const ClanData = props => {
     }
   } else return (clanData = clanStatus);
 
-  return <div>{clanData}</div>;
+  return (
+    <div>
+      {' '}
+      <Progress
+        allSets={clanChart}
+        firstSet={'clanScore'}
+        secondSet={'createdDate'}
+        thirdSet={'trophyChange'}
+      />
+      {clanData}
+    </div>
+  );
 };
 
 ClanData.propTypes = {
