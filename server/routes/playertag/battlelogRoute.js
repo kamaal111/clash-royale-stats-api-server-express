@@ -2,10 +2,10 @@
 const EXPRESS = require('express'),
   ROUTER = EXPRESS.Router();
 
-const BATTLELOG = require('../../schemas/playertag/battlelog_schema');
+const Battlelog = require('../../schemas/playertag/battlelog_schema');
 
 ROUTER.param('player', (req, res, next, id) => {
-  BATTLELOG.find({ id }, (error, doc) => {
+  Battlelog.find({ id }, (error, doc) => {
     if (error) return res.json({ succes: false, error });
     else {
       if (doc[0]) {

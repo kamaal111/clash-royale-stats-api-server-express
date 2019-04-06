@@ -1,11 +1,11 @@
-const CLAN_CUR_WAR = require('../../schemas/clantag/clanCurWar_schema');
+const ClanCurWar = require('../../schemas/clantag/clanCurWar_schema');
 
 module.exports = (clan, parsed) => {
-  CLAN_CUR_WAR.deleteOne({ id: clan }, err => {
+  ClanCurWar.deleteOne({ id: clan }, err => {
     if (err) console.error(`1 - Save Failed(current war) ${clan}`, err);
     console.log(`1 - Refreshing Database(current war) ${clan}`);
 
-    CLAN_CUR_WAR({
+    ClanCurWar({
       id: clan,
 
       state: parsed.state,

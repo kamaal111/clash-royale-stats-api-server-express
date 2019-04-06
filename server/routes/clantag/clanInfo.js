@@ -4,9 +4,9 @@ const EXPRESS = require('express'),
 const ClanInfo = require('../../schemas/clantag/clanInfo_schema');
 
 ROUTER.param('clan', (req, res, next, id) => {
-  ClanInfo.find({ id }, (err, doc) => {
-    if (err) return res.json({ succes: false, error: err });
-    return res.json({ succes: true, doc: doc });
+  ClanInfo.find({ id }, (error, doc) => {
+    if (error) return res.json({ succes: false, error });
+    return res.json({ succes: true, doc });
   });
 });
 

@@ -6,6 +6,27 @@ import SearchForm from './components/SearchForm/index';
 import Routes from './components/Routes';
 
 let port = 3000;
+const getUrls = tag => {
+  return {
+    // Player routes
+    chest: `http://localhost:${port}/v1/api/chests/${tag}`,
+    battlelog: `http://localhost:${port}/v1/api/battlelog/${tag}`,
+    player: `http://localhost:${port}/v1/api/player/${tag}`,
+    // Clan routes
+    clan: `http://localhost:${port}/v1/api/clan/data/${tag}`,
+    warlog: `http://localhost:${port}/v1/api/clan/warlog/${tag}`,
+    curWar: `http://localhost:${port}/v1/api/clan/curwar/${tag}`
+  };
+};
+
+const updateUrls = tag => {
+  return {
+    // Update player
+    player: `http://localhost:${port}/v1/api/${tag}`,
+    // Update clan
+    clan: `http://localhost:${port}/v1/api/clan/${tag}`
+  };
+};
 
 export default class App extends Component {
   state = {
@@ -17,8 +38,8 @@ export default class App extends Component {
 
     // Clan States
     clan: [],
+    curwar: [],
     warlog: [],
-    pastWar: [],
     clanChart: [],
 
     // Player & clan status
@@ -78,16 +99,17 @@ export default class App extends Component {
   // Retrieve clan data from database
   callPlayerAPI = player => {
     // console.log("Fetch all!");
+    let urls = getUrls(player);
     Promise.all([
-      fetch(`http://localhost:${port}/v1/api/chests/${player}`)
+      fetch(urls.chest)
         .then(results => results.json())
         .then(data => this.setState({ chests: data.doc, loading: false })),
-      fetch(`http://localhost:${port}/v1/api/battlelog/${player}`)
+      fetch(urls.battlelog)
         .then(results => results.json())
         .then(data =>
           this.setState({ battlelog: data.doc, playerChart: data.data })
         ),
-      fetch(`http://localhost:${port}/v1/api/player/${player}`)
+      fetch(urls.player)
         .then(results => results.json())
         .then(data => this.setState({ player: data.doc }))
     ]);
@@ -96,16 +118,17 @@ export default class App extends Component {
   // Retrieve clan data from database
   callClanAPI = clan => {
     // console.log("Fetch all!");
+    let urls = getUrls(clan);
     Promise.all([
-      fetch(`http://localhost:${port}/v1/api/clan/data/${clan}`)
+      fetch(urls.clan)
         .then(results => results.json())
         .then(data => this.setState({ clan: data.doc, loading: false })),
-      fetch(`http://localhost:${port}/v1/api/clan/warlog/${clan}`)
+      fetch(urls.warlog)
         .then(results => results.json())
         .then(data =>
-          this.setState({ pastWar: data.doc, clanChart: data.data })
+          this.setState({ warlog: data.doc, clanChart: data.data })
         ),
-      fetch(`http://localhost:${port}/v1/api/clan/curwar/${clan}`)
+      fetch(urls.curWar)
         .then(results => results.json())
         .then(data => this.setState({ curwar: data.doc }))
     ]);
@@ -170,10 +193,11 @@ export default class App extends Component {
 
   // Updates player data
   updateData = () => {
-    console.log('Update data!');
+    // console.log('Update data!');
     let tag = this.getCookie(this.state.route);
+    let urls = updateUrls(tag);
     if (this.state.route === 'playertag') {
-      fetch(`http://localhost:${port}/v1/api/${tag}`)
+      fetch(urls.player)
         .then(results => results.json())
         .then(data => this.setState({ playerStatus: data }))
         .then(() => {
@@ -183,7 +207,7 @@ export default class App extends Component {
           }
         });
     } else if (this.state.route === 'clantag') {
-      fetch(`http://localhost:${port}/v1/api/clan/${tag}`)
+      fetch(urls.clan)
         .then(results => results.json())
         .then(data => this.setState({ clanStatus: data }))
         .then(() => {
@@ -258,7 +282,7 @@ export default class App extends Component {
             route={this.state.route}
             clanCookie={this.state.clanCookie}
             curWar={this.state.curwar}
-            pastWar={this.state.pastWar}
+            pastWar={this.state.warlog}
             playerChart={this.state.playerChart}
             clanChart={this.state.clanChart}
           />

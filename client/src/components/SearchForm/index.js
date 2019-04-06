@@ -1,7 +1,7 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import DropDown from "./DropDown";
+import DropDown from './DropDown';
 
 const SearchForm = props => {
   const {
@@ -16,9 +16,9 @@ const SearchForm = props => {
   } = props;
 
   const holder = () => {
-    if (route === false) return "";
-    else if (route === "playertag") return `#${playerCookie}`;
-    else if (route === "clantag") return `#${clanCookie}`;
+    if (route === false) return '';
+    else if (route === 'playertag') return `#${playerCookie}`;
+    else if (route === 'clantag') return `#${clanCookie}`;
   };
 
   const updatebtn = () => {

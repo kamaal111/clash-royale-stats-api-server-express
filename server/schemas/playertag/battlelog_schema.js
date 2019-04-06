@@ -2,7 +2,7 @@ const MONGOOSE = require('mongoose');
 
 const { Schema } = MONGOOSE;
 
-const BATTLELOG_SCHEMA = Schema({
+const BattlelogSchema = Schema({
   id: String,
 
   battlelog: {
@@ -10,4 +10,4 @@ const BATTLELOG_SCHEMA = Schema({
   }
 });
 
-module.exports = MONGOOSE.model('Battlelogs', BATTLELOG_SCHEMA);
+module.exports = MONGOOSE.model('Battlelogs', BattlelogSchema);

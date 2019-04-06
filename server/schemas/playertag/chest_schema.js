@@ -2,7 +2,7 @@ const MONGOOSE = require('mongoose');
 
 const { Schema } = MONGOOSE;
 
-const CHEST_SCHEMA = Schema({
+const ChestSchema = Schema({
   id: String,
 
   items: {
@@ -12,4 +12,4 @@ const CHEST_SCHEMA = Schema({
   }
 });
 
-module.exports = MONGOOSE.model('Chests', CHEST_SCHEMA);
+module.exports = MONGOOSE.model('Chests', ChestSchema);

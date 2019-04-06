@@ -35,7 +35,6 @@ const ClanData = props => {
 
   return (
     <div>
-      {' '}
       <Progress
         allSets={clanChart}
         firstSet={'clanScore'}
