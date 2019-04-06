@@ -1,11 +1,11 @@
-const BATTLELOG = require('../../schemas/playertag/battlelog_schema');
+const Battlelog = require('../../schemas/playertag/battlelog_schema');
 
 module.exports = (player, parsed) => {
-  BATTLELOG.deleteOne({ id: player }, err => {
+  Battlelog.deleteOne({ id: player }, err => {
     if (err) console.error(`1 - Save Failed(battlelog) ${player}`, err);
     console.log(`1 - Refreshing Database(battlelog) ${player}`);
 
-    BATTLELOG({
+    Battlelog({
       id: player,
       battlelog: parsed
     }).save(err => {

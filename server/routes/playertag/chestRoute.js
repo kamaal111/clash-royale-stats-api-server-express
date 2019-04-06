@@ -2,12 +2,12 @@
 const EXPRESS = require('express'),
   ROUTER = EXPRESS.Router();
 
-const CHEST = require('../../schemas/playertag/chest_schema');
+const Chest = require('../../schemas/playertag/chest_schema');
 
 ROUTER.param('player', (req, res, next, id) => {
-  CHEST.find({ id }, (err, doc) => {
-    if (err) return res.json({ succes: false, error: err });
-    return res.json({ succes: true, doc: doc });
+  Chest.find({ id }, (error, doc) => {
+    if (error) return res.json({ succes: false, error });
+    return res.json({ succes: true, doc });
   });
 });
 

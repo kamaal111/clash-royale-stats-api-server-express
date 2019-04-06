@@ -1,11 +1,11 @@
-const CLAN_WARLOG = require('../../schemas/clantag/clanWarlog_schema');
+const ClanWarlog = require('../../schemas/clantag/clanWarlog_schema');
 
 module.exports = (clan, parsed) => {
-  CLAN_WARLOG.deleteOne({ id: clan }, err => {
+  ClanWarlog.deleteOne({ id: clan }, err => {
     if (err) console.error(`1 - Save Failed(warlog) ${clan}`, err);
     console.log(`1 - Refreshing Database(warlog) ${clan}`);
 
-    CLAN_WARLOG({
+    ClanWarlog({
       id: clan,
 
       items: parsed.items

@@ -2,12 +2,12 @@
 const EXPRESS = require('express'),
   ROUTER = EXPRESS.Router();
 
-const PLAYER = require('../../schemas/playertag/player_schema');
+const Player = require('../../schemas/playertag/player_schema');
 
 ROUTER.param('player', (req, res, next, id) => {
-  PLAYER.find({ id }, (err, doc) => {
-    if (err) return res.json({ succes: false, error: err });
-    return res.json({ succes: true, doc: doc });
+  Player.find({ id }, (error, doc) => {
+    if (error) return res.json({ succes: false, error });
+    return res.json({ succes: true, doc });
   });
 });
 
