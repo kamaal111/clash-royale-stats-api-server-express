@@ -18,7 +18,9 @@ const COLLECT_DATA = (logs, clanScore, trophyChange, createdDate, id) => {
   return [{ clanScore, trophyChange, createdDate }];
 };
 
-ROUTER.param('clan', (req, res, next, id) => {
+ROUTER.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+
   clanWarlog.find({ id }, (error, doc) => {
     if (error) return res.json({ succes: false, error });
     else {
@@ -34,7 +36,5 @@ ROUTER.param('clan', (req, res, next, id) => {
     }
   });
 });
-
-ROUTER.get('/:clan', (req, res, next) => {});
 
 module.exports = ROUTER;

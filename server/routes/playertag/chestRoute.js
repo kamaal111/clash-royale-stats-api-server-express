@@ -4,13 +4,13 @@ const EXPRESS = require('express'),
 
 const Chest = require('../../schemas/playertag/chest_schema');
 
-ROUTER.param('player', (req, res, next, id) => {
+ROUTER.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+
   Chest.find({ id }, (error, doc) => {
     if (error) return res.json({ succes: false, error });
     return res.json({ succes: true, doc });
   });
 });
-
-ROUTER.get('/:player', (req, res, next) => {});
 
 module.exports = ROUTER;

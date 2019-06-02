@@ -9,11 +9,13 @@ const WARLOG_DB = require('../../updateDB/clantag/warlogdb'),
   CUR_WAR_DB = require('../../updateDB/clantag/curWardb'),
   CLAN_INFO_DB = require('../../updateDB/clantag/clanInfodb');
 
-ROUTER.param('clan', (req, res, next, id) => {
-  REQUESTS_CB(id, 4, CLAN_INFO_DB, response => {
+ROUTER.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+
+  REQUESTS_CB((tag = id), (num = 4), (update = CLAN_INFO_DB), response => {
     if (response === 'OK') {
-      REQUESTS(id, 5, WARLOG_DB);
-      REQUESTS(id, 6, CUR_WAR_DB);
+      REQUESTS((tag = id), (num = 5), (update = WARLOG_DB));
+      REQUESTS((tag = id), (num = 6), (update = CUR_WAR_DB));
       console.log(CHALK.yellowBright.bgBlack(response));
       res.json(response);
     } else {
@@ -22,7 +24,5 @@ ROUTER.param('clan', (req, res, next, id) => {
     }
   });
 });
-
-ROUTER.get('/:clan', (req, res, next) => {});
 
 module.exports = ROUTER;

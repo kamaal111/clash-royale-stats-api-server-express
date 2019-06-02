@@ -14,7 +14,7 @@ import NotFound from './NotFound';
 
 export default class Routes extends Component {
   loadData() {
-    let {
+    const {
       route,
       loading,
       playerCookie,
@@ -119,7 +119,7 @@ Routes.propTypes = {
   battlelog: propTypes.array,
   clan: propTypes.array,
   clanStatus: propTypes.string,
-  route: propTypes.string,
+  route: propTypes.oneOfType([propTypes.string, propTypes.bool]),
   pastWar: propTypes.array,
   curWar: propTypes.array,
   playerChart: propTypes.array

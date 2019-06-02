@@ -1,10 +1,10 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
 const DropDown = props => {
   return (
     <select
-      className={"tag-select"}
+      className="tag-select"
       value={props.selection}
       onChange={props.handleSelect}
     >
