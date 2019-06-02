@@ -7,9 +7,6 @@ const PlayerSchema = Schema({
 
   id: String,
 
-  // player: {
-  //   type: Array
-  // }
   name: String,
   expLevel: Number,
   trophies: Number,

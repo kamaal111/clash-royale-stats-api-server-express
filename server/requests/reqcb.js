@@ -1,13 +1,13 @@
 const HTTPS = require('https'),
   HTTP = require('http');
 
-const OPTIONS = require('../lib');
+const OPTIONS = require('../lib/index');
 
 module.exports = (tag, num, update, callback) => {
-  const REQUEST = HTTPS.request(OPTIONS(num, tag), res => {
-    let status = () => {
-      let statusCode = HTTP.STATUS_CODES[res.statusCode];
-      let statusCodeError = new Error(statusCode);
+  const REQUEST = HTTPS.request(OPTIONS((tag = tag), (num = num)), res => {
+    const status = () => {
+      const statusCode = HTTP.STATUS_CODES[res.statusCode];
+      const statusCodeError = new Error(statusCode);
       return callback(statusCodeError.message);
     };
 

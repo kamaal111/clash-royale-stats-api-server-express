@@ -5,7 +5,7 @@ module.exports = (player, parsed) => {
     if (err) console.error(`1 - Save Failed(player) ${player}`, err);
     console.log(`1 - Refreshing Database(player) ${player}`);
 
-    let timeNow = () => {
+    const timeNow = () => {
       let date = new Date();
       date.setTime(date.getTime() + 24 * 60 * 60);
       return date.toUTCString();

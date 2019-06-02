@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 1em/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.alert-warning {
+  padding: 0.5em;
+  background-color: #e8ba56;
+  color: rgb(82, 56, 1);
+}
+
+.alert-success {
+  padding: 0.5em;
+  background-color: #a4fe7e;
+  color: rgb(1, 60, 8);
+}
+
+.card {
+  height: 4rem;
+}
+
+.border {
+  width: 300px;
+  border: 0.3rem solid #000000;
+  padding: 2rem;
+  margin: 2rem;
+}

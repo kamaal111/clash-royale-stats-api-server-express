@@ -4,13 +4,13 @@ const EXPRESS = require('express'),
 
 const Player = require('../../schemas/playertag/player_schema');
 
-ROUTER.param('player', (req, res, next, id) => {
+ROUTER.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+
   Player.find({ id }, (error, doc) => {
     if (error) return res.json({ succes: false, error });
     return res.json({ succes: true, doc });
   });
 });
-
-ROUTER.get('/:player', (req, res, next) => {});
 
 module.exports = ROUTER;

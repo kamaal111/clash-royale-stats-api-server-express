@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "testserver": "jest -i --verbose --coverage --runInBand",
-    "startserver": " node bin/www",
+    "startserver": "node bin/www",
     "dboff": "killall mongod",
     "watch": "nodemon bin/www",
     "dbon": "mkdir -p ./db && mongod --dbpath ./db"

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import NavBar from './components/NavBar';
+import './App.css';
+
+import NavBar from './components/NavBar/index';
 import SearchForm from './components/SearchForm/index';
-import Routes from './components/Routes';
+import Routes from './components/Routes/index';
 
 let port = 3000;
 const getUrls = tag => {
@@ -64,7 +66,7 @@ export default class App extends Component {
     selection: 'playertag'
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (this.state.route === 'clantag') {
       if (this.state.clanCookie !== false)
         this.callClanAPI(this.state.clanCookie);
@@ -73,15 +75,15 @@ export default class App extends Component {
         this.callPlayerAPI(this.state.playerCookie);
       }
     }
-  }
+  };
 
   // Set new cookie
-  setCookie(cname, cvalue, exdays) {
+  setCookie = (cname, cvalue, exdays) => {
     let date = new Date();
     date.setTime(date.getTime() + exdays * 24 * 60 * 60 * 1000);
     let expires = `expires=${date.toUTCString()}`;
     document.cookie = `${cname}=${cvalue};${expires};path=/`;
-  }
+  };
 
   // Look for matching cookie
   getCookie(name) {
@@ -199,23 +201,20 @@ export default class App extends Component {
     if (this.state.route === 'playertag') {
       fetch(urls.player)
         .then(results => results.json())
-        .then(data => this.setState({ playerStatus: data }))
-        .then(() => {
-          if (this.state.playerStatus === 'OK') {
-            this.callPlayerAPI(tag);
-            window.location.reload(true);
-          }
+        .then(data => {
+          this.setState({ playerStatus: data });
+
+          if (this.state.playerStatus === 'OK') window.location.reload(true);
         });
     } else if (this.state.route === 'clantag') {
       fetch(urls.clan)
         .then(results => results.json())
-        .then(data => this.setState({ clanStatus: data }))
-        .then(() => {
-          if (this.state.clanStatus === 'OK') {
-            this.callClanAPI(tag);
-            window.location.reload(true);
-          }
-        });
+        .then(data => {
+          this.setState({ clanStatus: data });
+
+          if (this.state.clanStatus === 'OK') window.location.reload(true);
+        })
+        .then(() => {});
     }
   };
 
@@ -257,6 +256,7 @@ export default class App extends Component {
               thirLink={`${this.nameNavBar()[2]}/`}
               thirTitle={this.nameNavBar()[3]}
             />
+
             {this.alertClient()}
             <SearchForm
               onSearchChange={this.onSearchChange}

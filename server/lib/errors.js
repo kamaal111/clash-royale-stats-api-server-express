@@ -8,7 +8,7 @@ const NOT_FOUND = app => {
 };
 
 // error handler
-let errorHandler = app => {
+const errorHandler = app => {
   app.use((err, req, res, next) => {
     // set locals, only providing error in development
     res.locals.message = err.message;

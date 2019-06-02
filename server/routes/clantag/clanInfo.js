@@ -3,13 +3,13 @@ const EXPRESS = require('express'),
 
 const ClanInfo = require('../../schemas/clantag/clanInfo_schema');
 
-ROUTER.param('clan', (req, res, next, id) => {
+ROUTER.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+
   ClanInfo.find({ id }, (error, doc) => {
     if (error) return res.json({ succes: false, error });
     return res.json({ succes: true, doc });
   });
 });
-
-ROUTER.get('/:clan', (req, res, next) => {});
 
 module.exports = ROUTER;

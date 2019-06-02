@@ -1,6 +1,8 @@
-import React from "react";
-import propTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import propTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+
+import './index.css';
 
 const NavBar = props => (
   <ul className="nav-bar">

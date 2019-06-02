@@ -4,7 +4,9 @@ const EXPRESS = require('express'),
 
 const Battlelog = require('../../schemas/playertag/battlelog_schema');
 
-ROUTER.param('player', (req, res, next, id) => {
+ROUTER.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+
   Battlelog.find({ id }, (error, doc) => {
     if (error) return res.json({ succes: false, error });
     else {
@@ -26,7 +28,5 @@ ROUTER.param('player', (req, res, next, id) => {
     }
   });
 });
-
-ROUTER.get('/:player', (req, res, next) => {});
 
 module.exports = ROUTER;
