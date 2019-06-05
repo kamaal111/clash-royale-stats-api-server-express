@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 
 const Progress = props => {
   let checks = (allSets, firstSet, secondSet, thirdSet) => {
-    let chartSetter = allSets;
+    const chartSetter = allSets;
 
     if (chartSetter) {
       return [
@@ -14,24 +14,29 @@ const Progress = props => {
         // Trophy Change
         chartSetter[thirdSet]
       ];
-    } else return [undefined, undefined, undefined];
+    } else return [undefined, undefined, undefined, undefined];
   };
 
-  let collection = checks(
-    props.allSets[0],
-    props.firstSet,
-    props.secondSet,
-    props.thirdSet
-  );
+  let collection = [undefined, undefined, undefined, undefined];
+
+  if (checks[0] !== undefined) {
+    collection = checks(
+      props.allSets[0],
+      props.firstSet,
+      props.secondSet,
+      props.thirdSet
+    );
+  }
 
   const TROPHIES = () => {
-    let liste = [],
-      startingTrophies = collection[0],
+    let liste = [];
+
+    const startingTrophies = collection[0],
       trophyChange = collection[2];
 
     if (startingTrophies !== undefined) {
       for (let i = 0; i < startingTrophies.length; i++) {
-        let sumUp = startingTrophies[i] + trophyChange[i];
+        const sumUp = startingTrophies[i] + trophyChange[i];
         if (sumUp !== 0) liste.unshift(sumUp);
         else liste.unshift(undefined);
       }
@@ -41,11 +46,11 @@ const Progress = props => {
   };
 
   let time = date => {
-    let s = date.split('');
+    const s = date.split('');
 
-    let year = `${s.slice(0, 4).join('')}`;
-    let month = `${s.slice(4, 6).join('')}`;
-    let day = `${s.slice(6, 8).join('')}`;
+    const year = `${s.slice(0, 4).join('')}`,
+      month = `${s.slice(4, 6).join('')}`,
+      day = `${s.slice(6, 8).join('')}`;
 
     return `${day}-${month}-${year}`;
   };
