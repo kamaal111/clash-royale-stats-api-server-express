@@ -7,7 +7,9 @@ import NavBar from './components/NavBar/index';
 import SearchForm from './components/SearchForm/index';
 import Routes from './components/Routes/index';
 
+// URLs port
 let port = 3000;
+
 const getUrls = tag => {
   return {
     // Player routes
@@ -67,12 +69,13 @@ export default class App extends Component {
   };
 
   componentDidMount = () => {
-    if (this.state.route === 'clantag') {
-      if (this.state.clanCookie !== false)
-        this.callClanAPI(this.state.clanCookie);
-    } else if (this.state.route === 'playertag') {
-      if (this.state.playerCookie !== false) {
-        this.callPlayerAPI(this.state.playerCookie);
+    const { route, clanCookie, playerCookie } = this.state;
+
+    if (route === 'clantag') {
+      if (clanCookie !== false) this.callClanAPI(clanCookie);
+    } else if (route === 'playertag') {
+      if (playerCookie !== false) {
+        this.callPlayerAPI(playerCookie);
       }
     }
   };
@@ -87,10 +90,10 @@ export default class App extends Component {
 
   // Look for matching cookie
   getCookie(name) {
-    let pairs = document.cookie.split('; ');
-    let count = pairs.length;
-    let parts;
-    // console.log("Get cookie");
+    let pairs = document.cookie.split('; '),
+      count = pairs.length,
+      parts;
+
     while (count--) {
       parts = pairs[count].split('=');
       if (parts[0] === name) return parts[1];
@@ -100,12 +103,11 @@ export default class App extends Component {
 
   // Retrieve clan data from database
   callPlayerAPI = player => {
-    // console.log("Fetch all!");
-    let urls = getUrls(player);
+    const urls = getUrls(player);
     Promise.all([
       fetch(urls.chest)
         .then(results => results.json())
-        .then(data => this.setState({ chests: data.doc, loading: false })),
+        .then(data => this.setState({ chests: data.doc })),
       fetch(urls.battlelog)
         .then(results => results.json())
         .then(data =>
@@ -115,16 +117,16 @@ export default class App extends Component {
         .then(results => results.json())
         .then(data => this.setState({ player: data.doc }))
     ]);
+    this.setState({ loading: false });
   };
 
   // Retrieve clan data from database
   callClanAPI = clan => {
-    // console.log("Fetch all!");
     let urls = getUrls(clan);
     Promise.all([
       fetch(urls.clan)
         .then(results => results.json())
-        .then(data => this.setState({ clan: data.doc, loading: false })),
+        .then(data => this.setState({ clan: data.doc })),
       fetch(urls.warlog)
         .then(results => results.json())
         .then(data =>
@@ -134,6 +136,7 @@ export default class App extends Component {
         .then(results => results.json())
         .then(data => this.setState({ curwar: data.doc }))
     ]);
+    this.setState({ loading: false });
   };
 
   // Save on search change in state
@@ -164,25 +167,25 @@ export default class App extends Component {
   // Handles submit button
   handleSubmit = e => {
     e.preventDefault();
-    let { selection, searchText } = this.state;
+    const { selection, searchText } = this.state;
 
-    let string = this.hideTag(searchText.replace(/O/g, '0').toUpperCase());
-    let checks = this.checkForm(string);
+    const string = this.hideTag(searchText.replace(/O/g, '0').toUpperCase()),
+      checks = this.checkForm(string);
 
     if (checks !== true) this.setState({ formMessage: checks });
     else {
       this.setState({ formMessage: '' });
-      this.setCookie(selection, string, 365);
-      this.setCookie('freshestCookie', selection, 365);
-      let cooks = this.getCookie(selection);
+      this.setCookie(selection, string, 180);
+      this.setCookie('freshestCookie', selection, 180);
+
+      const cooks = this.getCookie(selection);
+
       if (selection === 'playertag') {
         this.setState({ playerCookie: cooks, route: selection });
         this.callPlayerAPI(cooks);
-        //  TODO: redirect to '/' from here
       } else if (selection === 'clantag') {
         this.setState({ clanCookie: cooks, route: selection });
         this.callClanAPI(cooks);
-        //  TODO: redirect to '/' from here
       }
     }
   };
@@ -195,35 +198,38 @@ export default class App extends Component {
 
   // Updates player data
   updateData = () => {
-    // console.log('Update data!');
-    let tag = this.getCookie(this.state.route);
-    let urls = updateUrls(tag);
-    if (this.state.route === 'playertag') {
+    const { route } = this.state;
+
+    const tag = this.getCookie(route),
+      urls = updateUrls(tag);
+
+    if (route === 'playertag') {
       fetch(urls.player)
         .then(results => results.json())
         .then(data => {
           this.setState({ playerStatus: data });
 
-          if (this.state.playerStatus === 'OK') window.location.reload(true);
+          setTimeout(() => window.location.reload(true), 2500);
         });
-    } else if (this.state.route === 'clantag') {
+    } else if (route === 'clantag') {
       fetch(urls.clan)
         .then(results => results.json())
         .then(data => {
           this.setState({ clanStatus: data });
 
-          if (this.state.clanStatus === 'OK') window.location.reload(true);
-        })
-        .then(() => {});
+          setTimeout(() => window.location.reload(true), 2500);
+        });
     }
   };
 
   // Alerts client if form is not filled in correctly
   alertClient = () => {
-    if (this.state.formMessage !== '') {
+    const { formMessage } = this.state;
+
+    if (formMessage !== '') {
       return (
         <div className="alert-warning">
-          <p>{this.state.formMessage}</p>
+          <p>{formMessage}</p>
         </div>
       );
     }
@@ -231,11 +237,13 @@ export default class App extends Component {
 
   // Name of navbar and route
   nameNavBar = () => {
+    const { route } = this.state;
+
     let namer = [];
-    if (this.state.route === 'playertag') {
+    if (route === 'playertag') {
       namer = ['chests', 'Chests', 'battlelog', 'Battlelog'];
       return namer;
-    } else {
+    } else if (route === 'clantag') {
       namer = ['currentWar', 'Current War', 'pastWar', 'Past War'];
       return namer;
     }
