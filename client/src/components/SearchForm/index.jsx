@@ -30,7 +30,13 @@ const SearchForm = props => {
           <i className="fas fa-sync-alt" />
         </button>
       );
-    else return <p>Please enter your playertag</p>;
+    else
+      return (
+        <div>
+          {/* <br /> */}
+          <p className="update-button-text">Please enter a tag</p>
+        </div>
+      );
   };
 
   return (
@@ -47,7 +53,6 @@ const SearchForm = props => {
             <i className="fas fa-search" />
           </button>
           {updatebtn()}
-
           <DropDown handleSelect={handleSelect} selection={selection} />
         </label>
       </form>

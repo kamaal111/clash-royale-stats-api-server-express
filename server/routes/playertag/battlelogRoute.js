@@ -21,7 +21,7 @@ ROUTER.get('/:id', (req, res, next) => {
           trophyChange.push(logs[i].team[0].trophyChange);
           battleTime.push(logs[i].battleTime);
         }
-        let data = [{ startingTrophies, trophyChange, battleTime }];
+        let data = [startingTrophies, trophyChange, battleTime];
 
         return res.json({ succes: true, doc, data });
       } else return res.json({ succes: true, doc });

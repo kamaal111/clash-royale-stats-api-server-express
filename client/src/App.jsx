@@ -240,7 +240,7 @@ export default class App extends Component {
     const { route } = this.state;
 
     let namer = [];
-    if (route === 'playertag') {
+    if (route === 'playertag' || route === false) {
       namer = ['chests', 'Chests', 'battlelog', 'Battlelog'];
       return namer;
     } else if (route === 'clantag') {

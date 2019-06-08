@@ -1,38 +1,23 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 
 const Progress = props => {
-  let checks = (allSets, firstSet, secondSet, thirdSet) => {
-    const chartSetter = allSets;
+  let collection = [];
 
-    if (chartSetter) {
-      return [
-        // Starting Trophies
-        chartSetter[firstSet],
-        // Time
-        chartSetter[secondSet],
-        // Trophy Change
-        chartSetter[thirdSet]
-      ];
-    } else return [undefined, undefined, undefined, undefined];
-  };
-
-  let collection = [undefined, undefined, undefined, undefined];
-
-  if (checks[0] !== undefined) {
-    collection = checks(
-      props.allSets[0],
-      props.firstSet,
-      props.secondSet,
-      props.thirdSet
-    );
+  if (props.allSets) {
+    collection.push(props.allSets[0]);
+    collection.push(props.allSets[1]);
+    collection.push(props.allSets[2]);
   }
+
+  // console.log(collection);
 
   const TROPHIES = () => {
     let liste = [];
 
     const startingTrophies = collection[0],
-      trophyChange = collection[2];
+      trophyChange = collection[1];
 
     if (startingTrophies !== undefined) {
       for (let i = 0; i < startingTrophies.length; i++) {
@@ -57,7 +42,7 @@ const Progress = props => {
 
   const TIMEFY = () => {
     let liste = [],
-      battleTime = collection[1];
+      battleTime = collection[2];
 
     if (battleTime !== undefined) {
       for (let i = 0; i < battleTime.length; i++) {
@@ -103,6 +88,10 @@ const Progress = props => {
       <Line data={data} />
     </div>
   );
+};
+
+Progress.propTypes = {
+  allSets: propTypes.array
 };
 
 export default Progress;
