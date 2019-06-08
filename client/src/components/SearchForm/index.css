@@ -37,7 +37,14 @@
   cursor: pointer;
 }
 
+.update-button-text {
+  color: #fffb00;
+  border-left: none;
+  padding: 10px;
+}
+
 .tag-select {
+  float: left;
   width: 120px;
   background-color: #fffb00;
 }

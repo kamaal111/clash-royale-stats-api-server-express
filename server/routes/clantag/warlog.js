@@ -15,7 +15,7 @@ const COLLECT_DATA = (logs, clanScore, trophyChange, createdDate, id) => {
       } else continue;
     }
   }
-  return [{ clanScore, trophyChange, createdDate }];
+  return [clanScore, trophyChange, createdDate];
 };
 
 ROUTER.get('/:id', (req, res, next) => {

@@ -35,12 +35,7 @@ const ClanData = props => {
 
   return (
     <div>
-      <Progress
-        allSets={clanChart}
-        firstSet={'clanScore'}
-        secondSet={'createdDate'}
-        thirdSet={'trophyChange'}
-      />
+      <Progress allSets={clanChart} />
       {clanData}
     </div>
   );
