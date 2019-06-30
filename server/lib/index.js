@@ -11,7 +11,7 @@ const URLS = tag => [
   `/v1/clans/%23${tag}/currentwar`
 ];
 
-const token = `Bearer ${process.env.BEARERTOKEN1}`;
+const token = `Bearer ${process.env.BEARERTOKEN0}`;
 
 module.exports = (tag, num) => {
   return {
