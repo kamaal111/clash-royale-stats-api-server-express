@@ -1,18 +1,18 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import Team from "./Team/index";
+import Team from './Team/index';
 
 const Battlelog = props => {
-  let time = date => {
-    let s = date.split("");
+  const time = date => {
+    const s = date.split('');
 
-    let year = `${s.slice(0, 4).join("")}`;
-    let month = `${s.slice(4, 6).join("")}`;
-    let day = `${s.slice(6, 8).join("")}`;
-    let hour = `${s.slice(9, 11).join("")}`;
-    let minute = `${s.slice(11, 13).join("")}`;
-    let second = `${s.slice(13, 15).join("")}`;
+    let year = `${s.slice(0, 4).join('')}`,
+      month = `${s.slice(4, 6).join('')}`,
+      day = `${s.slice(6, 8).join('')}`,
+      hour = `${s.slice(9, 11).join('')}`,
+      minute = `${s.slice(11, 13).join('')}`,
+      second = `${s.slice(13, 15).join('')}`;
 
     return `${day}-${month}-${year} ${hour}:${minute}:${second}`;
   };
@@ -28,7 +28,7 @@ const Battlelog = props => {
       <br />
 
       <Team
-        title={"Team"}
+        title={'Team'}
         name={props.teamName}
         nameMate={props.teamNameMate}
         tag={props.teamTag}
@@ -47,7 +47,7 @@ const Battlelog = props => {
       <br />
 
       <Team
-        title={"Opponent"}
+        title={'Opponent'}
         name={props.opponentName}
         nameMate={props.opponentNameMate}
         tag={props.opponentTag}

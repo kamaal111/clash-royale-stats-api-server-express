@@ -71,12 +71,15 @@ export default class App extends Component {
   componentDidMount = () => {
     const { route, clanCookie, playerCookie } = this.state;
 
-    if (route === 'clantag') {
-      if (clanCookie !== false) this.callClanAPI(clanCookie);
-    } else if (route === 'playertag') {
-      if (playerCookie !== false) {
-        this.callPlayerAPI(playerCookie);
-      }
+    switch (route) {
+      case 'clantag':
+        if (clanCookie !== false) this.callClanAPI(clanCookie);
+        break;
+      case 'playertag':
+        if (playerCookie !== false) this.callPlayerAPI(playerCookie);
+        break;
+      default:
+        break;
     }
   };
 
@@ -240,61 +243,66 @@ export default class App extends Component {
     const { route } = this.state;
 
     let namer = [];
-    if (route === 'playertag' || route === false) {
-      namer = ['chests', 'Chests', 'battlelog', 'Battlelog'];
-      return namer;
-    } else if (route === 'clantag') {
-      namer = ['currentWar', 'Current War', 'pastWar', 'Past War'];
-      return namer;
+
+    switch (route) {
+      case 'playertag':
+      case false:
+        namer = ['chests', 'Chests', 'battlelog', 'Battlelog'];
+        return namer;
+      case 'clantag':
+        namer = ['currentWar', 'Current War', 'pastWar', 'Past War'];
+        return namer;
+      default:
+        break;
     }
   };
 
   render() {
     return (
       <BrowserRouter>
-        <div className="container">
-          <header>
-            <h1>Welcome Clasher</h1>
+        <header>
+          <h1>Welcome Clasher</h1>
 
-            <NavBar
-              firLink={''}
-              firTitle={'Home'}
-              secLink={`${this.nameNavBar()[0]}/`}
-              secTitle={this.nameNavBar()[1]}
-              thirLink={`${this.nameNavBar()[2]}/`}
-              thirTitle={this.nameNavBar()[3]}
-            />
+          <NavBar
+            firLink={''}
+            firTitle={'Home'}
+            secLink={`${this.nameNavBar()[0]}/`}
+            secTitle={this.nameNavBar()[1]}
+            thirLink={`${this.nameNavBar()[2]}/`}
+            thirTitle={this.nameNavBar()[3]}
+          />
 
-            {this.alertClient()}
-            <SearchForm
-              onSearchChange={this.onSearchChange}
-              handleSubmit={this.handleSubmit}
-              playerCookie={this.state.playerCookie}
-              handleUpdate={this.handleUpdate}
-              handleSelect={this.handleSelect}
-              selection={this.state.selection}
-              route={this.state.route}
-              clanCookie={this.state.clanCookie}
-            />
-          </header>
-
-          <Routes
-            loading={this.state.loading}
+          {this.alertClient()}
+          <SearchForm
+            onSearchChange={this.onSearchChange}
+            handleSubmit={this.handleSubmit}
             playerCookie={this.state.playerCookie}
-            player={this.state.player}
-            playerStatus={this.state.playerStatus}
-            chests={this.state.chests}
-            battlelog={this.state.battlelog}
-            clan={this.state.clan}
-            clanStatus={this.state.clanStatus}
+            handleUpdate={this.handleUpdate}
+            handleSelect={this.handleSelect}
+            selection={this.state.selection}
             route={this.state.route}
             clanCookie={this.state.clanCookie}
-            curWar={this.state.curwar}
-            pastWar={this.state.warlog}
-            playerChart={this.state.playerChart}
-            clanChart={this.state.clanChart}
           />
-        </div>
+        </header>
+
+        <br className="line-break-5" />
+
+        <Routes
+          loading={this.state.loading}
+          playerCookie={this.state.playerCookie}
+          player={this.state.player}
+          playerStatus={this.state.playerStatus}
+          chests={this.state.chests}
+          battlelog={this.state.battlelog}
+          clan={this.state.clan}
+          clanStatus={this.state.clanStatus}
+          route={this.state.route}
+          clanCookie={this.state.clanCookie}
+          curWar={this.state.curwar}
+          pastWar={this.state.warlog}
+          playerChart={this.state.playerChart}
+          clanChart={this.state.clanChart}
+        />
       </BrowserRouter>
     );
   }

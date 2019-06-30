@@ -6,6 +6,14 @@ body {
   font: 1em/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.line-break-1 {
+  line-break: 1rem;
+}
+
+.line-break-5 {
+  line-height: 5rem;
+}
+
 .alert-warning {
   padding: 0.5em;
   background-color: #e8ba56;

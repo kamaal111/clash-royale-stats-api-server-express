@@ -1,18 +1,17 @@
 .form-playertag {
-  background-color: #333333;
+  float: left;
+  margin-left: 0;
 }
 
 .form-playertag input[type='text'] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
-  width: 400px;
+  width: 337px;
   background: #f1f1f1;
 }
 
 .form-playertag button {
-  float: left;
-  width: 10%;
   padding: 10px;
   background: #fffb00;
   color: #333333;
@@ -22,12 +21,7 @@
   cursor: pointer;
 }
 
-.search-button:hover {
-  background: #0b7dda;
-}
-
 .update-button {
-  width: 10%;
   padding: 10px;
   background: #fffb00;
   color: #333333;
@@ -44,7 +38,6 @@
 }
 
 .tag-select {
-  float: left;
   width: 120px;
   background-color: #fffb00;
 }

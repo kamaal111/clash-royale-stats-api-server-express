@@ -11,8 +11,6 @@ const Progress = props => {
     collection.push(props.allSets[2]);
   }
 
-  // console.log(collection);
-
   const TROPHIES = () => {
     let liste = [];
 
@@ -30,7 +28,7 @@ const Progress = props => {
     } else return [undefined];
   };
 
-  let time = date => {
+  const time = date => {
     const s = date.split('');
 
     const year = `${s.slice(0, 4).join('')}`,

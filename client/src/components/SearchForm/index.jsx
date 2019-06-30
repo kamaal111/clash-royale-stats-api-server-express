@@ -18,9 +18,16 @@ const SearchForm = props => {
   } = props;
 
   const holder = () => {
-    if (route === false) return '';
-    else if (route === 'playertag') return `#${playerCookie}`;
-    else if (route === 'clantag') return `#${clanCookie}`;
+    switch (route) {
+      case false:
+        return '';
+      case 'playertag':
+        return `#${playerCookie}`;
+      case 'clantag':
+        return `#${clanCookie}`;
+      default:
+        break;
+    }
   };
 
   const updatebtn = () => {
@@ -33,7 +40,6 @@ const SearchForm = props => {
     else
       return (
         <div>
-          {/* <br /> */}
           <p className="update-button-text">Please enter a tag</p>
         </div>
       );
@@ -53,6 +59,7 @@ const SearchForm = props => {
             <i className="fas fa-search" />
           </button>
           {updatebtn()}
+          <br className="line-break-1" />
           <DropDown handleSelect={handleSelect} selection={selection} />
         </label>
       </form>
