@@ -7,7 +7,7 @@
     "startserver": "node bin/www",
     "dboff": "killall mongod",
     "watch": "nodemon bin/www",
-    "dbon": "mkdir -p ./db && mongod --dbpath ./db"
+    "dbon": "mongod"
   },
   "author": "Kamaal",
   "license": "MIT",
