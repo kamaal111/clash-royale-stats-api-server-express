@@ -1,29 +1,25 @@
-const HTTPS = require('https'),
-  HTTP = require('http');
+const https = require('https');
+const http = require('http');
 
-const OPTIONS = require('../lib/index');
+const options = require('../lib');
 
-module.exports = (tag, num, update, callback) => {
-  const REQUEST = HTTPS.request(OPTIONS((tag = tag), (num = num)), res => {
-    const status = () => {
-      const statusCode = HTTP.STATUS_CODES[res.statusCode];
-      const statusCodeError = new Error(statusCode);
-      return callback(statusCodeError.message);
-    };
+module.exports = (tag, path, update, callback) => {
+    const req = https.request(options(tag, path), res => {
+        const statusCode = http.STATUS_CODES[res.statusCode];
+        const statusCodeError = new Error(statusCode);
 
-    if (res.statusCode === 200) {
-      let body = '';
+        if (res.statusCode !== 200) return callback(statusCodeError.message);
 
-      res.on('data', data => (body += data));
+        let body = '';
 
-      res.on('end', () => {
-        const PARSED = JSON.parse(body);
-        update(tag, PARSED);
-        status();
-      });
-    } else {
-      status();
-    }
-  });
-  REQUEST.end();
+        res.on('data', data => (body += data));
+
+        return res.on('end', () => {
+            const parsedBody = JSON.parse(body);
+            update(tag, parsedBody);
+            callback(statusCodeError.message);
+        });
+    });
+
+    req.end();
 };

@@ -1,20 +1,19 @@
-// modules
-const EXPRESS = require('express'),
-  LOGGER = require('morgan');
+const express = require('express');
+const logger = require('morgan');
 
-let app = EXPRESS();
+const app = express();
 
 require('dotenv').config();
 
-app.use(LOGGER('dev'));
-app.use(EXPRESS.json());
+app.use(logger('dev'));
+app.use(express.json());
 
 // mongoDB connection
 require('./database');
 
 // CORS
-const CORS = require('./lib/CORS');
-CORS(app);
+const cors = require('./lib/cors');
+app.use(cors);
 
 // update player route
 app.use('/v1/api', require('./routes/playertag'));
@@ -33,10 +32,10 @@ app.use('/v1/api/clan/warlog', require('./routes/clantag/warlog'));
 // clan current war route
 app.use('/v1/api/clan/curwar', require('./routes/clantag/curWar'));
 
+const { notFound, errorHandler } = require('./lib/errors');
 // catch 404 and forward to error handler
-require('./lib/errors').NOT_FOUND(app);
-
+app.use(notFound);
 // error handler
-require('./lib/errors').errorHandler(app);
+app.use(errorHandler);
 
 module.exports = app;

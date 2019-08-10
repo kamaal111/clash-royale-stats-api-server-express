@@ -1,0 +1,60 @@
+{
+    "succes": true,
+    "doc": [
+        {
+            "clan": {
+                "tag": "#PYVLYC9G",
+                "name": "crunchy nuts",
+                "badgeId": 16000028
+            },
+            "arena": {
+                "id": 54000014,
+                "name": "Challenger III"
+            },
+            "leagueStatistics": {
+                "currentSeason": {
+                    "trophies": 4720,
+                    "bestTrophies": 4720
+                },
+                "previousSeason": {
+                    "id": "",
+                    "trophies": 0,
+                    "bestTrophies": 0
+                },
+                "bestSeason": {
+                    "id": "2019-05",
+                    "trophies": 5373
+                }
+            },
+            "currentFavouriteCard": {
+                "iconUrls": {
+                    "medium": "https://api-assets.clashroyale.com/cards/300/ASSQJG_MoVq9e81HZzo4bynMnyLNpNJMfSLb3hqydOw.png"
+                },
+                "name": "Royal Hogs",
+                "maxLevel": 11
+            },
+            "role": "elder",
+            "_id": "5d4f02c3f7a5fbaa2450b862",
+            "id": "998LLUR0R",
+            "updatedAt": "Sat, 10 Aug 2019 17:47:05 GMT",
+            "name": "KILLER KAMAAL",
+            "expLevel": 12,
+            "trophies": 4720,
+            "bestTrophies": 5481,
+            "wins": 2804,
+            "losses": 2872,
+            "battleCount": 6955,
+            "threeCrownWins": 1523,
+            "challengeCardsWon": 908,
+            "challengeMaxWins": 7,
+            "tournamentCardsWon": 4,
+            "tournamentBattleCount": 126,
+            "donations": 0,
+            "donationsReceived": 0,
+            "totalDonations": 54391,
+            "warDayWins": 88,
+            "clanCardsCollected": 249009,
+            "__v": 0
+        }
+    ]
+}

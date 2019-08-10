@@ -1,28 +1,32 @@
-const EXPRESS = require('express'),
-  CHALK = require('chalk'),
-  ROUTER = EXPRESS.Router();
+const { Router } = require('express');
+const chalk = require('chalk');
 
-const REQUESTS = require('../../requests'),
-  REQUESTS_CB = require('../../requests/reqcb');
+const requests = require('../../requests');
+const requestsCB = require('../../requests/reqcb');
 
-const WARLOG_DB = require('../../updateDB/clantag/warlogdb'),
-  CUR_WAR_DB = require('../../updateDB/clantag/curWardb'),
-  CLAN_INFO_DB = require('../../updateDB/clantag/clanInfodb');
+const warlogDB = require('../../updateDB/clantag/warlogdb');
+const currentWarDB = require('../../updateDB/clantag/curWardb');
+const clanInfoDB = require('../../updateDB/clantag/clanInfodb');
 
-ROUTER.get('/:id', (req, res, next) => {
-  const { id } = req.params;
+const router = new Router();
 
-  REQUESTS_CB((tag = id), (num = 4), (update = CLAN_INFO_DB), response => {
-    if (response === 'OK') {
-      REQUESTS((tag = id), (num = 5), (update = WARLOG_DB));
-      REQUESTS((tag = id), (num = 6), (update = CUR_WAR_DB));
-      console.log(CHALK.yellowBright.bgBlack(response));
-      res.json(response);
-    } else {
-      console.log(CHALK.redBright.bgBlack(response));
-      res.json(response);
-    }
-  });
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
+
+    requestsCB(id, 'updateClan', clanInfoDB, response => {
+        if (response === 'OK') {
+            requests(id, 'updateWarlog', warlogDB);
+            requests(id, 'updateCurrentWar', currentWarDB);
+
+            console.log(chalk.yellowBright.bgBlack(response));
+
+            return res.json(response);
+        }
+
+        console.log(chalk.redBright.bgBlack(response));
+
+        return res.json(response);
+    });
 });
 
-module.exports = ROUTER;
+module.exports = router;

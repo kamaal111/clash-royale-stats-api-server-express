@@ -1,0 +1,64 @@
+{
+    "succes": true,
+    "doc": [
+        {
+            "items": [
+                {
+                    "index": 0,
+                    "name": "Silver Chest"
+                },
+                {
+                    "index": 1,
+                    "name": "Magical Chest"
+                },
+                {
+                    "index": 2,
+                    "name": "Silver Chest"
+                },
+                {
+                    "index": 3,
+                    "name": "Silver Chest"
+                },
+                {
+                    "index": 4,
+                    "name": "Golden Chest"
+                },
+                {
+                    "index": 5,
+                    "name": "Silver Chest"
+                },
+                {
+                    "index": 6,
+                    "name": "Silver Chest"
+                },
+                {
+                    "index": 7,
+                    "name": "Silver Chest"
+                },
+                {
+                    "index": 8,
+                    "name": "Golden Chest"
+                },
+                {
+                    "index": 28,
+                    "name": "Giant Chest"
+                },
+                {
+                    "index": 167,
+                    "name": "Epic Chest"
+                },
+                {
+                    "index": 337,
+                    "name": "Mega Lightning Chest"
+                },
+                {
+                    "index": 425,
+                    "name": "Legendary Chest"
+                }
+            ],
+            "_id": "5d4f02c4f7a5fbaa2450b863",
+            "id": "998LLUR0R",
+            "__v": 0
+        }
+    ]
+}

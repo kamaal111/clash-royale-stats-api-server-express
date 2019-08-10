@@ -1,33 +1,52 @@
 {
-  "name": "clashroyaleapi",
-  "version": "1.0.0",
-  "main": "app.js",
-  "scripts": {
-    "testserver": "jest -i --verbose --coverage --runInBand",
-    "startserver": "node bin/www",
-    "dboff": "killall mongod",
-    "watch": "nodemon bin/www",
-    "dbon": "mongod"
-  },
-  "author": "Kamaal",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^2.4.2",
-    "debug": "^4.1.1",
-    "dotenv": "^6.2.0",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.20",
-    "morgan": "^1.9.1"
-  },
-  "devDependencies": {},
-  "keywords": [],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kamaal111/clashroyaleapi.git"
-  },
-  "bugs": {
-    "url": "https://github.com/kamaal111/clashroyaleapi/issues"
-  },
-  "homepage": "https://github.com/kamaal111/clashroyaleapi#readme",
-  "description": ""
+    "name": "clashroyaleapi",
+    "version": "1.0.0",
+    "main": "bin/www",
+    "scripts": {
+        "testserver": "jest -i --verbose --coverage --runInBand",
+        "startserver": "node .",
+        "dboff": "killall mongod",
+        "watch": "npx nodemon . --inspect",
+        "dbon": "mongod"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js}": [
+            "eslint",
+            "pretty-quick — staged",
+            "git add"
+        ]
+    },
+    "author": "Kamaal",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.4.2",
+        "debug": "^4.1.1",
+        "dotenv": "^6.2.0",
+        "express": "^4.16.4",
+        "mongoose": "^5.4.20",
+        "morgan": "^1.9.1"
+    },
+    "devDependencies": {
+        "eslint": "^6.1.0",
+        "nodemon": "^1.19.1",
+        "husky": "^3.0.1",
+        "lint-staged": "^9.2.1",
+        "prettier": "^1.18.2",
+        "pretty-quick": "^1.11.1"
+    },
+    "keywords": [],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kamaal111/clashroyaleapi.git"
+    },
+    "bugs": {
+        "url": "https://github.com/kamaal111/clashroyaleapi/issues"
+    },
+    "homepage": "https://github.com/kamaal111/clashroyaleapi#readme",
+    "description": ""
 }

@@ -1,15 +1,17 @@
-const EXPRESS = require('express'),
-  ROUTER = EXPRESS.Router();
+const { Router } = require('express');
 
 const ClanInfo = require('../../schemas/clantag/clanInfo_schema');
 
-ROUTER.get('/:id', (req, res, next) => {
-  const { id } = req.params;
+const router = new Router();
 
-  ClanInfo.find({ id }, (error, doc) => {
-    if (error) return res.json({ succes: false, error });
-    return res.json({ succes: true, doc });
-  });
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
+
+    ClanInfo.find({ id }, (error, doc) => {
+        if (error) return res.json({ succes: false, error });
+
+        return res.json({ succes: true, doc });
+    });
 });
 
-module.exports = ROUTER;
+module.exports = router;
