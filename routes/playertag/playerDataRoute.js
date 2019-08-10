@@ -1,16 +1,18 @@
 // modules
-const EXPRESS = require('express'),
-  ROUTER = EXPRESS.Router();
+const { Router } = require('express');
 
 const Player = require('../../schemas/playertag/player_schema');
 
-ROUTER.get('/:id', (req, res, next) => {
-  const { id } = req.params;
+const router = new Router();
 
-  Player.find({ id }, (error, doc) => {
-    if (error) return res.json({ succes: false, error });
-    return res.json({ succes: true, doc });
-  });
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
+
+    Player.find({ id }, (error, doc) => {
+        if (error) return res.json({ succes: false, error });
+
+        return res.json({ succes: true, doc });
+    });
 });
 
-module.exports = ROUTER;
+module.exports = router;

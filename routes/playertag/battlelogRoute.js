@@ -1,32 +1,37 @@
 // modules
-const EXPRESS = require('express'),
-  ROUTER = EXPRESS.Router();
+const { Router } = require('express');
 
 const Battlelog = require('../../schemas/playertag/battlelog_schema');
 
-ROUTER.get('/:id', (req, res, next) => {
-  const { id } = req.params;
+const router = new Router();
 
-  Battlelog.find({ id }, (error, doc) => {
-    if (error) return res.json({ succes: false, error });
-    else {
-      if (doc[0]) {
-        let startingTrophies = [],
-          trophyChange = [],
-          battleTime = [],
-          logs = doc[0].battlelog;
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
 
-        for (let i = 0; i < logs.length; i++) {
-          startingTrophies.push(logs[i].team[0].startingTrophies);
-          trophyChange.push(logs[i].team[0].trophyChange);
-          battleTime.push(logs[i].battleTime);
+    Battlelog.find({ id }, (error, doc) => {
+        if (error) return res.json({ succes: false, error });
+
+        if (doc[0]) {
+            const logs = doc[0].battlelog;
+
+            const data = logs.reduce(
+                (acc, log) => {
+                    const [startingTrophies, trophyChange, battleTime] = acc;
+
+                    startingTrophies.push(log.team[0].startingTrophies);
+                    trophyChange.push(log.team[0].trophyChange);
+                    battleTime.push(log.battleTime);
+
+                    return acc;
+                },
+                [[], [], []]
+            );
+
+            return res.json({ succes: true, doc, data });
         }
-        let data = [startingTrophies, trophyChange, battleTime];
 
-        return res.json({ succes: true, doc, data });
-      } else return res.json({ succes: true, doc });
-    }
-  });
+        return res.json({ succes: true, doc });
+    });
 });
 
-module.exports = ROUTER;
+module.exports = router;

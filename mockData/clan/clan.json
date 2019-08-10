@@ -1,0 +1,696 @@
+{
+    "succes": true,
+    "doc": [
+        {
+            "location": [
+                {
+                    "id": 57000166,
+                    "name": "Netherlands",
+                    "isCountry": true,
+                    "countryCode": "NL"
+                }
+            ],
+            "memberList": [
+                {
+                    "tag": "#8UVYCULU0",
+                    "name": "magicPony",
+                    "role": "coLeader",
+                    "lastSeen": "20190810T175946.000Z",
+                    "expLevel": 13,
+                    "trophies": 5807,
+                    "arena": {
+                        "id": 54000017,
+                        "name": "Master III"
+                    },
+                    "clanRank": 1,
+                    "previousClanRank": 1,
+                    "donations": 720,
+                    "donationsReceived": 560,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#GQJ28QVV",
+                    "name": "Govanni",
+                    "role": "leader",
+                    "lastSeen": "20190810T181651.000Z",
+                    "expLevel": 13,
+                    "trophies": 5538,
+                    "arena": {
+                        "id": 54000016,
+                        "name": "Master II"
+                    },
+                    "clanRank": 2,
+                    "previousClanRank": 2,
+                    "donations": 1417,
+                    "donationsReceived": 640,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8YJR889YP",
+                    "name": "densoe",
+                    "role": "member",
+                    "lastSeen": "20190810T180720.000Z",
+                    "expLevel": 13,
+                    "trophies": 5386,
+                    "arena": {
+                        "id": 54000016,
+                        "name": "Master II"
+                    },
+                    "clanRank": 3,
+                    "previousClanRank": 3,
+                    "donations": 1678,
+                    "donationsReceived": 560,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8V0PGGUV2",
+                    "name": "wantaim",
+                    "role": "member",
+                    "lastSeen": "20190810T180740.000Z",
+                    "expLevel": 13,
+                    "trophies": 5314,
+                    "arena": {
+                        "id": 54000016,
+                        "name": "Master II"
+                    },
+                    "clanRank": 4,
+                    "previousClanRank": 5,
+                    "donations": 145,
+                    "donationsReceived": 160,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#P829RLGR",
+                    "name": "luukske",
+                    "role": "member",
+                    "lastSeen": "20190810T140816.000Z",
+                    "expLevel": 13,
+                    "trophies": 5268,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 5,
+                    "previousClanRank": 4,
+                    "donations": 178,
+                    "donationsReceived": 240,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8JR900LVG",
+                    "name": "Ryan88AH",
+                    "role": "coLeader",
+                    "lastSeen": "20190810T181920.000Z",
+                    "expLevel": 13,
+                    "trophies": 5243,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 6,
+                    "previousClanRank": 8,
+                    "donations": 1068,
+                    "donationsReceived": 720,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#80UGYRYRL",
+                    "name": "ricks010",
+                    "role": "member",
+                    "lastSeen": "20190810T180440.000Z",
+                    "expLevel": 12,
+                    "trophies": 5191,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 7,
+                    "previousClanRank": 7,
+                    "donations": 449,
+                    "donationsReceived": 470,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#9RVUC0YV",
+                    "name": "fc biertje",
+                    "role": "elder",
+                    "lastSeen": "20190810T173704.000Z",
+                    "expLevel": 13,
+                    "trophies": 5148,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 8,
+                    "previousClanRank": 9,
+                    "donations": 395,
+                    "donationsReceived": 600,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#2Q8JVJGU",
+                    "name": "bart",
+                    "role": "elder",
+                    "lastSeen": "20190810T165651.000Z",
+                    "expLevel": 13,
+                    "trophies": 5138,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 9,
+                    "previousClanRank": 6,
+                    "donations": 710,
+                    "donationsReceived": 560,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#YPPVPUP9",
+                    "name": "Jimmy®",
+                    "role": "member",
+                    "lastSeen": "20190810T163227.000Z",
+                    "expLevel": 12,
+                    "trophies": 5090,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 10,
+                    "previousClanRank": 10,
+                    "donations": 482,
+                    "donationsReceived": 580,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#9CYJYLLQU",
+                    "name": "Rohit",
+                    "role": "member",
+                    "lastSeen": "20190810T164731.000Z",
+                    "expLevel": 11,
+                    "trophies": 5022,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 11,
+                    "previousClanRank": 18,
+                    "donations": 190,
+                    "donationsReceived": 360,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8U0CPQP8P",
+                    "name": "shem",
+                    "role": "coLeader",
+                    "lastSeen": "20190810T164550.000Z",
+                    "expLevel": 12,
+                    "trophies": 5012,
+                    "arena": {
+                        "id": 54000015,
+                        "name": "Master I"
+                    },
+                    "clanRank": 12,
+                    "previousClanRank": 11,
+                    "donations": 361,
+                    "donationsReceived": 640,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8VVQYLPJQ",
+                    "name": "moorwan",
+                    "role": "member",
+                    "lastSeen": "20190810T170811.000Z",
+                    "expLevel": 12,
+                    "trophies": 4980,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 13,
+                    "previousClanRank": 15,
+                    "donations": 109,
+                    "donationsReceived": 360,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#822C09GRR",
+                    "name": "cool vengeance",
+                    "role": "elder",
+                    "lastSeen": "20190810T164336.000Z",
+                    "expLevel": 13,
+                    "trophies": 4978,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 14,
+                    "previousClanRank": 12,
+                    "donations": 448,
+                    "donationsReceived": 440,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8LP2GQ0V2",
+                    "name": "MegaKeba",
+                    "role": "elder",
+                    "lastSeen": "20190809T134900.000Z",
+                    "expLevel": 13,
+                    "trophies": 4968,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 15,
+                    "previousClanRank": 13,
+                    "donations": 96,
+                    "donationsReceived": 400,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#J9GPGG8J",
+                    "name": "Juul",
+                    "role": "member",
+                    "lastSeen": "20190810T155551.000Z",
+                    "expLevel": 11,
+                    "trophies": 4934,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 16,
+                    "previousClanRank": 16,
+                    "donations": 400,
+                    "donationsReceived": 280,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#920LCJC2G",
+                    "name": "John Mayer",
+                    "role": "elder",
+                    "lastSeen": "20190810T164107.000Z",
+                    "expLevel": 11,
+                    "trophies": 4920,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 17,
+                    "previousClanRank": 14,
+                    "donations": 255,
+                    "donationsReceived": 400,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#2J9UPY9VL",
+                    "name": "mikevld",
+                    "role": "elder",
+                    "lastSeen": "20190810T180939.000Z",
+                    "expLevel": 11,
+                    "trophies": 4866,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 18,
+                    "previousClanRank": 23,
+                    "donations": 222,
+                    "donationsReceived": 280,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#80U02YUPQ",
+                    "name": "GoodGame",
+                    "role": "member",
+                    "lastSeen": "20190810T182040.000Z",
+                    "expLevel": 12,
+                    "trophies": 4860,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 19,
+                    "previousClanRank": 20,
+                    "donations": 336,
+                    "donationsReceived": 440,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8Y29PQQ9L",
+                    "name": "Ramon is Harig",
+                    "role": "member",
+                    "lastSeen": "20190810T154805.000Z",
+                    "expLevel": 12,
+                    "trophies": 4853,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 20,
+                    "previousClanRank": 17,
+                    "donations": 522,
+                    "donationsReceived": 520,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8V0VCG8L9",
+                    "name": "stikkie",
+                    "role": "elder",
+                    "lastSeen": "20190810T150511.000Z",
+                    "expLevel": 12,
+                    "trophies": 4848,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 21,
+                    "previousClanRank": 19,
+                    "donations": 86,
+                    "donationsReceived": 240,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#2U902CGPP",
+                    "name": "slender",
+                    "role": "member",
+                    "lastSeen": "20190809T162704.000Z",
+                    "expLevel": 12,
+                    "trophies": 4825,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 22,
+                    "previousClanRank": 21,
+                    "donations": 148,
+                    "donationsReceived": 280,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#LULJYCY2",
+                    "name": "✡️✡️✡️AFCA✡️✡️✡",
+                    "role": "elder",
+                    "lastSeen": "20190810T163523.000Z",
+                    "expLevel": 13,
+                    "trophies": 4810,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 23,
+                    "previousClanRank": 22,
+                    "donations": 481,
+                    "donationsReceived": 600,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#99CJV9CUR",
+                    "name": "shennie",
+                    "role": "elder",
+                    "lastSeen": "20190810T160348.000Z",
+                    "expLevel": 12,
+                    "trophies": 4783,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 24,
+                    "previousClanRank": 27,
+                    "donations": 330,
+                    "donationsReceived": 440,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8YL8JPJY9",
+                    "name": "薩拉赫",
+                    "role": "member",
+                    "lastSeen": "20190809T114458.000Z",
+                    "expLevel": 11,
+                    "trophies": 4764,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 25,
+                    "previousClanRank": 24,
+                    "donations": 0,
+                    "donationsReceived": 80,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#2LRYURL9",
+                    "name": "⚡⚡LUUK⚡⚡",
+                    "role": "elder",
+                    "lastSeen": "20190810T180202.000Z",
+                    "expLevel": 13,
+                    "trophies": 4754,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 26,
+                    "previousClanRank": 25,
+                    "donations": 50,
+                    "donationsReceived": 80,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#28VR0928L",
+                    "name": "mr2ronaldo",
+                    "role": "elder",
+                    "lastSeen": "20190810T173126.000Z",
+                    "expLevel": 13,
+                    "trophies": 4754,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 27,
+                    "previousClanRank": 26,
+                    "donations": 574,
+                    "donationsReceived": 518,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8GRQPUCV",
+                    "name": "Merkwaardig",
+                    "role": "member",
+                    "lastSeen": "20190810T180018.000Z",
+                    "expLevel": 13,
+                    "trophies": 4738,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 28,
+                    "previousClanRank": 28,
+                    "donations": 637,
+                    "donationsReceived": 680,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#Y9R922P2",
+                    "name": "Ryanvld",
+                    "role": "coLeader",
+                    "lastSeen": "20190810T172411.000Z",
+                    "expLevel": 12,
+                    "trophies": 4677,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 29,
+                    "previousClanRank": 29,
+                    "donations": 170,
+                    "donationsReceived": 520,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8PGVJUU9L",
+                    "name": "bo",
+                    "role": "elder",
+                    "lastSeen": "20190809T202421.000Z",
+                    "expLevel": 11,
+                    "trophies": 4661,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 30,
+                    "previousClanRank": 30,
+                    "donations": 110,
+                    "donationsReceived": 240,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#8GGPRPPR",
+                    "name": "GRANDMASTER",
+                    "role": "member",
+                    "lastSeen": "20190810T171057.000Z",
+                    "expLevel": 11,
+                    "trophies": 4659,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 31,
+                    "previousClanRank": 31,
+                    "donations": 424,
+                    "donationsReceived": 520,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#PP9GYLCYV",
+                    "name": "ijzerkoekie",
+                    "role": "member",
+                    "lastSeen": "20190810T181041.000Z",
+                    "expLevel": 11,
+                    "trophies": 4616,
+                    "arena": {
+                        "id": 54000014,
+                        "name": "Challenger III"
+                    },
+                    "clanRank": 32,
+                    "previousClanRank": 32,
+                    "donations": 1160,
+                    "donationsReceived": 560,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#PP9GQLVCY",
+                    "name": "Ah",
+                    "role": "member",
+                    "lastSeen": "20190810T121529.000Z",
+                    "expLevel": 10,
+                    "trophies": 4567,
+                    "arena": {
+                        "id": 54000013,
+                        "name": "Challenger II"
+                    },
+                    "clanRank": 33,
+                    "previousClanRank": 33,
+                    "donations": 63,
+                    "donationsReceived": 680,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#YQLUCYU9C",
+                    "name": "Densoe",
+                    "role": "member",
+                    "lastSeen": "20190808T220104.000Z",
+                    "expLevel": 9,
+                    "trophies": 4541,
+                    "arena": {
+                        "id": 54000013,
+                        "name": "Challenger II"
+                    },
+                    "clanRank": 34,
+                    "previousClanRank": 34,
+                    "donations": 106,
+                    "donationsReceived": 120,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#20Q9VRLVU",
+                    "name": "davey",
+                    "role": "elder",
+                    "lastSeen": "20190810T094102.000Z",
+                    "expLevel": 12,
+                    "trophies": 4506,
+                    "arena": {
+                        "id": 54000013,
+                        "name": "Challenger II"
+                    },
+                    "clanRank": 35,
+                    "previousClanRank": 35,
+                    "donations": 274,
+                    "donationsReceived": 360,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#998LLUR0R",
+                    "name": "KILLER KAMAAL",
+                    "role": "elder",
+                    "lastSeen": "20190810T175937.000Z",
+                    "expLevel": 12,
+                    "trophies": 4360,
+                    "arena": {
+                        "id": 54000013,
+                        "name": "Challenger II"
+                    },
+                    "clanRank": 36,
+                    "previousClanRank": 39,
+                    "donations": 0,
+                    "donationsReceived": 0,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#9GCRJV9YC",
+                    "name": "Bram",
+                    "role": "elder",
+                    "lastSeen": "20190810T181643.000Z",
+                    "expLevel": 10,
+                    "trophies": 4319,
+                    "arena": {
+                        "id": 54000013,
+                        "name": "Challenger II"
+                    },
+                    "clanRank": 37,
+                    "previousClanRank": 36,
+                    "donations": 1408,
+                    "donationsReceived": 560,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#89P0VUPY",
+                    "name": "Hyde",
+                    "role": "elder",
+                    "lastSeen": "20190711T172037.000Z",
+                    "expLevel": 13,
+                    "trophies": 4001,
+                    "arena": {
+                        "id": 54000012,
+                        "name": "Legendary Arena"
+                    },
+                    "clanRank": 38,
+                    "previousClanRank": 37,
+                    "donations": 0,
+                    "donationsReceived": 0,
+                    "clanChestPoints": 0
+                },
+                {
+                    "tag": "#92C2J2RUU",
+                    "name": "¥{kimmie}¥",
+                    "role": "elder",
+                    "lastSeen": "20190711T204350.000Z",
+                    "expLevel": 12,
+                    "trophies": 4001,
+                    "arena": {
+                        "id": 54000012,
+                        "name": "Legendary Arena"
+                    },
+                    "clanRank": 39,
+                    "previousClanRank": 38,
+                    "donations": 0,
+                    "donationsReceived": 0,
+                    "clanChestPoints": 0
+                }
+            ],
+            "_id": "5d4f0b12cf3c63b1a0e6dc73",
+            "id": "PYVLYC9G",
+            "updatedAt": "Sat, 10 Aug 2019 18:22:33 GMT",
+            "name": "crunchy nuts",
+            "type": "crunchy nuts",
+            "description": "Welkom bij crunchy nuts👊❤️ Actief in War, Ladder & Gezelligheid! War deelname minimaal lvl 11 !! Team 34🔴⚪️",
+            "badgeId": 16000028,
+            "clanScore": 48568,
+            "clanWarTrophies": 4929,
+            "requiredTrophies": 5000,
+            "donationsPerWeek": 16368,
+            "clanChestStatus": "inactive",
+            "clanChestLevel": 1,
+            "clanChestMaxLevel": 0,
+            "members": 39,
+            "__v": 0
+        }
+    ]
+}

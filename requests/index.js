@@ -1,17 +1,18 @@
-const HTTPS = require('https');
+const https = require('https');
 
-const OPTIONS = require('../lib/index');
+const options = require('../lib/index');
 
-module.exports = (tag, num, update) => {
-  const REQUEST = HTTPS.request(OPTIONS((tag = tag), (num = num)), res => {
-    let body = '';
+module.exports = (tag, path, update) => {
+    const req = https.request(options(tag, path), res => {
+        let body = '';
 
-    res.on('data', data => (body += data));
+        res.on('data', data => (body += data));
 
-    res.on('end', () => {
-      const PARSED = JSON.parse(body);
-      update(tag, PARSED);
+        res.on('end', () => {
+            const parsedBody = JSON.parse(body);
+            update(tag, parsedBody);
+        });
     });
-  });
-  REQUEST.end();
+
+    req.end();
 };

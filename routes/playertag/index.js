@@ -1,29 +1,32 @@
-const EXPRESS = require('express'),
-  ROUTER = EXPRESS.Router();
+const { Router } = require('express');
+const chalk = require('chalk');
 
-const CHALK = require('chalk');
+const requests = require('../../requests');
+const requestsCB = require('../../requests/reqcb');
 
-const REQUESTS = require('../../requests'),
-  REQUESTS_CB = require('../../requests/reqcb');
+const chestDB = require('../../updateDB/playertag/chestdb');
+const battlelogDB = require('../../updateDB/playertag/battlelogdb');
+const playerDB = require('../../updateDB/playertag/playerdb');
 
-const CHEST_DB = require('../../updateDB/playertag/chestdb'),
-  BATTLELOG_DB = require('../../updateDB/playertag/battlelogdb'),
-  PLAYER_DB = require('../../updateDB/playertag/playerdb');
+const router = new Router();
 
-ROUTER.get('/:player', (req, res, next) => {
-  const { player } = req.params;
+router.get('/:player', (req, res) => {
+    const { player } = req.params;
 
-  REQUESTS_CB((tag = player), (num = 0), (update = PLAYER_DB), response => {
-    if (response === 'OK') {
-      REQUESTS((tag = player), (num = 1), (update = CHEST_DB));
-      REQUESTS((tag = player), (num = 2), (update = BATTLELOG_DB));
-      console.log(CHALK.yellowBright.bgBlack(response));
-      res.json(response);
-    } else {
-      console.log(CHALK.redBright.bgBlack(response));
-      res.json(response);
-    }
-  });
+    requestsCB(player, 'updatePlayer', playerDB, response => {
+        if (response === 'OK') {
+            requests(player, 'updateChest', chestDB);
+            requests(player, 'updateBattlelog', battlelogDB);
+
+            console.log(chalk.yellowBright.bgBlack(response));
+
+            return res.json(response);
+        }
+
+        console.log(chalk.redBright.bgBlack(response));
+
+        return res.json(response);
+    });
 });
 
-module.exports = ROUTER;
+module.exports = router;
