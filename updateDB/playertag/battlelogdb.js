@@ -1,17 +1,15 @@
 const Battlelog = require('../../schemas/playertag/battlelog_schema');
 
 module.exports = (player, parsed) => {
-    Battlelog.deleteOne({ id: player }, err => {
-        if (err) console.error(`1 - Save Failed(battlelog) ${player}`, err);
-        console.log(`1 - Refreshing Database(battlelog) ${player}`);
+    const condition = { id: player };
+    const update = { id: player, battlelog: parsed };
+    const options = { upsert: true };
 
-        Battlelog({
-            id: player,
-            battlelog: parsed,
-        }).save(err => {
-            if (err) console.error(`2 - Save Failed(battlelog) ${player}`, err);
-        });
+    Battlelog.findOneAndUpdate(condition, update, options, error => {
+        if (error) {
+            return console.error(`Save Failed(battlelog) ${player}`, error);
+        }
 
-        console.log(`2 - Saved battlelog ${player}`);
+        console.log(`Saved battlelog ${player}`);
     });
 };

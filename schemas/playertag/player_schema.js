@@ -1,6 +1,4 @@
-const MONGOOSE = require('mongoose');
-
-const { Schema } = MONGOOSE;
+const { Schema, model } = require('mongoose');
 
 const PlayerSchema = Schema({
     updatedAt: String,
@@ -59,4 +57,4 @@ const PlayerSchema = Schema({
     },
 });
 
-module.exports = MONGOOSE.model('playerData', PlayerSchema);
+module.exports = model('playerData', PlayerSchema);

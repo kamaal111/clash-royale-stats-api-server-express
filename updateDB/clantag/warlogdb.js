@@ -1,17 +1,15 @@
 const ClanWarlog = require('../../schemas/clantag/clanWarlog_schema');
 
 module.exports = (clan, parsed) => {
-    ClanWarlog.deleteOne({ id: clan }, err => {
-        if (err) console.error(`1 - Save Failed(warlog) ${clan}`, err);
-        console.log(`1 - Refreshing Database(warlog) ${clan}`);
+    const condition = { id: clan };
+    const update = { id: clan, items: parsed.items };
+    const options = { upsert: true };
 
-        ClanWarlog({
-            id: clan,
+    ClanWarlog.findOneAndUpdate(condition, update, options, error => {
+        if (error) {
+            return console.error(`Save Failed(warlog) ${clan}`, error);
+        }
 
-            items: parsed.items,
-        }).save(err => {
-            if (err) console.error(`2 - Save Failed(warlog) ${clan}`, err);
-        });
-        console.log(`2 - Saved warlog ${clan}`);
+        console.log(`Saved warlog ${clan}`);
     });
 };
