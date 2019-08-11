@@ -13,26 +13,22 @@ router.get('/:id', (req, res) => {
     Battlelog.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
 
-        if (doc[0]) {
-            const logs = doc[0].battlelog;
+        const data = doc.battlelog.reduce(
+            (acc, log) => {
+                const { startingTrophies, trophyChange, battleTime } = acc;
 
-            const data = logs.reduce(
-                (acc, log) => {
-                    const [startingTrophies, trophyChange, battleTime] = acc;
-
+                if (log.team[0].trophyChange !== undefined) {
                     startingTrophies.push(log.team[0].startingTrophies);
                     trophyChange.push(log.team[0].trophyChange);
                     battleTime.push(log.battleTime);
+                }
 
-                    return acc;
-                },
-                [[], [], []]
-            );
+                return acc;
+            },
+            { startingTrophies: [], trophyChange: [], battleTime: [] }
+        );
 
-            return res.json({ succes: true, doc, data });
-        }
-
-        return res.json({ succes: true, doc });
+        return res.json({ succes: true, doc, data });
     });
 });
 
