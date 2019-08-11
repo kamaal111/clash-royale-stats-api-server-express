@@ -8,7 +8,9 @@ const router = new Router();
 router.get('/:id', (req, res) => {
     const { id } = req.params;
 
-    Battlelog.find({ id }, (error, doc) => {
+    const condition = { id };
+
+    Battlelog.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
 
         if (doc[0]) {

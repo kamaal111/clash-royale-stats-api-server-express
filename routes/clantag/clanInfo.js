@@ -7,7 +7,9 @@ const router = new Router();
 router.get('/:id', (req, res) => {
     const { id } = req.params;
 
-    ClanInfo.find({ id }, (error, doc) => {
+    const condition = { id };
+
+    ClanInfo.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
 
         return res.json({ succes: true, doc });

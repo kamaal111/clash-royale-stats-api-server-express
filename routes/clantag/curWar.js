@@ -7,7 +7,9 @@ const router = new Router();
 router.get('/:id', (req, res) => {
     const { id } = req.params;
 
-    CurWar.find({ id }, (error, doc) => {
+    const condition = { id };
+
+    CurWar.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
 
         return res.json({ succes: true, doc });

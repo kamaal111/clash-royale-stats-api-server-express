@@ -1,6 +1,4 @@
-const MONGOOSE = require('mongoose');
-
-const { Schema } = MONGOOSE;
+const { Schema, model } = require('mongoose');
 
 const ClanInfoSchema = Schema({
     updatedAt: String,
@@ -50,4 +48,4 @@ const ClanInfoSchema = Schema({
     },
 });
 
-module.exports = MONGOOSE.model('clanInfo', ClanInfoSchema);
+module.exports = model('clanInfo', ClanInfoSchema);

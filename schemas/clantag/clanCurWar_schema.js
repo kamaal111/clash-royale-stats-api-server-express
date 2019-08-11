@@ -1,6 +1,4 @@
-const MONGOOSE = require('mongoose');
-
-const { Schema } = MONGOOSE;
+const { Schema, model } = require('mongoose');
 
 const ClanCurWarSchema = Schema({
     id: String,
@@ -31,4 +29,4 @@ const ClanCurWarSchema = Schema({
     ],
 });
 
-module.exports = MONGOOSE.model('clanCurWar', ClanCurWarSchema);
+module.exports = model('clanCurWar', ClanCurWarSchema);

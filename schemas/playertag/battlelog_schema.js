@@ -1,6 +1,4 @@
-const MONGOOSE = require('mongoose');
-
-const { Schema } = MONGOOSE;
+const { Schema, model } = require('mongoose');
 
 const BattlelogSchema = Schema({
     id: String,
@@ -10,4 +8,4 @@ const BattlelogSchema = Schema({
     },
 });
 
-module.exports = MONGOOSE.model('Battlelogs', BattlelogSchema);
+module.exports = model('Battlelogs', BattlelogSchema);
