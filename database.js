@@ -14,6 +14,7 @@ class Database {
                 {
                     useCreateIndex: true,
                     useNewUrlParser: true,
+                    useFindAndModify: false,
                 }
             )
             .then(() => {

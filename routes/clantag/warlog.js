@@ -12,30 +12,24 @@ router.get('/:id', (req, res) => {
     clanWarlog.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
 
-        if (doc[0]) {
-            const logs = doc[0].items;
+        const data = doc.items.reduce(
+            (acc, log) => {
+                const { clanScore, trophyChange, createdDate } = acc;
 
-            const data = logs.reduce(
-                (acc, log) => {
-                    const [clanScore, trophyChange, createdDate] = acc;
+                const clansStanding = log[0].standings.find(
+                    standing => standing.clan.tag === `#${id}`
+                );
 
-                    const clansStanding = log[0].standings.find(
-                        standing => standing.clan.tag === `#${id}`
-                    );
+                createdDate.push(log[0].createdDate);
+                clanScore.push(clansStanding.clan.clanScore);
+                trophyChange.push(clansStanding.trophyChange);
 
-                    createdDate.push(log[0].createdDate);
-                    clanScore.push(clansStanding.clan.clanScore);
-                    trophyChange.push(clansStanding.trophyChange);
+                return acc;
+            },
+            { clanScore: [], trophyChange: [], createdDate: [] }
+        );
 
-                    return acc;
-                },
-                [[], [], []]
-            );
-
-            return res.json({ succes: true, doc, data });
-        }
-
-        return res.json({ succes: true, doc });
+        return res.json({ succes: true, doc, data });
     });
 });
 
