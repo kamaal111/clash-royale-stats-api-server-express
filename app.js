@@ -16,13 +16,16 @@ const cors = require('./lib/cors');
 app.use(cors);
 
 // update player route
-app.use('/v1/api', require('./routes/playertag'));
+app.use('/v1/api/player', require('./routes/playertag'));
 // chest player route
-app.use('/v1/api/chests', require('./routes/playertag/chestRoute'));
+app.use('/v1/api/player/chests', require('./routes/playertag/chestRoute'));
 // player data route
-app.use('/v1/api/player', require('./routes/playertag/playerDataRoute'));
+app.use('/v1/api/player/player', require('./routes/playertag/playerDataRoute'));
 // battlelog playerroute
-app.use('/v1/api/battlelog', require('./routes/playertag/battlelogRoute'));
+app.use(
+    '/v1/api/player/battlelog',
+    require('./routes/playertag/battlelogRoute')
+);
 // update clan route
 app.use('/v1/api/clan', require('./routes/clantag/index'));
 // clan data route
