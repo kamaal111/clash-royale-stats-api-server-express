@@ -12,6 +12,12 @@ router.get('/:id', (req, res) => {
 
     Battlelog.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
+        if (!doc) {
+            return res.json({
+                succes: false,
+                error: { status: 404, message: 'Battlelog not found' },
+            });
+        }
 
         const data = doc.battlelog.reduce(
             (acc, log) => {

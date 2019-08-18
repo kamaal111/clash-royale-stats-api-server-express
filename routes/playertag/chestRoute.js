@@ -12,6 +12,12 @@ router.get('/:id', (req, res) => {
 
     Chest.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
+        if (!doc) {
+            return res.json({
+                succes: false,
+                error: { status: 404, message: 'Chest not found' },
+            });
+        }
 
         const chestImages = chest =>
             `https://royaleapi.github.io/cr-api-assets/chests/${chest}.png`;
