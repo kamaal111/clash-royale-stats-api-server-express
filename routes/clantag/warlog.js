@@ -11,6 +11,12 @@ router.get('/:id', (req, res) => {
 
     clanWarlog.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
+        if (!doc) {
+            return res.json({
+                succes: false,
+                error: { status: 404, message: 'Warlog not found' },
+            });
+        }
 
         const data = doc.items.reduce(
             (acc, log) => {

@@ -11,6 +11,12 @@ router.get('/:id', (req, res) => {
 
     ClanInfo.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
+        if (!doc) {
+            return res.json({
+                succes: false,
+                error: { status: 404, message: 'Clan stats not found' },
+            });
+        }
 
         return res.json({ succes: true, doc });
     });

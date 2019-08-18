@@ -12,6 +12,12 @@ router.get('/:id', (req, res) => {
 
     Player.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
+        if (!doc) {
+            return res.json({
+                succes: false,
+                error: { status: 404, message: 'Player stats not found' },
+            });
+        }
 
         return res.json({ succes: true, doc });
     });

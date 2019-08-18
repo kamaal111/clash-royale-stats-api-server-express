@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { request } = require('../../lib');
+const request = require('../../lib');
 
 const warlogDB = require('../../updateDB/clantag/warlogdb');
 const currentWarDB = require('../../updateDB/clantag/curWardb');

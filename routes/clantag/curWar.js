@@ -11,6 +11,12 @@ router.get('/:id', (req, res) => {
 
     CurWar.findOne(condition, (error, doc) => {
         if (error) return res.json({ succes: false, error });
+        if (!doc) {
+            return res.json({
+                succes: false,
+                error: { status: 404, message: 'Current warlog not found' },
+            });
+        }
 
         return res.json({ succes: true, doc });
     });
