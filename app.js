@@ -5,7 +5,7 @@ const { notFound, errorHandler } = require('./lib/errors');
 
 const app = express();
 
-// require('dotenv').config();
+require('dotenv').config();
 
 app.use(logger('dev'));
 app.use(express.json());
