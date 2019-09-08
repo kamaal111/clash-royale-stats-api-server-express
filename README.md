@@ -31,7 +31,7 @@ An API to provide [Clash Royale](http://supercell.com/en/games/clashroyale/) sta
 
 ## Installition
 
--   Running the API locally
+### Running the API locally
 
 -   Make sure you have installed all these prerequisites on your development machine.
 
