@@ -2,7 +2,7 @@
     "name": "clashroyaleapi",
     "version": "1.0.0",
     "main": "bin/www",
-    "description": "",
+    "description": "An API to provide Clash Royale statistics.",
     "scripts": {
         "testserver": "jest -i --verbose --coverage --runInBand",
         "startserver": "node .",
