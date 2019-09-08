@@ -1,35 +1,34 @@
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 
+const { DATABASE_URL } = require('./config');
+
+const databaseOptions = {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+};
+
 class Database {
     constructor() {
         this._connect();
     }
 
-    _connect() {
-        mongoose
-            .connect(
-                // process.env.DATABASE_URL ||
-                'mongodb://127.0.0.1:27017/cr_api',
-                {
-                    useCreateIndex: true,
-                    useNewUrlParser: true,
-                    useFindAndModify: false,
-                }
-            )
-            .then(() => {
-                console.log(
-                    chalk.greenBright.bgBlack.bold(
-                        'Database connection successfull'
-                    )
-                );
-            })
-            .catch(error => {
-                console.error(
-                    chalk.redBright.bgBlack.bold('connection error:'),
-                    error
-                );
-            });
+    async _connect() {
+        try {
+            await mongoose.connect(DATABASE_URL, databaseOptions);
+
+            return console.log(
+                chalk.greenBright.bgBlack.bold(
+                    'Database connection successfull'
+                )
+            );
+        } catch (error) {
+            console.error(
+                chalk.redBright.bgBlack.bold('connection error:'),
+                error
+            );
+        }
     }
 }
 
