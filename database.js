@@ -24,7 +24,7 @@ class Database {
                 )
             );
         } catch (error) {
-            console.error(
+            return console.error(
                 chalk.redBright.bgBlack.bold('connection error:'),
                 error
             );

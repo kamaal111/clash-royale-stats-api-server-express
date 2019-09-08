@@ -1,5 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
+const cors = require('cors');
 
 const { notFound, errorHandler } = require('./lib/errors');
 
@@ -14,7 +15,7 @@ app.use(express.json());
 require('./database');
 
 // CORS
-app.use(require('./lib/cors'));
+app.use(cors());
 
 // update player route
 app.use('/v1/api/player', require('./routes/playertag'));

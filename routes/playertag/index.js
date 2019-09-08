@@ -8,7 +8,7 @@ const playerDB = require('../../updateDB/playertag/playerdb');
 
 const router = new Router();
 
-router.get('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const { id } = req.params;
 
     Promise.all([
