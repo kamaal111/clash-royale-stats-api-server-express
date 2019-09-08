@@ -1,6 +1,8 @@
 const express = require('express');
 const logger = require('morgan');
 
+const { notFound, errorHandler } = require('./lib/errors');
+
 const app = express();
 
 require('dotenv').config();
@@ -12,8 +14,7 @@ app.use(express.json());
 require('./database');
 
 // CORS
-const cors = require('./lib/cors');
-app.use(cors);
+app.use(require('./lib/cors'));
 
 // update player route
 app.use('/v1/api/player', require('./routes/playertag'));
@@ -35,7 +36,6 @@ app.use('/v1/api/clan/warlog', require('./routes/clantag/warlog'));
 // clan current war route
 app.use('/v1/api/clan/curwar', require('./routes/clantag/curWar'));
 
-const { notFound, errorHandler } = require('./lib/errors');
 // catch 404 and forward to error handler
 app.use(notFound);
 // error handler
