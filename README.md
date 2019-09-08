@@ -1,6 +1,6 @@
 # Clash Royale stats API
 
-An API to provide [Clash Royale](http://supercell.com/en/games/clashroyale/) statistics.
+An API that provides [Clash Royale](http://supercell.com/en/games/clashroyale/) statistics.
 
 ## What can it do?
 
