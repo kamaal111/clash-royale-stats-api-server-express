@@ -29,7 +29,7 @@ An API that provides [Clash Royale](http://supercell.com/en/games/clashroyale/) 
 | `/v1/api/clan/warlog/:id`      | `GET`     | Find clans latest warlogs                                   |
 | `/v1/api/clan/curwar/:id`      | `GET`     | Find clans current war statistics                           |
 
-## Installition
+## Installation
 
 ### Running the API locally
 
