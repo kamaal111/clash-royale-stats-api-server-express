@@ -1,53 +1,55 @@
 const Player = require('../../schemas/playertag/player_schema');
 
-module.exports = (player, parsed) => {
+module.exports = async (player, parsed) => {
+  try {
     const timeNow = () => {
-        let date = new Date();
-        date.setTime(date.getTime() + 24 * 60 * 60);
+      let date = new Date();
+      date.setTime(date.getTime() + 24 * 60 * 60);
 
-        return date.toUTCString();
+      return date.toUTCString();
     };
 
-    const condition = { id: player };
+    const condition = {id: player};
     const update = {
-        id: player,
+      id: player,
 
-        updatedAt: timeNow(),
+      updatedAt: timeNow(),
 
-        name: parsed.name,
-        expLevel: parsed.expLevel,
-        trophies: parsed.trophies,
-        bestTrophies: parsed.bestTrophies,
-        wins: parsed.wins,
-        losses: parsed.losses,
-        battleCount: parsed.battleCount,
-        threeCrownWins: parsed.threeCrownWins,
-        challengeCardsWon: parsed.challengeCardsWon,
-        challengeMaxWins: parsed.challengeMaxWins,
-        tournamentCardsWon: parsed.tournamentCardsWon,
-        tournamentBattleCount: parsed.tournamentBattleCount,
-        role: parsed.role,
-        donations: parsed.donations,
-        donationsReceived: parsed.donationsReceived,
-        totalDonations: parsed.totalDonations,
-        warDayWins: parsed.warDayWins,
-        clanCardsCollected: parsed.clanCardsCollected,
+      name: parsed.name,
+      expLevel: parsed.expLevel,
+      trophies: parsed.trophies,
+      bestTrophies: parsed.bestTrophies,
+      wins: parsed.wins,
+      losses: parsed.losses,
+      battleCount: parsed.battleCount,
+      threeCrownWins: parsed.threeCrownWins,
+      challengeCardsWon: parsed.challengeCardsWon,
+      challengeMaxWins: parsed.challengeMaxWins,
+      tournamentCardsWon: parsed.tournamentCardsWon,
+      tournamentBattleCount: parsed.tournamentBattleCount,
+      role: parsed.role,
+      donations: parsed.donations,
+      donationsReceived: parsed.donationsReceived,
+      totalDonations: parsed.totalDonations,
+      warDayWins: parsed.warDayWins,
+      clanCardsCollected: parsed.clanCardsCollected,
 
-        clan: parsed.clan,
+      clan: parsed.clan,
 
-        arena: parsed.arena,
+      arena: parsed.arena,
 
-        leagueStatistics: parsed.leagueStatistics,
+      leagueStatistics: parsed.leagueStatistics,
 
-        currentFavouriteCard: parsed.currentFavouriteCard,
+      currentFavouriteCard: parsed.currentFavouriteCard,
     };
-    const options = { upsert: true };
+    const options = {upsert: true};
 
-    Player.findOneAndUpdate(condition, update, options, error => {
-        if (error) {
-            return console.error(`Save Failed(player) ${player}`, error);
-        }
+    const entity = await Player.findOneAndUpdate(condition, update, options);
 
-        console.log(`Saved playerdata ${player}`);
-    });
+    console.log(`Saved playerdata ${player}`);
+
+    return {player: entity.toJSON()};
+  } catch (error) {
+    return console.error(`Save Failed(player) ${player}`, error);
+  }
 };
