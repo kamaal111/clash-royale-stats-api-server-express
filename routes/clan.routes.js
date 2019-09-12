@@ -1,10 +1,10 @@
-const { Router } = require('express');
+const {Router} = require('express');
 
 const {
-    updateStats,
-    findWarlog,
-    findCurrentWar,
-    findClanInfo,
+  updateStats,
+  findWarlog,
+  findCurrentWar,
+  findClanInfo,
 } = require('../services/clan.services');
 
 const router = new Router();

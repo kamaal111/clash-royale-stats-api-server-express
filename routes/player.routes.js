@@ -1,10 +1,10 @@
-const { Router } = require('express');
+const {Router} = require('express');
 
 const {
-    updateStats,
-    findPlayerStats,
-    findChestStats,
-    findBattlelogStats,
+  updateStats,
+  findPlayerStats,
+  findChestStats,
+  findBattlelogStats,
 } = require('../services/player.services');
 
 const router = new Router();

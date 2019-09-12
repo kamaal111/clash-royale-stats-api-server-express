@@ -4,17 +4,17 @@ An API that provides [Clash Royale](http://supercell.com/en/games/clashroyale/) 
 
 ## What can it do?
 
--   Basic actions:
-    -   Fetch and save player and clan statistics
-    -   Fetch and save players latest battlelogs
-    -   Fetch and save players upcomming chests
+- Basic actions:
+  - Fetch and save player and clan statistics
+  - Fetch and save players latest battlelogs
+  - Fetch and save players upcomming chests
 
 ## Primarily used technologies
 
--   [Express.js](https://expressjs.com)
--   [Node.js](https://nodejs.org/en/)
--   [MongoDB](https://www.mongodb.org/)
--   [Superagent](http://visionmedia.github.io/superagent/)
+- [Express.js](https://expressjs.com)
+- [Node.js](https://nodejs.org/en/)
+- [MongoDB](https://www.mongodb.org/)
+- [Superagent](http://visionmedia.github.io/superagent/)
 
 ## Endpoints
 
@@ -33,12 +33,12 @@ An API that provides [Clash Royale](http://supercell.com/en/games/clashroyale/) 
 
 ### Running the API locally
 
--   Make sure you have installed all these prerequisites on your development machine.
+- Make sure you have installed all these prerequisites on your development machine.
 
-    -   [Node.js](https://nodejs.org/en/download/)
-    -   [MongoDB](https://www.mongodb.org/)
+  - [Node.js](https://nodejs.org/en/download/)
+  - [MongoDB](https://www.mongodb.org/)
 
--   Register and generate your free API key [here](https://developer.clashroyale.com)
+- Register and generate your free API key [here](https://developer.clashroyale.com)
 
 ```bash
 > git clone git@github.com:kamaal111/clash-royale-stats-api-express.git
@@ -46,16 +46,16 @@ An API that provides [Clash Royale](http://supercell.com/en/games/clashroyale/) 
 > npm install
 ```
 
--   Modify config.js in the root directory with your credentials
+- Modify config.js in the root directory with your credentials
 
 ```bash
 > npm run dbon
 ```
 
--   In an separate terminal run
+- In an separate terminal run
 
 ```bash
 > npm run watch
 ```
 
--   Enjoy!!!
+- Enjoy!!!

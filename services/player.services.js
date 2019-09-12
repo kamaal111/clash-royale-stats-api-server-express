@@ -9,119 +9,83 @@ const Chest = require('../schemas/playertag/chest_schema');
 const Battlelog = require('../schemas/playertag/battlelog_schema');
 
 const updateStats = (req, res) => {
-    const { id } = req.params;
+  const {id} = req.params;
 
-    Promise.all([
-        request('updatePlayer', id, playerDB),
-        request('updateChest', id, chestDB),
-        request('updateBattlelog', id, battlelogDB),
-    ])
-        .then(() => res.send({ status: res.statusCode }))
-        .catch(err => res.send({ status: err.status }));
+  Promise.all([
+    request('updatePlayer', id, playerDB),
+    request('updateChest', id, chestDB),
+    request('updateBattlelog', id, battlelogDB),
+  ])
+    .then(docs => res.send({status: res.statusCode, docs}))
+    .catch(err => res.send({status: err.status}));
 };
 
-const findPlayerStats = (req, res) => {
-    const { id } = req.params;
+const findPlayerStats = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const condition = {id};
 
-    const condition = { id };
+    const foundPlayer = await Player.findOne(condition);
 
-    Player.findOne(condition, (error, doc) => {
-        if (error) return res.json({ succes: false, error });
-        if (!doc) {
-            return res.json({
-                succes: false,
-                error: { status: 404, message: 'Player stats not found' },
-            });
-        }
+    if (!foundPlayer) {
+      return res.json({
+        succes: false,
+        status: 404,
+        error: {message: 'Player stats not found'},
+      });
+    }
 
-        return res.json({ succes: true, doc });
-    });
+    return res.json({succes: true, status: 200, doc: foundPlayer});
+  } catch (error) {
+    return res.json({succes: false, error});
+  }
 };
 
-const findChestStats = (req, res) => {
-    const { id } = req.params;
+const findChestStats = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const condition = {id};
 
-    const condition = { id };
+    const foundChest = await Chest.findOne(condition);
 
-    Chest.findOne(condition, (error, doc) => {
-        if (error) return res.json({ succes: false, error });
-        if (!doc) {
-            return res.json({
-                succes: false,
-                error: { status: 404, message: 'Chest not found' },
-            });
-        }
+    if (!foundChest) {
+      return res.json({
+        succes: false,
+        status: 404,
+        error: {message: 'Chest not found'},
+      });
+    }
 
-        const chestImages = chest =>
-            `https://royaleapi.github.io/cr-api-assets/chests/${chest}.png`;
-
-        const { items } = doc;
-        const modifiedDocs = items.map(item => {
-            const chestName = item.name
-                .split(' ')
-                .reverse()
-                .join('-')
-                .toLowerCase();
-
-            if (item.name === 'Golden Chest') {
-                return {
-                    ...item,
-                    image: chestImages(chestName.replace('golden', 'gold')),
-                };
-            }
-
-            if (item.name === 'Mega Lightning Chest') {
-                return {
-                    ...item,
-                    image: chestImages(
-                        chestName.replace('lightning-mega', 'megalightning')
-                    ),
-                };
-            }
-
-            return { ...item, image: chestImages(chestName) };
-        });
-
-        return res.json({ succes: true, doc: { items: modifiedDocs } });
-    });
+    return res.json({succes: true, status: 200, doc: foundChest});
+  } catch (error) {
+    return res.json({succes: false, error});
+  }
 };
 
-const findBattlelogStats = (req, res) => {
-    const { id } = req.params;
+const findBattlelogStats = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const condition = {id};
 
-    const condition = { id };
+    const foundBattlelog = await Battlelog.findOne(condition);
 
-    Battlelog.findOne(condition, (error, doc) => {
-        if (error) return res.json({ succes: false, error });
-        if (!doc) {
-            return res.json({
-                succes: false,
-                error: { status: 404, message: 'Battlelog not found' },
-            });
-        }
+    if (!foundBattlelog) {
+      return res.json({
+        succes: false,
+        status: 404,
+        error: {message: 'Battlelog not found'},
+      });
+    }
 
-        const data = doc.battlelog.reduce(
-            (acc, log) => {
-                const { startingTrophies, trophyChange, battleTime } = acc;
-
-                if (log.team[0].trophyChange !== undefined) {
-                    startingTrophies.push(log.team[0].startingTrophies);
-                    trophyChange.push(log.team[0].trophyChange);
-                    battleTime.push(log.battleTime);
-                }
-
-                return acc;
-            },
-            { startingTrophies: [], trophyChange: [], battleTime: [] }
-        );
-
-        return res.json({ succes: true, doc, data });
-    });
+    return res.json({succes: true, status: 200, doc: foundBattlelog});
+  } catch (error) {
+    return res.json({succes: false, error});
+  }
 };
 
 module.exports = {
-    updateStats,
-    findPlayerStats,
-    findChestStats,
-    findBattlelogStats,
+  updateStats,
+  findPlayerStats,
+  findChestStats,
+  findBattlelogStats,
 };
