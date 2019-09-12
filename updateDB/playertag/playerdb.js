@@ -9,7 +9,7 @@ module.exports = async (player, parsed) => {
       return date.toUTCString();
     };
 
-    const condition = {id: player};
+    const condition = { id: player };
     const update = {
       id: player,
 
@@ -42,13 +42,13 @@ module.exports = async (player, parsed) => {
 
       currentFavouriteCard: parsed.currentFavouriteCard,
     };
-    const options = {upsert: true};
+    const options = { upsert: true };
 
     const entity = await Player.findOneAndUpdate(condition, update, options);
 
     console.log(`Saved playerdata ${player}`);
 
-    return {player: entity.toJSON()};
+    return { player: entity.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(player) ${player}`, error);
   }

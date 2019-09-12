@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 
-const {notFound, errorHandler} = require('./lib/errors');
+const { notFound, errorHandler } = require('./lib/errors');
 
 const app = express();
 

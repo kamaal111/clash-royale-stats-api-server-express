@@ -9,21 +9,27 @@ const Chest = require('../schemas/playertag/chest_schema');
 const Battlelog = require('../schemas/playertag/battlelog_schema');
 
 const updateStats = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
 
   Promise.all([
     request('updatePlayer', id, playerDB),
     request('updateChest', id, chestDB),
     request('updateBattlelog', id, battlelogDB),
   ])
-    .then(docs => res.send({status: res.statusCode, docs}))
-    .catch(err => res.send({status: err.status}));
+    .then(docs => {
+      if (res.statusCode !== 200) {
+        res.send({ succes: false, status: res.statusCode });
+      }
+
+      return res.send({ succes: true, status: res.statusCode, docs });
+    })
+    .catch(error => res.send({ succes: false, status: error.status, error }));
 };
 
 const findPlayerStats = async (req, res) => {
   try {
-    const {id} = req.params;
-    const condition = {id};
+    const { id } = req.params;
+    const condition = { id };
 
     const foundPlayer = await Player.findOne(condition);
 
@@ -31,20 +37,20 @@ const findPlayerStats = async (req, res) => {
       return res.json({
         succes: false,
         status: 404,
-        error: {message: 'Player stats not found'},
+        error: { message: 'Player stats not found' },
       });
     }
 
-    return res.json({succes: true, status: 200, doc: foundPlayer});
+    return res.json({ succes: true, status: 200, doc: foundPlayer });
   } catch (error) {
-    return res.json({succes: false, error});
+    return res.json({ succes: false, status: error.status, error });
   }
 };
 
 const findChestStats = async (req, res) => {
   try {
-    const {id} = req.params;
-    const condition = {id};
+    const { id } = req.params;
+    const condition = { id };
 
     const foundChest = await Chest.findOne(condition);
 
@@ -52,20 +58,20 @@ const findChestStats = async (req, res) => {
       return res.json({
         succes: false,
         status: 404,
-        error: {message: 'Chest not found'},
+        error: { message: 'Chest not found' },
       });
     }
 
-    return res.json({succes: true, status: 200, doc: foundChest});
+    return res.json({ succes: true, status: 200, doc: foundChest });
   } catch (error) {
-    return res.json({succes: false, error});
+    return res.json({ succes: false, status: error.status, error });
   }
 };
 
 const findBattlelogStats = async (req, res) => {
   try {
-    const {id} = req.params;
-    const condition = {id};
+    const { id } = req.params;
+    const condition = { id };
 
     const foundBattlelog = await Battlelog.findOne(condition);
 
@@ -73,13 +79,13 @@ const findBattlelogStats = async (req, res) => {
       return res.json({
         succes: false,
         status: 404,
-        error: {message: 'Battlelog not found'},
+        error: { message: 'Battlelog not found' },
       });
     }
 
-    return res.json({succes: true, status: 200, doc: foundBattlelog});
+    return res.json({ succes: true, status: 200, doc: foundBattlelog });
   } catch (error) {
-    return res.json({succes: false, error});
+    return res.json({ succes: false, status: error.status, error });
   }
 };
 

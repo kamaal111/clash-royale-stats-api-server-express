@@ -4,7 +4,7 @@ module.exports = async (player, parsed) => {
   try {
     const chestImages = chest => `https://royaleapi.github.io/cr-api-assets/chests/${chest}.png`;
 
-    const {items} = parsed;
+    const { items } = parsed;
     const modifiedDocs = items.map(item => {
       const chestName = item.name
         .split(' ')
@@ -26,18 +26,18 @@ module.exports = async (player, parsed) => {
         };
       }
 
-      return {...item, image: chestImages(chestName)};
+      return { ...item, image: chestImages(chestName) };
     });
 
-    const condition = {id: player};
-    const update = {id: player, items: modifiedDocs};
-    const options = {upsert: true};
+    const condition = { id: player };
+    const update = { id: player, items: modifiedDocs };
+    const options = { upsert: true };
 
     const entity = await Chest.findOneAndUpdate(condition, update, options);
 
     console.log(`Saved Chests ${player}`);
 
-    return {chests: entity.toJSON()};
+    return { chests: entity.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(chest) ${player}`, error);
   }
