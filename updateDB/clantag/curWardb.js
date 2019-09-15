@@ -10,13 +10,17 @@ module.exports = async (clan, parsed) => {
       clan: parsed.clan,
       participants: parsed.participants,
     };
-    const options = { upsert: true };
 
-    const entity = await ClanCurWar.findOneAndUpdate(condition, update, options);
+    const findClanCurWar = await ClanCurWar.findOneAndUpdate(condition, update);
+
+    if (!findClanCurWar) {
+      const createClanCurWar = await ClanCurWar.create(update);
+      console.log(`Saved current war ${clan}`);
+      return { currentWar: createClanCurWar.toJSON() };
+    }
 
     console.log(`Saved current war ${clan}`);
-
-    return { currentWar: entity.toJSON() };
+    return { currentWar: findClanCurWar.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(current war) ${clan}`, error);
   }

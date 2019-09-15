@@ -30,13 +30,17 @@ module.exports = async (clan, parsed) => {
       members: parsed.members,
       memberList: parsed.memberList,
     };
-    const options = { upsert: true };
 
-    const entity = await ClanInfo.findOneAndUpdate(condition, update, options);
+    const findClanInfo = await ClanInfo.findOneAndUpdate(condition, update);
+
+    if (!findClanInfo) {
+      const createClanInfo = await ClanInfo.create(update);
+      console.log(`Saved clan info ${clan}`);
+      return { clanInfo: createClanInfo.toJSON() };
+    }
 
     console.log(`Saved clan info ${clan}`);
-
-    return { clanInfo: entity.toJSON() };
+    return { clanInfo: findClanInfo.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(clan info) ${clan}`, error);
   }
