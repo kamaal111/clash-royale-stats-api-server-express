@@ -9,6 +9,14 @@ module.exports = async (player, parsed) => {
       return date.toUTCString();
     };
 
+    const modifiedClanData = clanData => {
+      if (typeof clanData === 'undefined') return clanData;
+      return {
+        ...clanData,
+        badgeUrl: `https://cdn.statsroyale.com/images/badges/${clanData.badgeId}.png`,
+      };
+    };
+
     const condition = { id: player };
     const update = {
       id: player,
@@ -34,7 +42,7 @@ module.exports = async (player, parsed) => {
       warDayWins: parsed.warDayWins,
       clanCardsCollected: parsed.clanCardsCollected,
 
-      clan: parsed.clan,
+      clan: modifiedClanData(parsed.clan),
 
       arena: parsed.arena,
 
