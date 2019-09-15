@@ -2,7 +2,8 @@ const Chest = require('../../schemas/playertag/chest_schema');
 
 module.exports = async (player, parsed) => {
   try {
-    const chestImages = chest => `https://royaleapi.github.io/cr-api-assets/chests/${chest}.png`;
+    const chestImages = chest =>
+      `https://royaleapi.github.io/cr-api-assets/chests/${chest}.png`;
 
     const { items } = parsed;
     const modifiedDocs = items.map(item => {
@@ -22,7 +23,9 @@ module.exports = async (player, parsed) => {
       if (item.name === 'Mega Lightning Chest') {
         return {
           ...item,
-          image: chestImages(chestName.replace('lightning-mega', 'megalightning')),
+          image: chestImages(
+            chestName.replace('lightning-mega', 'megalightning'),
+          ),
         };
       }
 
@@ -31,13 +34,17 @@ module.exports = async (player, parsed) => {
 
     const condition = { id: player };
     const update = { id: player, items: modifiedDocs };
-    const options = { upsert: true };
 
-    const entity = await Chest.findOneAndUpdate(condition, update, options);
+    const findChest = await Chest.findOneAndUpdate(condition, update);
+
+    if (!findChest) {
+      const createChest = await Chest.create(update);
+      console.log(`Saved Chests ${player}`);
+      return { chests: createChest.toJSON() };
+    }
 
     console.log(`Saved Chests ${player}`);
-
-    return { chests: entity.toJSON() };
+    return { chests: findChest.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(chest) ${player}`, error);
   }

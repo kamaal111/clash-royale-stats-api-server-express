@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const BattlelogSchema = Schema({
-    id: String,
+  id: String,
 
-    battlelog: {
-        type: Array,
-    },
+  battlelog: {
+    type: Object,
+  },
 });
 
 module.exports = model('Battlelogs', BattlelogSchema);

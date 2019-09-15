@@ -5,12 +5,13 @@ module.exports = async (clan, parsed) => {
     const data = parsed.items.reduce(
       (acc, logs) => {
         const { clanScore, trophyChange, createdDate } = acc;
-        const [log] = logs;
 
-        const clansStanding = log.standings.find(standing => standing.clan.tag === `#${clan}`);
+        const clansStanding = logs.standings.find(
+          standing => standing.clan.tag === `#${clan}`,
+        );
 
         return {
-          createdDate: [...createdDate, log.createdDate],
+          createdDate: [...createdDate, logs.createdDate],
           clanScore: [...clanScore, clansStanding.clan.clanScore],
           trophyChange: [...trophyChange, clansStanding.trophyChange],
         };
@@ -20,13 +21,17 @@ module.exports = async (clan, parsed) => {
 
     const condition = { id: clan };
     const update = { id: clan, clanWarlog: { logs: parsed.items, data } };
-    const options = { upsert: true };
 
-    const entity = await ClanWarlog.findOneAndUpdate(condition, update, options);
+    const findClanWarlog = await ClanWarlog.findOneAndUpdate(condition, update);
+
+    if (!findClanWarlog) {
+      const createClanWarlog = await ClanWarlog.create(update);
+      console.log(`Saved warlog ${clan}`);
+      return { clanWarlog: createClanWarlog.toJSON() };
+    }
 
     console.log(`Saved warlog ${clan}`);
-
-    return { clanWarlog: entity.toJSON() };
+    return { clanWarlog: findClanWarlog.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(warlog) ${clan}`, error);
   }

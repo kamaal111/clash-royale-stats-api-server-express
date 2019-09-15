@@ -42,13 +42,17 @@ module.exports = async (player, parsed) => {
 
       currentFavouriteCard: parsed.currentFavouriteCard,
     };
-    const options = { upsert: true };
 
-    const entity = await Player.findOneAndUpdate(condition, update, options);
+    const findPlayer = await Player.findOneAndUpdate(condition, update);
+
+    if (!findPlayer) {
+      const createPlayer = await Player.create(update);
+      console.log(`Saved playerdata ${player}`);
+      return { player: createPlayer.toJSON() };
+    }
 
     console.log(`Saved playerdata ${player}`);
-
-    return { player: entity.toJSON() };
+    return { player: findPlayer.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(player) ${player}`, error);
   }

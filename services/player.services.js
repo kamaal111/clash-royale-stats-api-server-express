@@ -21,6 +21,10 @@ const updateStats = (req, res) => {
         res.send({ succes: false, status: res.statusCode });
       }
 
+      if (docs.length < 3) {
+        res.send({ succes: false, status: 500 });
+      }
+
       return res.send({ succes: true, status: res.statusCode, docs });
     })
     .catch(error => res.send({ succes: false, status: error.status, error }));

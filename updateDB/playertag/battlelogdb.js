@@ -19,13 +19,17 @@ module.exports = async (player, parsed) => {
 
     const condition = { id: player };
     const update = { id: player, battlelog: { logs: parsed, data } };
-    const options = { upsert: true };
 
-    const entity = await Battlelog.findOneAndUpdate(condition, update, options);
+    const findBattlelog = await Battlelog.findOneAndUpdate(condition, update);
+
+    if (!findBattlelog) {
+      const createBattlelog = await Battlelog.create(update);
+      console.log(`Saved battlelog ${player}`);
+      return { battlelog: createBattlelog.toJSON() };
+    }
 
     console.log(`Saved battlelog ${player}`);
-
-    return { battlelog: entity.toJSON() };
+    return { battlelog: findBattlelog.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(battlelog) ${player}`, error);
   }

@@ -16,12 +16,16 @@ const updateStats = (req, res) => {
     request('updateWarlog', id, warlogDB),
     request('updateCurrentWar', id, currentWarDB),
   ])
-    .then(results => {
+    .then(docs => {
       if (res.statusCode !== 200) {
         res.send({ succes: false, status: res.statusCode });
       }
 
-      return res.send({ succes: true, status: res.statusCode, results });
+      if (docs.length < 3) {
+        res.send({ succes: false, status: 500 });
+      }
+
+      return res.send({ succes: true, status: res.statusCode, docs });
     })
     .catch(error => res.send({ succes: false, status: error.status, error }));
 };
