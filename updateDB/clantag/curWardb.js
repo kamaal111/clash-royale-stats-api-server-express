@@ -11,16 +11,11 @@ module.exports = async (clan, parsed) => {
       participants: parsed.participants,
     };
 
-    const findClanCurWar = await ClanCurWar.findOneAndUpdate(condition, update);
+    await ClanCurWar.findOneAndDelete(condition, update);
 
-    if (!findClanCurWar) {
-      const createClanCurWar = await ClanCurWar.create(update);
-      console.log(`Saved current war ${clan}`);
-      return { currentWar: createClanCurWar.toJSON() };
-    }
-
+    const createClanCurWar = await ClanCurWar.create(update);
     console.log(`Saved current war ${clan}`);
-    return { currentWar: findClanCurWar.toJSON() };
+    return { currentWar: createClanCurWar.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(current war) ${clan}`, error);
   }

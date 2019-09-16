@@ -17,19 +17,43 @@ module.exports = async (player, parsed) => {
       { startingTrophies: [], trophyChange: [], battleTime: [] },
     );
 
+    const modifiedParsedData = parsed.map(log => {
+      const team = log.team.map(player => {
+        if (typeof player.clan === 'undefined') return player;
+        return {
+          ...player,
+          clan: {
+            ...player.clan,
+            badgeUrl: `https://cdn.statsroyale.com/images/badges/${player.clan.badgeId}.png`,
+          },
+        };
+      });
+
+      const opponent = log.opponent.map(player => {
+        if (typeof player.clan === 'undefined') return player;
+        return {
+          ...player,
+          clan: {
+            ...player.clan,
+            badgeUrl: `https://cdn.statsroyale.com/images/badges/${player.clan.badgeId}.png`,
+          },
+        };
+      });
+
+      return { ...log, team, opponent };
+    });
+
     const condition = { id: player };
-    const update = { id: player, battlelog: { logs: parsed, data } };
+    const update = {
+      id: player,
+      battlelog: { logs: modifiedParsedData, data },
+    };
 
-    const findBattlelog = await Battlelog.findOneAndUpdate(condition, update);
+    await Battlelog.findOneAndDelete(condition);
 
-    if (!findBattlelog) {
-      const createBattlelog = await Battlelog.create(update);
-      console.log(`Saved battlelog ${player}`);
-      return { battlelog: createBattlelog.toJSON() };
-    }
-
+    const createBattlelog = await Battlelog.create(update);
     console.log(`Saved battlelog ${player}`);
-    return { battlelog: findBattlelog.toJSON() };
+    return { battlelog: await createBattlelog.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(battlelog) ${player}`, error);
   }
