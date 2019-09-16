@@ -35,16 +35,11 @@ module.exports = async (player, parsed) => {
     const condition = { id: player };
     const update = { id: player, items: modifiedDocs };
 
-    const findChest = await Chest.findOneAndUpdate(condition, update);
+    await Chest.findOneAndDelete(condition);
 
-    if (!findChest) {
-      const createChest = await Chest.create(update);
-      console.log(`Saved Chests ${player}`);
-      return { chests: createChest.toJSON() };
-    }
-
+    const createChest = await Chest.create(update);
     console.log(`Saved Chests ${player}`);
-    return { chests: findChest.toJSON() };
+    return { chests: await createChest.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(chest) ${player}`, error);
   }

@@ -22,16 +22,11 @@ module.exports = async (clan, parsed) => {
     const condition = { id: clan };
     const update = { id: clan, clanWarlog: { logs: parsed.items, data } };
 
-    const findClanWarlog = await ClanWarlog.findOneAndUpdate(condition, update);
+    await ClanWarlog.findOneAndDelete(condition);
 
-    if (!findClanWarlog) {
-      const createClanWarlog = await ClanWarlog.create(update);
-      console.log(`Saved warlog ${clan}`);
-      return { clanWarlog: createClanWarlog.toJSON() };
-    }
-
+    const createClanWarlog = await ClanWarlog.create(update);
     console.log(`Saved warlog ${clan}`);
-    return { clanWarlog: findClanWarlog.toJSON() };
+    return { clanWarlog: createClanWarlog.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(warlog) ${clan}`, error);
   }

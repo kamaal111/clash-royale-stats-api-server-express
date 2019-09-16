@@ -31,16 +31,11 @@ module.exports = async (clan, parsed) => {
       memberList: parsed.memberList,
     };
 
-    const findClanInfo = await ClanInfo.findOneAndUpdate(condition, update);
+    await ClanInfo.findOneAndDelete(condition);
 
-    if (!findClanInfo) {
-      const createClanInfo = await ClanInfo.create(update);
-      console.log(`Saved clan info ${clan}`);
-      return { clanInfo: createClanInfo.toJSON() };
-    }
-
+    const createClanInfo = await ClanInfo.create(update);
     console.log(`Saved clan info ${clan}`);
-    return { clanInfo: findClanInfo.toJSON() };
+    return { clanInfo: await createClanInfo.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(clan info) ${clan}`, error);
   }

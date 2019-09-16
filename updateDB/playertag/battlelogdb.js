@@ -49,16 +49,11 @@ module.exports = async (player, parsed) => {
       battlelog: { logs: modifiedParsedData, data },
     };
 
-    const findBattlelog = await Battlelog.findOneAndUpdate(condition, update);
+    await Battlelog.findOneAndDelete(condition);
 
-    if (!findBattlelog) {
-      const createBattlelog = await Battlelog.create(update);
-      console.log(`Saved battlelog ${player}`);
-      return { battlelog: createBattlelog.toJSON() };
-    }
-
+    const createBattlelog = await Battlelog.create(update);
     console.log(`Saved battlelog ${player}`);
-    return { battlelog: findBattlelog.toJSON() };
+    return { battlelog: await createBattlelog.toJSON() };
   } catch (error) {
     return console.error(`Save Failed(battlelog) ${player}`, error);
   }

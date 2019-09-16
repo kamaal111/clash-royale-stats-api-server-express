@@ -33,7 +33,11 @@ const PlayerSchema = Schema({
     default: undefined,
   },
 
-  arena: { id: Number, name: String },
+  arena: {
+    id: Number,
+    name: String,
+    arenaUrl: String,
+  },
 
   leagueStatistics: {
     currentSeason: {
@@ -48,6 +52,17 @@ const PlayerSchema = Schema({
     bestSeason: {
       id: { type: String, default: '' },
       trophies: { type: Number, default: 0 },
+    },
+  },
+
+  currentDeck: {
+    type: Array,
+    name: String,
+    level: Number,
+    maxLevel: Number,
+    count: Number,
+    iconUrls: {
+      medium: String,
     },
   },
 
