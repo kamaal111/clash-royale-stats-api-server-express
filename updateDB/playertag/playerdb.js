@@ -29,7 +29,7 @@ module.exports = async (player, parsed) => {
       }
 
       switch (name.toLowerCase()) {
-        case 'legandary':
+        case 'legendary':
           return url('arena11');
         case 'challenger':
           switch (number) {
