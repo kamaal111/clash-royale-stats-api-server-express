@@ -18,50 +18,22 @@ module.exports = async (player, parsed) => {
             badgeUrl: `https://cdn.statsroyale.com/images/badges/${parsed.clan.badgeId}.png`,
           };
 
-    const arenaUrl = arena => {
-      const [name, number] = arena.split(' ');
-
+    const leagueLadder = trophies => {
       const url = name =>
         `https://royaleapi.github.io/cr-api-assets/arenas/${name}.png`;
 
-      if (!isNaN(Number(number))) {
-        return url([name, number].join('').toLowerCase());
-      }
-
-      switch (name.toLowerCase()) {
-        case 'legendary':
-          return url('arena11');
-        case 'challenger':
-          switch (number) {
-            case 'I':
-              return url('arena12');
-            case 'II':
-              return url('arena13');
-            case 'III':
-              return url('arena14');
-            default:
-              return '';
-          }
-        case 'master':
-          switch (number) {
-            case 'I':
-              return url('arena15');
-            case 'II':
-              return url('arena16');
-            case 'III':
-              return url('arena17');
-            default:
-              return '';
-          }
-        case 'champion':
-          return url('arena18');
-        case 'grand':
-          return url('arena19');
-        case 'ultimate':
-          return url('arena20');
-        default:
-          return '';
-      }
+      if (trophies <= 3999) return '';
+      if (trophies >= 4000 && trophies <= 4299) return url('arena13');
+      if (trophies >= 4300 && trophies <= 4599) return url('arena14');
+      if (trophies >= 4600 && trophies <= 4999) return url('arena15');
+      if (trophies >= 5000 && trophies <= 5299) return url('arena16');
+      if (trophies >= 5300 && trophies <= 5599) return url('arena17');
+      if (trophies >= 5600 && trophies <= 5999) return url('arena18');
+      if (trophies >= 6000 && trophies <= 6299) return url('arena19');
+      if (trophies >= 6300 && trophies <= 6599) return url('arena20');
+      if (trophies >= 6600 && trophies <= 6999) return url('arena21');
+      if (trophies >= 7000) return url('arena22');
+      return '';
     };
 
     const condition = { id: player };
@@ -91,7 +63,7 @@ module.exports = async (player, parsed) => {
 
       clan: modifiedClanData,
 
-      arena: { ...parsed.arena, arenaUrl: arenaUrl(parsed.arena.name) },
+      arena: { ...parsed.arena, arenaUrl: leagueLadder(parsed.trophies) },
 
       leagueStatistics: parsed.leagueStatistics,
 

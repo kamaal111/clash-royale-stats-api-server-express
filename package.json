@@ -4,11 +4,10 @@
   "main": "bin/www",
   "description": "An API to provide Clash Royale statistics.",
   "scripts": {
-    "test": "jest -i --verbose --coverage --runInBand",
     "start": "node .",
-    "dboff": "killall mongod",
-    "watch": "npx nodemon . --inspect",
-    "dbon": "mongod"
+    "dev": "npx nodemon . --inspect",
+    "dbon": "mongod",
+    "dboff": "killall mongod"
   },
   "husky": {
     "hooks": {
